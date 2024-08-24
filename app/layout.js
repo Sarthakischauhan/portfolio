@@ -1,7 +1,8 @@
-import { Inter } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ variable:'--font-inter', subsets: ["latin"], weight:'500'});
+const ibmPlexMono = IBM_Plex_Mono({variable:'--font-ibm-mono',subsets: ["latin"], weight:'200'});
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.variable} ${ibmPlexMono.variable}`}>{children}</body>
     </html>
   );
 }
