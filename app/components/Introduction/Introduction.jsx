@@ -10,7 +10,7 @@ const Introduction = () => {
                     I am a third-year computer science student who loves writing software from scratch and publish it on the web. Do love product as well
                 </p>
                 <p className='text-l w-70 font-mono mt-[24px]' id='work-intro'>
-                    Currently exploring computer vision and working on <span className='underline'>spartan navigate app</span>
+                    Currently exploring computer vision and working on <a href="/" className='underline hover:text-hyperlink'>spartan navigate app</a>
                 </p>
             </div>
         </div>

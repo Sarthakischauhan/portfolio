@@ -1,5 +1,6 @@
 import ImageShot from "./components/ImageShot/ImageShot";
 import Introduction from "./components/Introduction/Introduction";
+import WorkExperience from "./components/WorkExperience/WorkExperience";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
         {/* Image will actually be  */}
         <ImageShot />
         <Introduction />
+        <WorkExperience />
       </div>
     </>
   );

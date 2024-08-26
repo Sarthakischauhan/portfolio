@@ -18,8 +18,12 @@ module.exports = {
       fontFamily:{
         inter: ['var(--font-inter)','sans'],
         mono:['var(--font-ibm-mono)', 'monospace']
-      }
-    },
+      },
+      textColor: {
+          'danger': '#e3342f',
+          'hyperlink': '#C175FF',
+      },
+    }
   },
   plugins: [],
 };
