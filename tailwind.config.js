@@ -23,6 +23,19 @@ module.exports = {
           'danger': '#e3342f',
           'hyperlink': '#C175FF',
       },
+      keyframes: {
+        appear: {
+          "0%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "1",
+          },
+       },
+       animation: {
+         appear: "appear 0.5s ease-in-out",
+       }
+    }
     }
   },
   plugins: [],
