@@ -2,12 +2,16 @@ import ExperienceTile from "./components/ExperienceTile";
 import BlogTile from "./components/BlogTile";
 import * as data from "@/public/data.json";
 import Image from 'next/image';
+import Link from "next/link";
+import Navbar from "./components/Navbar";
+
 
 export default function Home() {
   const WORK_EXPERIENCE = data.workExperience;
   const BLOG_DATA = data.blogData;  
   return (
     <>
+      <Navbar />
       <div className="max-w-[50rem] mx-auto md:mt-[100px] flex flex-col">
         <Image src='/D.png' height={150} width={150} alt="Dummy Image"
         className="rounded-full aspect-square object-cover"
@@ -38,6 +42,9 @@ export default function Home() {
                 <BlogTile blog={blog} key={i} />
               ))}
             </div>
+            <Link href={"/"}>
+              <h1 className="font-inter text-[18px] font mt-[24px]">Checkout all blogs.</h1>
+            </Link>
         </div>
       </div>
     </>

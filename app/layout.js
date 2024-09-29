@@ -1,8 +1,8 @@
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ variable:'--font-inter', subsets: ["latin"], weight:'500'});
-const ibmPlexMono = IBM_Plex_Mono({variable:'--font-ibm-mono',subsets: ["latin"], weight:'200'});
+const inter = Inter({ variable:'--font-inter', subsets: ["latin"], weight:['400', '200', '500', '300']});
+const ibmPlexMono = IBM_Plex_Mono({variable:'--font-ibm-mono',subsets: ["latin"], weight:'300'});
 
 export const metadata = {
   title: "Create Next App",
