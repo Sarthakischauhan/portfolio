@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className="p-4 font-inter">
       <div className="max-w-[50rem] mx-auto flex justify-between items-center">
-        <div className="flex space-x-1 text-lg font-light">
+        <div className="flex space-x-0.5 text-lg font-medium">
           <NavLink href="/">home</NavLink>
           <span>/</span>
           <NavLink href="/projects">projects</NavLink>

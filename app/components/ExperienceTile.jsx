@@ -4,18 +4,18 @@ import React from 'react'
 const ExperienceTile = ({ work }) => {
   return (
     <>
-        <div className="tile w-full flex">
+        <div className="tile w-full flex gap-x-2">
           <div className="job-heading flex-1 flex flex-col gap-y-1">
             <div className="job-duration">
               <h6 className="text-[10px] timeline font-inter">{work.duration}</h6>
             </div>
-            <div className="job-position font-inter hover:text-hyperlink cursor-pointer">
+            <div className="job-position font-inter font-medium hover:text-hyperlink cursor-pointer">
               <h3>
                 {work.title}, <span>{work.company}</span>
               </h3>
             </div>
             <div className="job-description">
-              <p className="font-mono text-xs tracking-wide">{work.roledesc}</p>
+              <p className="font-inter text-[12px] opacity-90 tracking-widest font-regular leading-2">{work.roledesc}</p>
             </div>
             <div className="skills">
               <ul className="mt-2 flex flex-wrap">
