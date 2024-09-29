@@ -4,7 +4,6 @@ import * as data from "@/public/data.json";
 import Image from 'next/image';
 
 export default function Home() {
-  console.log(data);
   const WORK_EXPERIENCE = data.workExperience;
   const BLOG_DATA = data.blogData;  
   return (
@@ -24,19 +23,19 @@ export default function Home() {
                 </p>
             </div>
         </div>
-        <div className="work-exp mb-[10px] mt-[40px]">
+        <div className="work-exp mb-[10px] mt-16">
             <h1 className='text-3xl font-inter font-semibold'>Work Experience</h1>
-            <div className="space-y-10 mt-[24px]">
+            <div className="space-y-16 mt-[24px]">
               {WORK_EXPERIENCE.map((work, i) => ( 
-                <ExperienceTile work={work} />
+                <ExperienceTile work={work} key={i} />
               ))}
             </div>
         </div>
-        <div className="work-exp mb-[10px] mt-[40px]">
+        <div className="work-exp mb-[10px] mt-16">
             <h1 className='text-3xl font-inter font-semibold'>Writings</h1>
             <div className="space-y-10 mt-[24px]">
               {BLOG_DATA.map((blog, i) => ( 
-                <BlogTile blog={blog} />
+                <BlogTile blog={blog} key={i} />
               ))}
             </div>
         </div>

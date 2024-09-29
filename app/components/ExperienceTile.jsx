@@ -7,7 +7,7 @@ const ExperienceTile = ({ work }) => {
         <div className="tile w-full flex">
           <div className="job-heading flex-1 flex flex-col gap-y-1">
             <div className="job-duration">
-              <h6 className="text-[10px] font-inter">{work.duration}</h6>
+              <h6 className="text-[10px] timeline font-inter">{work.duration}</h6>
             </div>
             <div className="job-position font-inter hover:text-hyperlink cursor-pointer">
               <h3>

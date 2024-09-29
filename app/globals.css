@@ -27,3 +27,8 @@ body {
     text-wrap: balance;
   }
 }
+
+
+.timeline{
+  opacity: 0.7;
+}
