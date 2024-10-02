@@ -1,11 +1,11 @@
 import ExperienceTile from "./components/ExperienceTile";
 import BlogTile from "./components/BlogTile";
-import * as data from "@/public/data.json";
 import Image from 'next/image';
 import Link from "next/link";
 import Navbar from "./components/Navbar";
-
-
+import ExternalCTA from "./components/ExternalCTA";
+import * as data from "../public/data.json";
+import { ArrowUpRight, Github, Linkedin, Mail} from 'lucide-react'
 export default function Home() {
   const WORK_EXPERIENCE = data.workExperience;
   const BLOG_DATA = data.blogData;  
@@ -14,16 +14,16 @@ export default function Home() {
       <Navbar />
       <div className="max-w-[50rem] mx-auto md:mt-[100px] flex flex-col">
         <Image src='/D.png' height={150} width={150} alt="Dummy Image"
-        className="rounded-full aspect-square object-cover"
+        className="rounded-full aspect-square object-cover border-white border-2 "
         />
         <div className='intro'>
             <h1 className='text-3xl mt-[24px] font-inter font-semibold'>Hey, I'm Sarthak 👋🏼</h1>
             <div className='para-class tracking-wide font-regular'>
-                <p className='text-[18px] w-70 font-inter mt-[16px] leading-2' id='self-intro'>
-                    I am a third-year computer science student who loves writing software from scratch and publish it on the web. Do love product as well
+                <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='self-intro'>
+                    a third-year computer science student who loves building software from the ground up and releasing it into the wild web. I have been programming for a while now, as you can see I can center some divs.
                 </p>
-                <p className='text-[18px] w-70 font-inter mt-[24px] leading-2' id='work-intro'>
-                    Currently exploring computer vision and working on <a href="/" className='underline hover:text-hyperlink'>spartan navigate app</a>
+                <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='work-intro'>
+                  currently exploring the field of computer vision and machine learning. In my free time, I work on building high-utility products.                
                 </p>
             </div>
         </div>
@@ -42,9 +42,26 @@ export default function Home() {
                 <BlogTile blog={blog} key={i} />
               ))}
             </div>
-            <Link href={"/"}>
-              <h1 className="font-inter font-semibold text-[18px] font mt-[24px]">Checkout all blogs.</h1>
-            </Link>
+            <div className="mt-[16px]">
+              <ExternalCTA
+                  action="/blogs"
+                  content="Checkout all blogs"
+                  icon={<ArrowUpRight className="w-3.5 h-3.5 " />}
+              /> 
+            </div>
+        </div>
+        <div className="mb-[20px] mt-16">
+            <h1 className='text-3xl font-inter font-semibold'>Get in touch</h1> 
+            <div className="block mt-[24px]">
+              <span className="font-inter font-medium text-[14px] mr-2">
+                I am actively looking for summer 2025 internship opportunities, you can contact me at
+              </span>
+              <ExternalCTA
+                action="mailto:sarthak.chauhan@sjsu.edu"
+                content="sarthak.chauhan@sjsu.edu"
+                icon={<></>}
+              />
+            </div>
         </div>
       </div>
     </>
