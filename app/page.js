@@ -54,13 +54,8 @@ export default function Home() {
             <h1 className='text-3xl font-inter font-semibold'>Get in touch</h1> 
             <div className="block mt-[24px]">
               <span className="font-inter font-medium text-[14px] mr-2">
-                I am actively looking for summer 2025 internship opportunities, you can contact me at
+                I am actively looking for summer 2025 internship opportunities, you can contact me at <span className="font-inter tracking-wide hover:text-hyperlink cursor-pointer underline"><Link href="mailto:sarthak.chauhan@sjsu.edu">sarthak.chauhan@sjsu.edu</Link></span>
               </span>
-              <ExternalCTA
-                action="mailto:sarthak.chauhan@sjsu.edu"
-                content="sarthak.chauhan@sjsu.edu"
-                icon={<></>}
-              />
             </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ const ExperienceTile = ({ work }) => {
             <div className="job-duration">
               <h6 className="text-[10px] timeline font-inter">{work.duration}</h6>
             </div>
-            <div className="job-position font-inter font-medium hover:text-hyperlink cursor-pointer">
+            <div className="job-position font-inter font-medium cursor-pointer">
               <h3>
                 {work.title}, <span>{work.company}</span>
               </h3>
