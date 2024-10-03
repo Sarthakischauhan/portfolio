@@ -19,7 +19,7 @@ export default function Home() {
         placeholder="empty"
         />
         <div className='intro'>
-            <h1 className='text-3xl mt-[24px] font-inter font-semibold'>Hey, I'm Sarthak 👋🏼</h1>
+            <h1 className='text-3xl mt-[24px] font-inter font-semibold'>Hey, I&apos;m Sarthak 👋🏼</h1>
             <div className='para-class tracking-wide font-regular'>
                 <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='self-intro'>
                     a third-year computer science student who loves building software from the ground up and releasing it into the wild web. I have been programming for a while now, as you can see I can center some divs.
