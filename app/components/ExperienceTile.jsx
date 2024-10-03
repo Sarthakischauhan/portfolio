@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import React from 'react'
+import { If } from 'react-if';
 
 const ExperienceTile = ({ work }) => {
   return (
     <>
-        <div className="tile w-full flex gap-x-2">
+        <div className="tile w-full flex md:flex-row xl:flex-row flex-col gap-x-2 ">
           <div className="job-heading flex-1 flex flex-col gap-y-1">
             <div className="job-duration">
               <h6 className="text-[10px] timeline font-inter">{work.duration}</h6>
@@ -30,14 +31,16 @@ const ExperienceTile = ({ work }) => {
               </ul>
             </div>
           </div>
-          <div className="flex-1 relative">
-            <Image
-              src={work.image}
-              alt="My internship experience image"
-              className="object-cover"
-              fill={true}
-            />
-          </div>
+          <div className="flex-1 relative ">
+              <Image
+                src={work.image}
+                alt="My internship experience image"
+                className="object-cover"
+                fill={true}
+                priority
+              />
+            </div>
+
         </div>
     </>
   );

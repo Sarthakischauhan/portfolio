@@ -18,11 +18,6 @@
         }
     ],
     "blogData":[
-        {
-            "title":"So you think you can frontend ?",
-            "path":"/app/data/blogs/frontend2024.md",
-            "dateWritten":"2024-09-22",
-            "desc":"“computer scientists stand on each other’s toes”, my thoughts on the state of frontend during the AI doom."
-        }
+
     ]
 }

@@ -2,19 +2,21 @@ import ExperienceTile from "./components/ExperienceTile";
 import BlogTile from "./components/BlogTile";
 import Image from 'next/image';
 import Link from "next/link";
-import Navbar from "./components/Navbar";
 import ExternalCTA from "./components/ExternalCTA";
 import * as data from "../public/data.json";
 import { ArrowUpRight, Github, Linkedin, Mail} from 'lucide-react'
+import { If,Else } from "react-if";
+
+
 export default function Home() {
   const WORK_EXPERIENCE = data.workExperience;
   const BLOG_DATA = data.blogData;  
-  return (
+  return (  
     <>
-      <Navbar />
-      <div className="max-w-[50rem] mx-auto md:mt-[100px] flex flex-col">
+      <div className="max-w-[50rem] mx-auto md:mt-[100px] flex flex-col ">
         <Image src='/D.png' height={150} width={150} alt="Dummy Image"
         className="rounded-full aspect-square object-cover border-white border-2 "
+        placeholder="empty"
         />
         <div className='intro'>
             <h1 className='text-3xl mt-[24px] font-inter font-semibold'>Hey, I'm Sarthak 👋🏼</h1>
@@ -35,26 +37,31 @@ export default function Home() {
               ))}
             </div>
         </div>
-        <div className="work-exp mb-[10px] mt-16">
-            <h1 className='text-3xl font-inter font-semibold'>Writings</h1>
-            <div className="space-y-10 mt-[24px]">
-              {BLOG_DATA.map((blog, i) => ( 
-                <BlogTile blog={blog} key={i} />
-              ))}
-            </div>
-            <div className="mt-[16px]">
-              <ExternalCTA
-                  action="/blogs"
-                  content="Checkout all blogs"
-                  icon={<ArrowUpRight className="w-3.5 h-3.5 " />}
-              /> 
-            </div>
+        <If condition={BLOG_DATA.length != 0}>
+          <div className="work-exp mb-[10px] mt-16">
+              <h1 className='text-3xl font-inter font-semibold'>Writings</h1>
+              <div className="space-y-10 mt-[24px]">
+                {BLOG_DATA.map((blog, i) => ( 
+                  <BlogTile blog={blog} key={i} />
+                ))}
+              </div>
+              <div className="mt-[16px]">
+                <ExternalCTA
+                    action="/blogs"
+                    content="Checkout all blogs"
+                    icon={<ArrowUpRight className="w-3.5 h-3.5 " />}
+                /> 
+              </div>
         </div>
+        </If>
+        <Else>
+          <></>
+        </Else>
         <div className="mb-[20px] mt-16">
             <h1 className='text-3xl font-inter font-semibold'>Get in touch</h1> 
             <div className="block mt-[24px]">
-              <span className="font-inter font-medium text-[14px] mr-2">
-                I am actively looking for summer 2025 internship opportunities, you can contact me at <span className="font-inter tracking-wide hover:text-hyperlink cursor-pointer underline"><Link href="mailto:sarthak.chauhan@sjsu.edu">sarthak.chauhan@sjsu.edu</Link></span>
+              <span className="font-inter text-[16px] leading-widest">
+                I am actively looking for summer 2025 internship opportunities, you can contact me at <span className="font-inter hover:text-hyperlink cursor-pointer underline transition-color"><Link href="mailto:sarthak.chauhan@sjsu.edu">sarthak.chauhan@sjsu.edu</Link></span>
               </span>
             </div>
         </div>
