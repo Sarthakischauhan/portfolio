@@ -4,7 +4,7 @@
             "title": "Software Engineering Intern", 
             "company": "Tesla", 
             "duration": "May 2024 - August 2024", 
-            "roledesc":"Build and maintained key features for Tesla's internal application for vehicle insurance. Worked closely with cross-functional teams including developers, designers and product managers to ship end to end digital products.", 
+            "roledesc":"Built and maintained key features for Tesla's internal application for vehicle insurance. Worked closely with cross-functional teams including developers, designers, and product managers to ship end-to-end digital products.", 
             "skills":["React","Javascript","PHP","Docker","Typescript","Redis"],
             "image":"/tesla.png"
         }, 
@@ -12,8 +12,8 @@
             "title": "Software Designer", 
             "company": "FSAE SJSU", 
             "duration": "June 2023 - December 2023", 
-            "roledesc":"Solved bugs, and optimized the dashboard layout while working with multiple teams and the vehicle driver. Implemented additional functionalities on dashboard boot-up.",
-            "skills":["C++", "CAN BUS"],
+            "roledesc":"Solved bugs and optimized the dashboard layout while working with multiple teams and the vehicle driver. Implemented additional functionalities on dashboard boot-up and streamlined communication between systems, ensuring efficient control during real-time operations.",
+            "skills":["C++", "C","CAN BUS", "Git"],
             "image":"/fsae.jpeg"
         }
     ],

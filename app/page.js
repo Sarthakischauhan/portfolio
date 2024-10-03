@@ -24,10 +24,10 @@ export default function Home() {
             <SocialTiles />
             <div className='para-class tracking-wide font-regular'>
                 <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='self-intro'>
-                    a third-year computer science student who loves building software from the ground up and releasing it into the wild web. I have been programming for a while now, as you can see I can center some divs.
+                    A third-year Computer Science student who thrives on crafting software from scratch and setting it free in the wild web. I've been coding for some time now, and yes, I can center divs (a true test of developer prowess!).
                 </p>
                 <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='work-intro'>
-                  currently exploring the field of computer vision and machine learning. In my free time, I work on building high-utility products.                
+                Currently diving deep into computer vision and machine learning, because why not solve the real world with cool tech? In my downtime, I love working on building products.
                 </p>
             </div>
         </div>
@@ -63,7 +63,7 @@ export default function Home() {
             <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Get in touch</h1> 
             <div className="block mt-[16px] md:mt-[24px]">
               <span className="font-inter text-[16px] leading-widest">
-                I am actively looking for summer 2025 internship opportunities, you can contact me at <span className="font-inter hover:text-hyperlink cursor-pointer underline transition-color"><Link href="mailto:sarthak.chauhan@sjsu.edu">sarthak.chauhan@sjsu.edu</Link></span>
+              I am actively seeking Summer 2025 internship opportunities to further expand my skills in software engineering. Feel free to reach out at <span className="font-inter hover:text-hyperlink cursor-pointer underline transition-color"><Link href="mailto:sarthak.chauhan@sjsu.edu">sarthak.chauhan@sjsu.edu</Link></span>—let&apos;s connect!
               </span>
             </div>
         </div>
