@@ -24,7 +24,7 @@ export default function Home() {
             <SocialTiles />
             <div className='para-class tracking-wide font-regular'>
                 <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='self-intro'>
-                    A third-year Computer Science student who thrives on crafting software from scratch and setting it free in the wild web. I've been coding for some time now, and yes, I can center divs (a true test of developer prowess!).
+                    A third-year Computer Science student who thrives on crafting software from scratch and setting it free in the wild web. I&apos;ve been coding for some time now, and yes, I can center divs (a true test of developer prowess!).
                 </p>
                 <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='work-intro'>
                 Currently diving deep into computer vision and machine learning, because why not solve the real world with cool tech? In my downtime, I love working on building products.
