@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-4 font-inter select-none">
+    <nav className="p-6 md:p-4 font-inter select-none">
       <div className="max-w-[50rem] mx-auto flex justify-between items-center">
         <div className="flex space-x-0.5 text-lg font-regular">
           <span>/</span>

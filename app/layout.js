@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
       </Head>
       <body className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}>
-        {<Navbar />} 
+        {/* {<Navbar />}  */}
         {children}
       </body>
     </html>

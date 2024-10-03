@@ -1,6 +1,7 @@
 import ExperienceTile from "./components/ExperienceTile";
 import BlogTile from "./components/BlogTile";
 import Image from 'next/image';
+import SocialTiles from "./components/SocialTiles";
 import Link from "next/link";
 import ExternalCTA from "./components/ExternalCTA";
 import * as data from "../public/data.json";
@@ -13,13 +14,14 @@ export default function Home() {
   const BLOG_DATA = data.blogData;  
   return (  
     <>
-      <div className="max-w-[50rem] mx-auto md:mt-[100px] flex flex-col ">
+      <div className="max-w-[50rem] mx-auto md:mt-[100px] mt-[30px] flex flex-col p-6 md:p-0">
         <Image src='/D.png' height={150} width={150} alt="Dummy Image"
-        className="rounded-full aspect-square object-cover border-white border-2 "
+        className="rounded-full aspect-square object-cover border-white border-2 w-4/12 sm:w-[150px]"
         placeholder="empty"
         />
         <div className='intro'>
-            <h1 className='text-3xl mt-[24px] font-inter font-semibold'>Hey, I&apos;m Sarthak 👋🏼</h1>
+            <h1 className='md:text-3xl text-2xl mt-[24px] font-inter font-semibold'>Hey, I&apos;m Sarthak 👋🏼</h1>
+            <SocialTiles />
             <div className='para-class tracking-wide font-regular'>
                 <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='self-intro'>
                     a third-year computer science student who loves building software from the ground up and releasing it into the wild web. I have been programming for a while now, as you can see I can center some divs.
@@ -29,9 +31,9 @@ export default function Home() {
                 </p>
             </div>
         </div>
-        <div className="work-exp mb-[10px] mt-16">
-            <h1 className='text-3xl font-inter font-semibold'>Work Experience</h1>
-            <div className="space-y-16 mt-[24px]">
+        <div className="work-exp mb-[10px] mt-8 md:mt-16">
+            <h1 className='md:text-3xl text-2xl sm:[24px] mt-[16px] font-inter font-semibold'>Work Experience</h1>
+            <div className="space-y-6 md:space-y-16 mt-[24px]">
               {WORK_EXPERIENCE.map((work, i) => ( 
                 <ExperienceTile work={work} key={i} />
               ))}
@@ -39,8 +41,8 @@ export default function Home() {
         </div>
         <If condition={BLOG_DATA.length != 0}>
           <div className="work-exp mb-[10px] mt-16">
-              <h1 className='text-3xl font-inter font-semibold'>Writings</h1>
-              <div className="space-y-10 mt-[24px]">
+              <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Writings</h1>
+              <div className="space-y-16 mt-[24px]">
                 {BLOG_DATA.map((blog, i) => ( 
                   <BlogTile blog={blog} key={i} />
                 ))}
@@ -49,7 +51,7 @@ export default function Home() {
                 <ExternalCTA
                     action="/blogs"
                     content="Checkout all blogs"
-                    icon={<ArrowUpRight className="w-3.5 h-3.5 " />}
+                    icon={<ArrowUpRight className="w-3.5 h-3.5"/>}
                 /> 
               </div>
         </div>
@@ -57,9 +59,9 @@ export default function Home() {
         <Else>
           <></>
         </Else>
-        <div className="mb-[20px] mt-16">
-            <h1 className='text-3xl font-inter font-semibold'>Get in touch</h1> 
-            <div className="block mt-[24px]">
+        <div className="mb-[20px] mt-8 md:mt-16">
+            <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Get in touch</h1> 
+            <div className="block mt-[16px] md:mt-[24px]">
               <span className="font-inter text-[16px] leading-widest">
                 I am actively looking for summer 2025 internship opportunities, you can contact me at <span className="font-inter hover:text-hyperlink cursor-pointer underline transition-color"><Link href="mailto:sarthak.chauhan@sjsu.edu">sarthak.chauhan@sjsu.edu</Link></span>
               </span>
