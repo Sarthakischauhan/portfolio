@@ -50,7 +50,7 @@ export default function Home() {
               </div>
               <div className="mt-[16px]">
                 <ExternalCTA
-                    action="/blogs"
+                    action="/blog"
                     content="Checkout all blogs"
                     icon={<ArrowUpRight className="w-3.5 h-3.5"/>}
                 /> 

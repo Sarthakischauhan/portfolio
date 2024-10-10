@@ -4,18 +4,7 @@ import Image from "next/image";
 const BlogPost = () => {
   return (
     <>
-      <Navbar />
-      <div className="relative w-full max-w-[50rem] mx-auto">
-        <Image
-          src="/sample.jpg"
-          alt="Blog post cover image"
-          width={800}
-          height={533}
-          className="object-cover w-full"
-          priority
-        />
-      </div>
-      <div className="prose dark:prose-invert prose-sm max-w-[50rem] m-auto font-inter">
+      <div className="prose dark:prose-invert prose-sm max-w-[50rem] m-auto font-inter md:mt-[40px] mt-[30px] flex flex-col p-6 md:p-0 ">
           <Blog />
       </div>
     </>
