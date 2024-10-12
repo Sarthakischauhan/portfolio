@@ -24,19 +24,17 @@ module.exports = {
           'hyperlink': '#C175FF',
       },
       keyframes: {
-        appear: {
-          "0%": {
-            opacity: "0",
-          },
-          "100%": {
-            opacity: "1",
-          },
-       },
-       animation: {
-         appear: "appear 0.5s ease-in-out",
-       }
-    }
+        keyframes: {
+          blur: {
+            '0%': { filter: "blur(0px)" },
+            '100%': { filter: "blur(5px)" },
+          }
+        },
+        animation: {
+          blur: 'blur 2s linear infinite',
+        }
+      }
     }
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

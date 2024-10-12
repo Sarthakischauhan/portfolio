@@ -18,6 +18,12 @@
         }
     ],
     "blogData":[
-
+        {
+            "title":"My plans for future and ambitions with engineering", 
+            "date_posted":"2024-10-12", 
+            "tags":["Thoughts","Future","Engineering"],
+            "desc": "Writing software is changing with cursor and LLMs, I need rapid reinventing of purpose",
+            "slug": "plans-for-future"
+        }
     ]
 }

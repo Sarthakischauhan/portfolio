@@ -14,10 +14,11 @@ export default function Home() {
   const BLOG_DATA = data.blogData;  
   return (  
     <>
-      <div className="max-w-[50rem] mx-auto md:mt-[100px] mt-[30px] flex flex-col p-6 md:p-0">
-        <Image src='/D.png' height={150} width={150} alt="Dummy Image"
+      <div className="max-w-[50rem] mx-auto md:mt-[100px] mt-[30px] flex flex-col p-6 md:p-0 ">
+        <Image src='/D.png' height={150} width={150} alt="Sarthak Chauhan" 
         className="rounded-full aspect-square object-cover border-white border-2 w-4/12 sm:w-[150px]"
         placeholder="empty"
+        priority
         />
         <div className='intro'>
             <h1 className='md:text-3xl text-2xl mt-[24px] font-inter font-semibold'>Hey, I&apos;m Sarthak 👋🏼</h1>
@@ -49,7 +50,7 @@ export default function Home() {
               </div>
               <div className="mt-[16px]">
                 <ExternalCTA
-                    action="/blogs"
+                    action="/blog"
                     content="Checkout all blogs"
                     icon={<ArrowUpRight className="w-3.5 h-3.5"/>}
                 /> 

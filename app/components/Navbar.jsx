@@ -23,9 +23,9 @@ const Navbar = () => {
         <div className="flex space-x-0.5 text-lg font-regular">
           <span>/</span>
           <NavLink href="/">home</NavLink>
-          {/* <NavLink href="/projects">projects</NavLink>
+          {/* <NavLink href="/projects">projects</NavLink> */}
           <span>/</span>
-          <NavLink href="/writings">writings</NavLink> */}
+          <NavLink href="/blog">writings</NavLink>
         </div>
         <div className="flex space-x-4">
           <a href="https://www.linkedin.com/in/sarthakchauhan01/" target="_blank" rel="noopener noreferrer">
