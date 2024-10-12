@@ -30,7 +30,7 @@ const BlogPost = ({params}) => {
 
   return (
     <>
-      <div className="prose dark:prose-invert prose-sm max-w-[50rem] m-auto font-inter md:mt-[40px] mt-[30px] flex flex-col p-6 md:p-0 ">
+      <div className="prose dark:prose-invert prose-sm max-w-[50rem] m-auto font-inter md:mt-[50px] mt-[30px] flex flex-col p-6 md:p-0 mb-[30px] md:mb-[40px]">
           {Blog ? <Blog /> : <NotFound />}
       </div>
     </>

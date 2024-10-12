@@ -19,11 +19,11 @@
     ],
     "blogData":[
         {
-            "title":"Why Cursor will help software developers", 
-            "date_posted":"2024-08-09", 
-            "tags":["frontend","llm","prediction"],
-            "desc": "If you have ever tried cursor or any other LLM powered code editors this blog is for you!",
-            "slug": "blog"
+            "title":"My plans for future and ambitions with engineering", 
+            "date_posted":"2024-10-12", 
+            "tags":["Thoughts","Future","Engineering"],
+            "desc": "Writing software is changing with cursor and LLMs, I need rapid reinventing of purpose",
+            "slug": "plans-for-future"
         }
     ]
 }
