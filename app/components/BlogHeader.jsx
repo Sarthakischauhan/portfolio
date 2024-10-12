@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment-timezone'
+import moment from 'moment'
 
 export default function BlogHeader({ children, date }) {
   const childrenArray = React.Children.toArray(children)
