@@ -17,7 +17,7 @@ export default function BlogHeader({ children, date }) {
     <header className="rounded-lg">
       <div className="flex flex-col items-center space-y-[20px]">
         <time className="text-sm text-white block">
-            {moment(new Date(date)).format("MMMM Do YYYY")}
+            {moment(date, "YYYY-MM-DD").format("MMMM Do YYYY")}
         </time>
         {title && <h1 className="text-4xl tracking-wide font-bold text-center m-0">{title.props.children}</h1>}
         {desc && <h2 className="text-sm tracking-wide text-center font-light m-0">{desc.props.children}</h2>}
