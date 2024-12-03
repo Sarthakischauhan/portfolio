@@ -4,6 +4,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./content/**/*.mdx",
   ],
   theme: {
     extend: {
@@ -22,6 +23,9 @@ module.exports = {
       textColor: {
           'danger': '#e3342f',
           'hyperlink': '#C175FF',
+      },
+      borderColor:{
+        'quote' :'#C175FF'
       },
       keyframes: {
         keyframes: {
