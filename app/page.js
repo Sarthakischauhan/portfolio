@@ -43,7 +43,7 @@ export default function Home() {
         <If condition={BLOG_DATA.length != 0}>
           <div className="work-exp mb-[10px] mt-16">
               <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Writings</h1>
-              <div className="space-y-16 mt-[24px]">
+              <div className="space-y-10 mt-[24px]">
                 {BLOG_DATA.map((blog, i) => ( 
                   <BlogTile blog={blog} key={i} />
                 ))}

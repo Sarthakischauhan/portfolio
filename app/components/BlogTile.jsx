@@ -5,7 +5,7 @@ import moment from "moment";
 const BlogTile = ({ blog }) => {
     return (
       <div className="w-full flex flex-col gap-y-1 mt-2"> 
-         <h6 className="text-[11px] timeline font-inter tracking-wide">{moment(blog.date_posted).format("LL")}</h6>
+         <h6 className="text-[11px] timeline font-inter tracking-wide">{moment(blog.date_posted, "MM-DD-YYYY").format("LL")}</h6>
          <Link href={`/blog/${blog.slug}`} className="text-[16px]">
           <h1 className="font-inter font-semibold hover:text-hyperlink cursor-pointer hover:underline transition-color">{blog.title}</h1>
          </Link>

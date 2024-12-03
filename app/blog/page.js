@@ -13,9 +13,9 @@ const BlogListing = () => {
             Recent Writings
         </div>
 
-        <div className="space-y-12 mt-[24px]">
-            {BLOG_DATA.map((blog, index) => ( // Iterate over the blog data
-                <BlogTile key={index} blog={blog} /> // Render BlogTile for each blog
+        <div className="space-y-10 mt-[16px]">
+            {BLOG_DATA.map((blog, index) => ( 
+                <BlogTile key={index} blog={blog} /> 
             ))}
         </div>
 
