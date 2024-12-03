@@ -2,7 +2,11 @@ import BlogTile from '../components/BlogTile'; // Import the BlogTile component
 import data from '../../public/data.json'; // Import blog data from data.json
 
 const BlogListing = () => {
-  const BLOG_DATA = data.blogData;  
+  // Sort blog data by date in descending order (newest first)
+  const BLOG_DATA = [...data.blogData].sort((a, b) => 
+    new Date(b.date_posted) - new Date(a.date_posted)
+  );
+  
   return (
     <div className="max-w-[50rem] mx-auto md:mt-[80px] mt-[30px] flex flex-col p-6 md:p-0 font-inter">
         <div className="text-3xl font-semibold">
