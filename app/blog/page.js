@@ -9,7 +9,7 @@ const BlogListing = () => {
             Recent Writings
         </div>
 
-        <div className="space-y-16 mt-[24px]">
+        <div className="space-y-12 mt-[24px]">
             {BLOG_DATA.map((blog, index) => ( // Iterate over the blog data
                 <BlogTile key={index} blog={blog} /> // Render BlogTile for each blog
             ))}
