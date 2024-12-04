@@ -11,7 +11,8 @@ import { If,Else } from "react-if";
 
 export default function Home() {
   const WORK_EXPERIENCE = data.workExperience;
-  const BLOG_DATA = data.blogData;  
+  const BLOG_DATA = data.blogData.sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted));
+  
   return (  
     <>
       <div className="max-w-[50rem] mx-auto md:mt-[100px] mt-[30px] flex flex-col p-6 md:p-0 ">
