@@ -23,6 +23,7 @@ module.exports = {
       textColor: {
           'danger': '#e3342f',
           'hyperlink': '#C175FF',
+          'info': '#007FFF' 
       },
       borderColor:{
         'quote' :'#C175FF', 
