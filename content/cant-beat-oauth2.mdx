@@ -41,7 +41,7 @@ To understand the difference between **<ins>authentication</ins>** and <ins>**au
   <li> <ins>Together they question</ins> - **Who is it and what can they access?**</li>
 </ul>
 
-So, Oauth just does questions the **"What"** part of our security equation. **"Who"** part is a by-product and doesn't gurantee security by any means.
+So, Oauth just questions the **"What"** part of our security equation. **"Who"** part is a by-product and doesn't gurantee security by any means.
 <blockquote className="border-l-4 border-quote pl-4 italic my-6 mt-4 mb-0">
   "Why do I need so many paasswordss! Can't it be simpler. Anyways my password is ..."
   <footer className="text-sm mt-2">— Miss Joe on a scam call</footer>
@@ -66,8 +66,28 @@ For all my visual learners, **Take a look at the image below**.
     />
 </div>
 
-
 I hope the image does help you with your understanding of this protocol. I would also like to share a more techy diagram for this concept which we will discuss and explain in the next part.
+
+<div className="relative w-full lg:max-w-[50rem] mx-auto mt-[10px] mb-[10px]
+ sm:max-w-[30rem] md:max-w-[50rem] p-4 border-[1.5px] border-imgborder rounded-[3px]"
+ >
+    <Image
+      src="/techintro-oauth.png"
+      alt="non-tech oauth information"
+      width={300}
+      height={333}
+      className="rounded object-cover w-full"
+      priority
+    />
+</div>
+
 <blockquote className="border-l-4 border-info pl-4 italic my-6 mt-2 mb-0">
   **NOTE :** OAuth protocol is infamous for being complex and confusing, while that discussion does have some weight, our focus on this technology for this part of blog, mainly revolves around its abstractions. 
 </blockquote>
+
+<div className="mt-10 mb-2">
+<h1 className="m-0 p-0">**Next part....**</h1>
+</div>
+
+I would love to go over the code implementation of OAuth in <ins>**2 mins**</ins>. We will see what our sample **<ins>request</ins>** and **<ins>response</ins>** contains. My choice would be a javascript based auth library, <a className="underline text-hyperlink" href="https://www.authjs.dev">authjs.dev</a> . It makes OAuth insanely simple and intuitive.
+I will update the link to second part here, untill then **See ya!**
