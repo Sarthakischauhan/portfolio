@@ -23,9 +23,12 @@ module.exports = {
       textColor: {
           'danger': '#e3342f',
           'hyperlink': '#C175FF',
+          'info': '#007FFF' 
       },
       borderColor:{
-        'quote' :'#C175FF'
+        'quote' :'#C175FF', 
+        'info' : "#007FFF", 
+        'imgborder': '#272727',
       },
       keyframes: {
         keyframes: {
