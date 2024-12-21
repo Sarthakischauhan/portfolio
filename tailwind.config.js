@@ -25,7 +25,9 @@ module.exports = {
           'hyperlink': '#C175FF',
       },
       borderColor:{
-        'quote' :'#C175FF'
+        'quote' :'#C175FF', 
+        'info' : "#007FFF", 
+        'imgborder': '#272727',
       },
       keyframes: {
         keyframes: {

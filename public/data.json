@@ -31,7 +31,15 @@
             "tags": ["Thoughts", "Culture"],
             "desc": "Exploring the cultural, societal, and systemic factors limiting India's global influence.",
             "slug": "indian-softpower"
+        }, 
+        {
+            "title": "Can't beat OAuth2",
+            "date_posted": "12-21-2024",
+            "tags": ["Tech", "Teaching","2 min read"],
+            "desc": "Let's learn open authentication(OAuth) in 2 mins.",
+            "slug": "cant-beat-oauth2"
         }
+        
         
     ]
 }
