@@ -5,13 +5,14 @@ import SocialTiles from "./components/SocialTiles";
 import Link from "next/link";
 import ExternalCTA from "./components/ExternalCTA";
 import * as data from "../public/data.json";
-import { ArrowUpRight, Github, Linkedin, Mail} from 'lucide-react'
+import { ArrowUpRight} from 'lucide-react'
 import { If,Else } from "react-if";
-
 
 export default function Home() {
   const WORK_EXPERIENCE = data.workExperience;
-  const BLOG_DATA = data.blogData.sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted));
+  const BLOG_DATA = data.blogData
+    .sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted))
+    .slice(0, 2);
   
   return (  
     <>
@@ -43,10 +44,10 @@ export default function Home() {
         </div>
         <If condition={BLOG_DATA.length != 0}>
           <div className="work-exp mb-[10px] mt-16">
-              <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Writings</h1>
+              <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Recent Writings</h1>
               <div className="space-y-10 mt-[24px]">
                 {BLOG_DATA.map((blog, i) => ( 
-                  <BlogTile blog={blog} key={i} />
+                  <BlogTile blog={blog} key={i} tags={false}/>
                 ))}
               </div>
               <div className="mt-[16px]">
