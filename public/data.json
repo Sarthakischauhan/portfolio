@@ -20,26 +20,24 @@
     "blogData":[
         {
             "title":"My plans for future and ambitions with engineering", 
-            "date_posted":"10-12-2024", 
+            "date_posted":"2024-12-10", 
             "tags":["Thoughts","Future","Engineering"],
             "desc": "Writing software is changing with cursor and LLMs, I need rapid reinventing of purpose",
             "slug": "plans-for-future"
         },
         {
             "title": "Why Indians Struggle to Hold Significant Soft Power",
-            "date_posted": "12-03-2024",
+            "date_posted": "2024-12-03",
             "tags": ["Thoughts", "Culture"],
             "desc": "Exploring the cultural, societal, and systemic factors limiting India's global influence.",
             "slug": "indian-softpower"
         }, 
         {
             "title": "Can't beat OAuth2",
-            "date_posted": "12-21-2024",
+            "date_posted": "2024-12-21",
             "tags": ["Tech", "Teaching","2 min read"],
             "desc": "Let's learn open authentication(OAuth) in 2 mins.",
             "slug": "cant-beat-oauth2"
         }
-        
-        
     ]
 }
