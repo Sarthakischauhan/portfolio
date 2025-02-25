@@ -4,8 +4,7 @@ import BlogTile from '../components/BlogTile';
 import BlogFilter from '../components/BlogFilter';
 
 const BlogListing = () => {
-  const { blogs, allTags, selectedTag, setSelectedTag } = useBlogData();
-  
+  const { filteredBlogs, allTags, selectedTag, setSelectedTag } = useBlogData();
   return (
     <div className="max-w-[50rem] mx-auto md:mt-[80px] mt-[30px] flex flex-col p-6 md:p-0 font-inter">
         <div className="flex justify-between items-center">
@@ -20,7 +19,7 @@ const BlogListing = () => {
         </div>
 
         <div className="space-y-10 mt-[16px]">
-            {blogs.map((blog, index) => ( 
+            {filteredBlogs.map((blog, index) => ( 
                 <BlogTile key={index} blog={blog} /> 
             ))}
         </div>
