@@ -38,6 +38,13 @@
             "tags": ["Tech", "Teaching","2 min read"],
             "desc": "Let's learn open authentication(OAuth) in 2 mins.",
             "slug": "cant-beat-oauth2"
+        },
+        {
+            "title": "Automate the boring stuff",
+            "date_posted": "2025-02-25",
+            "tags": ["Tech", "Teaching","2 min read"],
+            "desc": "Oganize screenshots with python and a dash of AI",
+            "slug": "cleanSS-groq"
         }
     ]
 }
