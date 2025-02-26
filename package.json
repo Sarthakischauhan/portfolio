@@ -22,6 +22,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-if": "^4.1.5",
+    "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
