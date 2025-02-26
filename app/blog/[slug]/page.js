@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import ExternalCTA from '../../components/ExternalCTA';
 import { ArrowUpRight } from 'lucide-react';
+import "../../styles/xcode.css";
 
 const NotFound = () => (
   <div>
