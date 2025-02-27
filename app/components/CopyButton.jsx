@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import { ClipboardCheck, Copy } from 'lucide-react';
 
 const CopyButton = ({ text }) => {
   const [copied, setCopied] = useState(false);
@@ -17,9 +18,19 @@ const CopyButton = ({ text }) => {
   return (
     <button 
       onClick={handleCopy}
-      className="absolute right-2 top-2 px-2 py-1 rounded text-xs bg-gray-700 hover:bg-gray-600 transition-colors"
+      className="absolute right-2 top-2 px-2 flex flex-row gap-2 py-1 rounded-sm text-xs hover:backdrop-blur-md hover:bg-white/10 transition-colors"
     >
-      {copied ? 'Copied!' : 'Copy'}
+      {copied ?
+          <>
+            <ClipboardCheck className='h-4 w-4'/>
+            <span className='none'>Copied!</span>
+          </>
+        :
+          <>
+          <Copy className='h-4 w-4'/>
+          <span className='none'>Copy</span>
+        </>
+      }
     </button>
   );
 };
