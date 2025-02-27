@@ -1,0 +1,341 @@
+import BlogHeader from '../app/components/BlogHeader'
+import CodeSnippet from '../app/components/CodeSnippet'
+import Image from "next/image"
+ 
+ 
+<BlogHeader date='2025-02-26'>
+  <h1 className="m-0 p-0">Automate the boring stuff</h1>
+  ## Organize screenshots with Python and a dash of AI
+  <p className="tag">Tech</p>
+  <p className="tag">LLM</p>
+  <p className="tag">Teaching</p>
+</BlogHeader>
+
+<blockquote className="border-l-4 border-info pl-4 italic my-6 mt-10 mb-0">
+  Before we dive in, here's what we'll be using:
+  <ul className="list-disc">
+    <li>Python for automation and file handling</li>
+    <li>groqCloud with llama 3.2 90b vision preview model for image classification</li>
+    <li>PIL (Python Imaging Library) for image processing</li>
+    <li>Base64 encoding for image data transmission</li>
+  </ul>
+</blockquote>
+
+To install the above dependencies, run the following command in your terminal
+<CodeSnippet>
+```language-bash
+pip install groq pillow
+```
+</CodeSnippet>
+
+<div className="mt-10 mb-4">
+<h1 className="m-0 p-0">**The Problem**</h1>
+</div>
+
+If you are like me and have hundreds of screenshots just lying on your desktop with no information, making everything look messy, then you would love something that can organize those screenshots for you. This script will automatically:
+
+<ul className="list-disc">
+  <li>Analyze image content using AI</li>
+  <li>Handle image compression when needed</li>
+  <li>Categorize them into appropriate folders or pre defined categories</li>
+  <li>Move the file to appropriatte folders based on the category</li>
+</ul>
+
+<div className="mt-10 mb-4">
+<h1 className="m-0 p-0">**Results**</h1>
+</div>
+
+I have a really cluttered desktop with random photos or memes, code snippets and images that I take screenshots of. Llama will clean and organize them to make it look from this: 
+
+<div className="relative w-full lg:max-w-[50rem] mx-auto mt-[10px] mb-[10px]
+ sm:max-w-[30rem] md:max-w-[50rem]">
+    <Image
+      src="/pre-cleanss.png"
+      alt="Desktop before running our script"
+      width={1920}
+      height={1080}
+      className="rounded object-cover w-full"
+      priority
+      quality={100}
+    />
+</div>
+
+#### To this:
+<div className="relative w-full lg:max-w-[50rem] mx-auto mt-[10px] mb-[10px]
+ sm:max-w-[30rem] md:max-w-[50rem]"
+ >
+    <Image
+      src="/post-cleanss.png"
+      alt="Desktop after running our script"
+      width={1920}
+      height={1080}
+      className="rounded object-cover w-full"
+      quality={100}
+      priority
+    />
+</div>
+
+<div className="mt-10 mb-4">
+<h1 className="m-0 p-0">**Let's Break Down the Code**</h1>
+</div>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**Import Required Libraries**</h2>
+</div>
+
+We are using the **`groq`** library, which is OpenAI-compatible and will be used to access our model hosted on **`groqcloud`**.
+
+<CodeSnippet>
+```python
+#! /base/bin/python3
+import os
+import glob
+import base64
+from dotenv import load_dotenv # type: ignore
+from groq import Groq # type: ignore
+import json
+import shutil
+from PIL import Image
+from io import BytesIO
+from datetime import datetime
+
+load_dotenv()
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**Creating a Class for Organization**</h2>
+</div>
+
+We'll take an object-oriented approach and create a class **`CleanScreenShots`** with well-defined responsibilities:
+
+<ul className="list-disc">
+  <li>Managing desktop path and allowed categories</li>
+  <li>Handling image processing and compression</li>
+  <li>Interfacing with the AI model</li>
+  <li>Organizing files into appropriate folders</li>
+</ul>
+
+<CodeSnippet>
+```python
+class CleanScreenShots:
+    DESKTOP_PATH = os.path.join(os.path.expanduser("~"), "Desktop")
+    ALLOWED_CATEGORIES = ["Meme", "Study", "Documents", "Random", "Images"]
+    # Generic code coming soon
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**Fetching Screenshots**</h2>
+</div>
+
+Our function **`get_screenshots()`** will fetch all the screenshots stored on the desktop. It searches for file names that contain **`Screenshot`** in their name and supports multiple image formats:
+
+<ul className="list-disc">
+  <li>JPEG files (\*.jpg, \*.jpeg)</li>
+  <li>PNG files (\*.png)</li>
+</ul>
+
+<CodeSnippet>
+```python
+def get_screenshots(self):
+    patterns = [os.path.join(self.DESKTOP_PATH, f"*Screenshot*.{ext}") for ext in ["png", "jpg", "jpeg"]]
+    screenshots = []
+    for pattern in patterns:
+        screenshots.extend(glob.glob(pattern))
+    return screenshots
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**Processing Images**</h2>
+</div>
+
+The image processing pipeline involves several key steps:
+
+<ul className="list-disc">
+  <li>**Size Check**: Images larger than 2.5MB are automatically compressed</li>
+  <li>**Base64 Encoding**: Required for sending local image data to `groq`</li>
+  <li>**MIME Type Generation**: Used as a prefix for sending data</li>
+</ul>
+
+Here's how we handle these requirements:
+
+<CodeSnippet>
+```python
+def compress_resize_image(self, image_path, max_size=2.5 * 1024 * 1024):
+    img = Image.open(image_path)
+    img.thumbnail((1920, 1080))
+    buf = BytesIO()
+    ext = os.path.splitext(image_path)[1].lower()
+    if ext in [".jpg", ".jpeg"]:
+        img.save(buf, format="JPEG", quality=85)
+    else:
+        img.save(buf, format="PNG", optimize=True)
+    return base64.b64encode(buf.getvalue()).decode("utf-8")
+
+def encode_image(self, image_path):
+    max_size = 2.5 * 1024 * 1024
+    if os.path.getsize(image_path) > max_size:
+        return self.compress_resize_image(image_path, max_size)
+    else:
+        with open(image_path, "rb") as image_file:
+            return base64.b64encode(image_file.read()).decode("utf-8")
+
+def get_mime_type(self, image_path):
+    ext = os.path.splitext(image_path)[1].lower()
+    if ext == ".png":
+        return "image/png"
+    elif ext in [".jpg", ".jpeg"]:
+        return "image/jpeg"
+    else:
+        return "application/octet-stream"
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**AI-Powered Categorization**</h2>
+</div>
+
+The heart of our script lies in its ability to intelligently categorize images. We use a carefully crafted prompt that instructs the AI model to classify images into specific categories:
+
+<blockquote className="border-l-4 border-info pl-4 italic my-6 mt-4 mb-4">
+  The categories are designed to cover most common screenshot types:
+  <ul className="list-disc mt-2">
+    <li>Meme: Funny or satirical images</li>
+    <li>Study: Educational content, formulas, notes</li>
+    <li>Documents: Text-heavy, information-rich content</li>
+    <li>Random: Code snippets, tickets, miscellaneous</li>
+    <li>Images: Personal photos and non-meme images</li>
+  </ul>
+</blockquote>
+
+<CodeSnippet>
+```python
+prompt = f"""Categorize the following image into one of these categories:
+    Meme : Generally images with some satirical text or just funny images.
+    Study : Math equations, formulas, experiment results.
+    Documents: PDFs or text-based documents with useful information.
+    Random: Code snippets, outdated tickets, invitations.
+    Images: Images of people that are not memes.
+
+    Always return only a JSON object in the schema:
+    {{"category": "value"}}
+
+    The current date is {datetime.today().strftime('%Y-%m-%d')}
+"""
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**Connecting with groqCloud**</h2>
+</div>
+
+We use the following configuration to connect with groqCloud and process our images:
+
+<CodeSnippet>
+```python 
+messages = [
+    {
+        "role": "user",
+        "content": [
+            {
+                "type": "text",
+                "text": prompt
+            },
+            {
+                "type": "image_url",
+                "image_url": {"url": image_data_url},
+            },
+        ],
+    }
+]
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+chat_completion = client.chat.completions.create(
+    messages=messages,
+    model="llama-3.2-90b-vision-preview",
+    temperature=1,
+    max_completion_tokens=1024,
+    top_p=1,
+    stream=False,
+    response_format={"type": "json_object"},
+    stop=None,
+)
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**Putting It All Together**</h2>
+</div>
+
+The `process_all_screenshots` function serves as the main orchestrator, combining all our components to:
+
+<ul className="list-disc">
+  <li>Process screenshots in batches of 5</li>
+  <li>Get AI-powered categorization for each image</li>
+  <li>Move files to their respective category folders</li>
+  <li>Provide interactive control over the process</li>
+</ul>
+
+<CodeSnippet>
+```python
+def save_to_folders(self, category, image_path):
+    allowed = self.ALLOWED_CATEGORIES + [s.lower() for s in self.ALLOWED_CATEGORIES]
+    print(category)
+    if category not in allowed:
+        raise Exception("Cannot save docs for unknown categories")
+    
+    output_path = os.path.join(self.DESKTOP_PATH, category)
+    os.makedirs(output_path, exist_ok=True)
+    output_path = os.path.join(output_path, os.path.basename(image_path))
+    shutil.move(image_path, output_path) 
+    
+def process_all_screenshots(self):
+    screenshots = self.get_screenshots()
+    assert screenshots, "No screenshots matched, check screenshot names"
+    k = 0
+    while k < len(screenshots):
+        batch = screenshots[k:k+5]
+        for image_path in batch:
+            print(f"Processing {image_path}...")
+            result = json.loads(self.categorize_image(image_path))
+            category = result["category"]
+            self.save_to_folders(category, image_path)
+        if k + 5 < len(screenshots):
+            proceed = input("Do you wish to continue? (y/n): ").strip().lower()
+            while proceed not in ["y", "n", "yes", "no"]:
+                print("Invalid input. Please enter 'y' or 'n'.")
+                proceed = input("Do you wish to continue? (y/n): ").strip().lower()
+            if proceed in ["n", "no"]:
+                break
+        k += 5
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**Running the Script**</h2>
+</div>
+
+To use this script, simply create an instance of **`CleanScreenShots`** and call **`process_all_screenshots`**:
+
+<CodeSnippet>
+```python
+if __name__ == "__main__":
+    cs = CleanScreenShots()
+    cs.process_all_screenshots()
+```
+</CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**What's next?** <span className="text-[14px]">(Ofc you are gonna do it!)</span></h2>
+</div>
+<ul className="list-disc">
+  <li>A more scalable and useful approach would be to convert our script into a command line tool.</li>
+  <li>Ask users to mention their categories and give descriptions for each</li>
+  <li>Instead of just passing an image and categorize them, a much accurate approach would be passing in summaries of image into a seperate model</li>
+</ul>
+
+<blockquote className="border-l-4 border-quote pl-4 italic my-6 mt-4 mb-0">
+  "True AGI is when AI can do a task with 96.012% accuracy that a human can do with 100"
+  <span className="block text-sm mt-2">— Vibe coder</span>
+</blockquote>
