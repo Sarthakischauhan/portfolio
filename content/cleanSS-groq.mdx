@@ -21,6 +21,12 @@ import Image from "next/image"
   </ul>
 </blockquote>
 
+To install the above dependencies, run the following command in your terminal
+<CodeSnippet>
+```language-bash
+pip install groq pillow
+```
+</CodeSnippet>
 
 <div className="mt-10 mb-4">
 <h1 className="m-0 p-0">**The Problem**</h1>
@@ -29,17 +35,17 @@ import Image from "next/image"
 If you are like me and have hundreds of screenshots just lying on your desktop with no information, making everything look messy, then you would love something that can organize those screenshots for you. This script will automatically:
 
 <ul className="list-disc">
-  <li>Detect screenshots on your desktop</li>
-  <li>Analyze their content using AI</li>
-  <li>Categorize them into appropriate folders</li>
+  <li>Analyze image content using AI</li>
   <li>Handle image compression when needed</li>
+  <li>Categorize them into appropriate folders or pre defined categories</li>
+  <li>Move the file to appropriatte folders based on the category</li>
 </ul>
 
 <div className="mt-10 mb-4">
-<h1 className="m-0 p-0">**Before and After**</h1>
+<h1 className="m-0 p-0">**Results**</h1>
 </div>
 
-Currently, my desktop looked like this:
+I have a really cluttered desktop with random photos or memes, code snippets and images that I take screenshots of. Llama will clean and organize them to make it look from this: 
 
 <div className="relative w-full lg:max-w-[50rem] mx-auto mt-[10px] mb-[10px]
  sm:max-w-[30rem] md:max-w-[50rem]">
@@ -54,7 +60,7 @@ Currently, my desktop looked like this:
     />
 </div>
 
-After running this script, it will look like this:
+#### To this:
 <div className="relative w-full lg:max-w-[50rem] mx-auto mt-[10px] mb-[10px]
  sm:max-w-[30rem] md:max-w-[50rem]"
  >
@@ -77,7 +83,7 @@ After running this script, it will look like this:
 <h2 className="m-0 p-0">**Import Required Libraries**</h2>
 </div>
 
-We are using the `groq` library, which is OpenAI-compatible and will be used to access our model hosted on `groqcloud`.
+We are using the **`groq`** library, which is OpenAI-compatible and will be used to access our model hosted on **`groqcloud`**.
 
 <CodeSnippet>
 ```python
@@ -101,7 +107,7 @@ load_dotenv()
 <h2 className="m-0 p-0">**Creating a Class for Organization**</h2>
 </div>
 
-We'll take an object-oriented approach and create a class `CleanScreenShots` with well-defined responsibilities:
+We'll take an object-oriented approach and create a class **`CleanScreenShots`** with well-defined responsibilities:
 
 <ul className="list-disc">
   <li>Managing desktop path and allowed categories</li>
@@ -123,11 +129,11 @@ class CleanScreenShots:
 <h2 className="m-0 p-0">**Fetching Screenshots**</h2>
 </div>
 
-Our function `get_screenshots()` will fetch all the screenshots stored on the desktop. It searches for file names that contain `Screenshot` in their name and supports multiple image formats:
+Our function **`get_screenshots()`** will fetch all the screenshots stored on the desktop. It searches for file names that contain **`Screenshot`** in their name and supports multiple image formats:
 
 <ul className="list-disc">
-  {/* <li>PNG files (*.png)</li> */}
-  <li>JPEG files (*.jpg, *.jpeg)</li>
+  <li>JPEG files (\*.jpg, \*.jpeg)</li>
+  <li>PNG files (\*.png)</li>
 </ul>
 
 <CodeSnippet>
@@ -310,7 +316,7 @@ def process_all_screenshots(self):
 <h2 className="m-0 p-0">**Running the Script**</h2>
 </div>
 
-To use this script, simply create an instance of `CleanScreenShots` and call `process_all_screenshots`:
+To use this script, simply create an instance of **`CleanScreenShots`** and call **`process_all_screenshots`**:
 
 <CodeSnippet>
 ```python
@@ -319,6 +325,15 @@ if __name__ == "__main__":
     cs.process_all_screenshots()
 ```
 </CodeSnippet>
+
+<div className="mt-6 mb-2">
+<h2 className="m-0 p-0">**What's next?** <span className="text-[14px]">(Ofc you are gonna do it!)</span></h2>
+</div>
+<ul className="list-disc">
+  <li>A more scalable and useful approach would be to convert our script into a command line tool.</li>
+  <li>Ask users to mention their categories and give descriptions for each</li>
+  <li>Instead of just passing an image and categorize them, a much accurate approach would be passing in summaries of image into a seperate model</li>
+</ul>
 
 <blockquote className="border-l-4 border-quote pl-4 italic my-6 mt-4 mb-0">
   "True AGI is when AI can do a task with 96.012% accuracy that a human can do with 100"
