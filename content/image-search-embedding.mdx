@@ -1,0 +1,82 @@
+import BlogHeader from '../app/components/BlogHeader'
+import CodeSnippet from '../app/components/CodeSnippet'
+
+<BlogHeader date="2025-02-26">
+  <h1 className="m-0 p-0">Image Search with Embeddings</h1>
+  ## Semantic Search for Images using Embeddings
+  <p className="tag">Tech</p>
+  <p className="tag">AI</p>
+  <p className="tag">Vision</p>
+</BlogHeader>
+
+*Embeddings* are the building blocks and the one of the foundational process for NLP. To understand them Picture a team meeting where you're grouping _similar_ tasks with the same colored sticky notes to show they're related.That's what embeddings do: they take words or sentences that are _semantically similar_ (meaning they share the same vibe or meaning) and represent them as points close together in a _multi-dimensional_ vector space.
+
+<blockquote className="border-l-4 border-info pl-4 italic my-6 mt-4 mb-4">
+A couple of things to unpack:
+<ol className="list-decimal ">
+  <li>_Semantically similar_ means sentences or words that convey roughly the same idea for instance, "I love coffee" and "I'm crazy about espresso" are similar in meaning.</li>
+  <li>_Multi-dimensional_ space is just a fancy way of saying we're plotting these points across a bunch of perspectives (or dimensions) to capture their essence in numbers.</li>
+</ol>
+</blockquote>
+
+### What does it mean by Image embeddings
+Imagine you could turn an image into a bunch of numbers spread accross multi dimensions that capture its "vibe". They're like a numerical fingerprint of an image, boiling down its colors, shapes, and content into a vector that a computer can understand.
+
+==You can go a bit technical here==
+
+### What do we wanna do and how do we do it ?
+
+I aim to build a quick image search program that can be used to accurately figure out how to search images based on a query or another image. The basic idea therefore is to use the embeddings model and then match the user query based on our computed image embeddings!
+
+**To demonstrate how I would implement this I have taken a popular image dataset around receipts. I choose receipts because I think search on them will have real life usage.
+
+<CodeSnippet>
+```python 
+from sentence_transformers import SentenceTransformer, util 
+import torch
+from PIL import Image
+from IPython.display import display
+from IPython.display import Image as IPImage
+
+# load and generate paths to images in the dataset
+dataset_path= "your-dataset-path"
+paths = []
+for dirname, _, files in os.walk(dataset_path):
+    pass
+
+for file in files:
+    paths.append(os.path.join(dirname, file))
+
+# Encoding images
+model = SentenceTransformer("clip-ViT-B-32")
+img_emb = model.encode([Image.open(filepath) for filepath in paths], batch_size=128, convert_to_tensor=True, show_progress_bar=True)
+```
+</CodeSnippet>
+
+##### We can actually use this search function from the official documentation from `sentence-transformers`
+
+<CodeSnippet>
+```python
+def search(query, k=3):
+    # You can embedd both image or text to search for the image.
+    query_emb = model.encode([query], convert_to_tensor=True, show_progress_bar=False)
+    hits = util.semantic_search(query_emb, img_emb, top_k=k)[0]
+    
+    print("Query given is:")
+    display(query)
+    for hit in hits:
+        print(paths[hit['corpus_id']]) 
+        display(IPImage(os.path.join(dirname, paths[hit['corpus_id']]), width=200))
+```
+</CodeSnippet>
+
+So let's say we search for ==cappuccino or coffee in california==
+
+<CodeSnippet>
+```python
+search("cappuccino or coffee in california")
+```
+</CodeSnippet>
+
+We get the following below:
+

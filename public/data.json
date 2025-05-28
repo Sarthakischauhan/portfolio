@@ -45,6 +45,13 @@
             "tags": ["Tech", "Teaching","2 min read"],
             "desc": "Oganize screenshots with python and a dash of AI",
             "slug": "cleanSS-groq"
+        },
+        {
+            "title": "Image Search with embeddings",
+            "date_posted": "2025-05-28",
+            "tags": ["Tech", "Teaching","2 min read"],
+            "desc": "Build a image search program with embeddings",
+            "slug": "image-search-embedding"
         }
     ]
 }
