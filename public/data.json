@@ -45,6 +45,13 @@
             "tags": ["Tech", "Teaching","2 min read"],
             "desc": "Oganize screenshots with python and a dash of AI",
             "slug": "cleanSS-groq"
+        }, 
+        {
+            "title": "Slow and Steady",
+            "date_posted": "2025-07-13",
+            "tags": ["Thoughts","2 min read"],
+            "desc": "Taking a moment to step back and reflect on the way of doing things.",
+            "slug": "slow-and-steady"
         }
     ]
 }
