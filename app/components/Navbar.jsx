@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import SocialTiles from "../components/SocialTiles"
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -19,11 +20,13 @@ const Navbar = () => {
 
   return (
     <nav className="p-6 md:p-4 font-inter select-none">
-      <div className="max-w-[50rem] mx-auto flex justify-between items-center">
+      <div className="max-w-[40rem] mx-auto flex justify-between items-center">
         <div className="flex space-x-0.5 text-lg font-regular">
           <span>/</span>
           <NavLink href="/">home</NavLink>
           {/* <NavLink href="/projects">projects</NavLink> */}
+          <span>/</span>
+          <NavLink href="/projects">projects</NavLink>
           <span>/</span>
           <NavLink href="/blog">writings</NavLink>
         </div>

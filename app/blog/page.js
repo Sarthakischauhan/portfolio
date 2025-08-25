@@ -6,7 +6,7 @@ import BlogFilter from '../components/BlogFilter';
 const BlogListing = () => {
   const { filteredBlogs, allTags, selectedTag, setSelectedTag } = useBlogData();
   return (
-    <div className="max-w-[50rem] mx-auto md:mt-[80px] mt-[30px] flex flex-col p-6 md:p-0 font-inter">
+    <div className="lg:max-w-[40rem] sm:max-w-[40rem] mx-auto md:mt-[80px] mt-[30px] flex flex-col p-6 md:p-0 font-inter">
         <div className="flex justify-between items-center">
             <div className="text-3xl font-semibold">
                 Recent Writings
