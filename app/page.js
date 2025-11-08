@@ -76,7 +76,7 @@ export default function Home() {
           renderHeading={(exp) => (
             <span className="flex flex-wrap gap-2 text-sm sm:text-base">
               <span className="capitalize">{exp.title}</span>
-              <span className="text-white/60 text-xs sm:text-sm">
+              <span className="text-white/60 text-xs sm:text-sm flex items-center">
                 @ {exp.company}
               </span>
               {exp.team && (

@@ -17,7 +17,7 @@ export const SectionList = ({
     <div className="mt-3 flex flex-col gap-4 pl-2">
       {items.map((item, index) => (
         <div key={getKey ? getKey(item, index) : index} className="space-y-2">
-          <p className="flex flex-wrap items-baseline gap-3 text-base sm:text-lg">
+          <p className="flex items-baseline gap-3 text-base sm:text-lg">
             <span className="text-xs font-semibold tracking-wide text-white/40 sm:text-sm">
               -
             </span>
