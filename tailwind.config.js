@@ -14,34 +14,37 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       margin: {
-        '70%' : '70%'
+        "70%": "70%",
       },
-      fontFamily:{
-        inter: ['var(--font-inter)','sans'],
-        mono:['var(--font-ibm-mono)', 'monospace']
+      fontFamily: {
+        inter: ["var(--font-inter)", "sans"],
+        mono: ["var(--font-ibm-mono)", "monospace"],
       },
       textColor: {
-          'danger': '#e3342f',
-          'hyperlink': '#C175FF',
-          'info': '#007FFF',
-          'inlinecode':'#d2a8ff'
+        danger: "#e3342f",
+        hyperlink: "#C175FF",
+        info: "#007FFF",
+        inlinecode: "#d2a8ff",
       },
-      borderColor:{
-        'quote' :'#C175FF', 
-        'info' : "#007FFF", 
-        'imgborder': '#272727',
+      borderColor: {
+        quote: "#C175FF",
+        info: "#007FFF",
+        imgborder: "#272727",
       },
       keyframes: {
-        keyframes: {
-          blur: {
-            '0%': { filter: "blur(0px)" },
-            '100%': { filter: "blur(5px)" },
-          }
+        blur: {
+          "0%": { filter: "blur(0px)" },
+          "100%": { filter: "blur(5px)" },
         },
-        animation: {
-          blur: 'blur 2s linear infinite',
-        }
-      }
+        "fade-in-up": {
+          "0%": { opacity: 0, transform: "translateY(16px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        blur: "blur 2s linear infinite",
+        "fade-in-up": "fade-in-up 0.6s ease-out both",
+      },
     }
   },
   plugins: [require('@tailwindcss/typography')],

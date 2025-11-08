@@ -1,94 +1,147 @@
-import ExperienceTile from "./components/ExperienceTile";
-import BlogTile from "./components/BlogTile";
-import Image from "next/image";
 import SocialTiles from "./components/SocialTiles";
 import Link from "next/link";
-import ExternalCTA from "./components/ExternalCTA";
-import * as data from "../public/data.json";
-import { ArrowUpRight, ArrowDown } from "lucide-react";
-import { If, Else } from "react-if";
+import data from "../public/data.json";
+import { SectionList } from "./components/SectionList";
+const PROJECTS = [
+  {
+    name: "LangCanvas",
+    summary:
+      "Realtime diagramming canvas that streams LangGraph workflows and supports multiplayer editing with CRDT sync.",
+    tech: ["Next.js", "Liveblocks", "LangChain", "Tailwind"],
+    href: "https://github.com/example/langcanvas",
+  },
+  {
+    name: "ChargeIQ",
+    summary:
+      "Energy usage co-pilot that forecasts EV charging demand, alerts on anomalies, and plugs into in-house telemetry APIs.",
+    tech: ["TypeScript", "tRPC", "PostgreSQL", "Temporal"],
+    href: "https://github.com/example/chargeiq",
+  },
+  {
+    name: "Sentinel HUD",
+    summary:
+      "Driver heads-up display with live CAN bus metrics, lap analytics, and OTA layout updates for Formula SAE.",
+    tech: ["React", "WebGL", "Rust", "Wasm"],
+    href: "https://github.com/example/sentinel-hud",
+  },
+];
+
+const containerClass =
+  "mx-auto flex max-w-[40rem] flex-col gap-8 px-6 mt-10 mb-10 pt-8 md:px-0";
+const paragraphClass =
+  "text-sm font-mono leading-relaxed text-white/70 sm:text-base";
+
+const formatDate = (value) =>
+  new Date(value).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
 export default function Home() {
-  const WORK_EXPERIENCE = data.workExperience.slice(0, 2);
-  const BLOG_DATA = data.blogData
+  const WORK_EXPERIENCE = data.workExperience;
+  const RECENT_BLOGS = [...data.blogData]
     .sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted))
     .slice(0, 2);
 
   return (
     <>
-      <div className="lg:max-w-[40rem] sm:max-w-[40rem] mx-auto md:mt-[100px] mt-[30px] flex flex-col p-6 md:p-0 ">
-        {/* <Image
-          src="/D.png"
-          height={500}
-          width={500}
-          alt="Sarthak Chauhan"
-          className="rounded-full aspect-square object-cover border-white border-2 w-4/12 sm:w-[140px] lg:w-[120px]"
-          placeholder="empty"
-          priority
-        />*/}
-        <div className="intro">
-          <h1 className="md:text-2xl text-xl mt-[10px] leading-8 font-mono font-medium">
-            hi there! nice to meet ya, i am sarthak
-            {/* <span className="opacity-60">
-              {" "}
-              I&apos;m a software engineer and an AI enthusiast
-            </span>*/}
+      <div className={containerClass}>
+        <div
+          className="intro animate-fade-in-up"
+          style={{ animationDelay: "0.05s" }}
+        >
+          <h1 className="mt-2 text-3xl font-mono font-medium leading-tight sm:text-[28px] md:text-4xl">
+            Sarthak Chauhan
           </h1>
+
           <SocialTiles />
-          <div className="para-class tracking-wide font-regular">
-            <p
-              className="text-[16px] w-70 font-mono mt-[8px] leading-2  opacity-60"
-              id="self-intro"
-            >
+          <div className="para-class mt-2 space-y-4">
+            <p className={paragraphClass}>
               i love to craft user interfaces, write apis, multiply matrices and
               some good ol&apos; brainstorming. actively looking for full time
               roles for winter 2025
             </p>
-            <p
-              className="text-[16px] w-70 font-mono mt-[16px] leading-2 opacity-60"
-              id="self-intro"
-            >
+            <p className={paragraphClass}>
               currently i am finishing up school and working on some fullstack
               and ai projects.
             </p>
-            <p className="text-[16px] w-70 font-mono mt-[16px] leading-2 opacity-100">
-              previously worked at
-            </p>
           </div>
         </div>
-        <div className="flex flex-col gap-1 mt-[16px] font-mono w-70">
-          <h4 className="text-lg tracking-wide underline text-red-400">
-            tesla
-          </h4>
-          <div className="indent-3 flex flex-col gap-3">
-            {WORK_EXPERIENCE.map((exp, idx) => (
-              <div className="" key={idx}>
-                <p className="text-lg">- swe @ {exp.team}</p>
-                <div className="indent-0 ml-6 leading-6 text-sm opacity-60">
-                  {exp.roledesc}
+        <SectionList
+          label="previously worked at"
+          items={WORK_EXPERIENCE}
+          animationDelay={0.1}
+          getKey={(exp) => `${exp.company}-${exp.team ?? exp.title}`}
+          renderHeading={(exp) => (
+            <span className="flex flex-wrap gap-2 text-sm sm:text-base">
+              <span className="capitalize">{exp.title}</span>
+              <span className="text-white/60 text-xs sm:text-sm">
+                @ {exp.company}
+              </span>
+              {exp.team && (
+                <span className="text-white/50 text-xs sm:text-sm">
+                  ({exp.team})
+                </span>
+              )}
+            </span>
+          )}
+          renderBody={(exp) => (
+            <>
+              <p>{exp.roledesc}</p>
+            </>
+          )}
+        />
+        <SectionList
+          label="recent projects"
+          items={PROJECTS}
+          animationDelay={0.2}
+          getKey={(project) => project.name}
+          renderHeading={(project) => (
+            <Link
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-base transition-colors hover:text-hyperlink sm:text-lg"
+            >
+              {project.name}
+            </Link>
+          )}
+          renderBody={(project) => (
+            <>
+              <p>{project.summary}</p>
+            </>
+          )}
+        />
+        <SectionList
+          label="latest writing"
+          items={RECENT_BLOGS}
+          animationDelay={0.3}
+          getKey={(blog) => blog.slug}
+          renderHeading={(blog) => (
+            <Link
+              href={`/blog/${blog.slug}`}
+              className="text-base transition-colors hover:text-hyperlink sm:text-lg"
+            >
+              {blog.title}
+            </Link>
+          )}
+          renderBody={(blog) => (
+            <>
+              <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-wide text-white/50 sm:text-xs">
+                <span>{formatDate(blog.date_posted)}</span>
+                <div className="flex flex-wrap gap-2">
+                  {blog.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="">
-          <p className="text-[16px] w-70 font-mono mt-[16px] leading-2 opacity-100">
-            checkout my projects and writings
-          </p>
-          <div className="flex flex-col lg:flex-row gap-4 mt-6 w-full font-mono">
-            <Link href={"/projects"} className="flex-1">
-              <div className="p-6 h-[150px] flex align-bottom rounded-lg border border-gray-700 hover:border-gray-600 transition-colors">
-                <h3 className="text-lg font-mono font-medium mb-2">Projects</h3>
-              </div>
-            </Link>
-
-            <Link href="/blog" className="flex-1">
-              <div className="p-6 h-[150px] rounded-lg border border-gray-700 hover:border-gray-600 transition-colors">
-                <h3 className="text-lg font-mono font-medium mb-2">Writings</h3>
-              </div>
-            </Link>
-          </div>
-        </div>
+              <p className="mt-2 text-sm leading-relaxed sm:text-base">
+                {blog.desc}
+              </p>
+            </>
+          )}
+        />
       </div>
     </>
   );

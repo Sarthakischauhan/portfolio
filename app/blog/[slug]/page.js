@@ -7,14 +7,16 @@ import { ArrowUpRight } from "lucide-react";
 import "../../styles/xcode.css";
 
 const NotFound = () => (
-  <div>
-    <h1>404 - Not Found</h1>
-    <p>The requested blog post could not be found.</p>
-    <div className="mt-[16px]">
+  <div className="space-y-3 text-center font-mono">
+    <h1 className="text-2xl font-semibold text-white">404 - Not Found</h1>
+    <p className="text-sm text-white/70 sm:text-base">
+      The requested blog post could not be found.
+    </p>
+    <div className="mt-4 flex justify-center">
       <ExternalCTA
         action="/blog"
         content="Back To Blogs"
-        icon={<ArrowUpRight className="w-3.5 h-3.5" />}
+        icon={<ArrowUpRight className="h-3.5 w-3.5" />}
       />
     </div>
   </div>
@@ -35,8 +37,13 @@ const BlogPost = ({ params }) => {
 
   return (
     <>
-      <div className="prose-invert prose-sm max-w-[50rem] m-auto font-mono md:mt-[50px] mt-[30px] flex flex-col p-6 md:p-0 mb-[30px] md:mb-[40px]">
-        {Blog ? <Blog /> : <NotFound />}
+      <div className="prose-invert prose-sm mx-auto mb-[30px] mt-[30px] flex max-w-[50rem] flex-col p-6 font-mono md:mb-[40px] md:mt-[50px] md:p-0">
+        <div
+          className="animate-fade-in-up"
+          style={{ animationDelay: "0.08s" }}
+        >
+          {Blog ? <Blog /> : <NotFound />}
+        </div>
       </div>
     </>
   );

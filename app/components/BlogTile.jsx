@@ -2,28 +2,34 @@ import React from "react";
 import Link from "next/link";
 import moment from "moment";
 
-const BlogTile = ({ blog, tags = true }) => {
+const BlogTile = ({ blog, tags = true, className = "", style }) => {
   return (
-    <div className="w-full flex flex-col gap-y-1 mt-2">
-      <h6 className="text-[11px] timeline font-mono tracking-wide">
+    <div
+      className={`mt-2 flex w-full flex-col gap-y-2 font-mono ${className}`}
+      style={style}
+    >
+      <h6 className="timeline text-xs font-mono tracking-wide text-white/70 sm:text-sm">
         {moment(blog.date_posted, "YYYY-MM-DD").format("LL")}
       </h6>
-      <Link href={`/blog/${blog.slug}`} className="text-[16px]">
-        <h1 className="font-mono font-semibold hover:text-hyperlink cursor-pointer hover:underline transition-color">
+      <Link
+        href={`/blog/${blog.slug}`}
+        className="text-lg transition-colors hover:text-hyperlink hover:underline sm:text-xl"
+      >
+        <h1 className="font-mono font-semibold leading-tight">
           {blog.title}
         </h1>
       </Link>
-      <p className="font-mono font-regular text-[14px] tracking-wide opacity-70">
+      <p className="font-mono font-regular text-sm leading-relaxed tracking-wide opacity-70 sm:text-base">
         {blog.desc}
       </p>
       <span>
         {tags && (
-          <div className="flex gap-2 flex-wrap mt-2">
+          <div className="mt-2 flex flex-wrap gap-2">
             {blog.tags &&
               blog.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="text-sm font-mono font-medium text-gray-100 hover:text-hyperlink transition-colors cursor-pointer"
+                  className="text-xs font-mono font-medium text-gray-100 transition-colors hover:text-hyperlink sm:text-sm"
                 >
                   #{tag}
                 </span>

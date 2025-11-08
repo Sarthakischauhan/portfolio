@@ -5,7 +5,7 @@
       "company": "tesla",
       "team": "design system",
       "duration": "May 25 - August 25",
-      "roledesc": "worked on migrating deisgn systm repos to monorepo using nx, built frontend focused coding agents using langchain",
+      "roledesc": "built design system coding agent using langgraph, adopted by 800+ frontend developers.",
       "skills": ["Langgraph", "Python", "FastAPI", "Nx"],
       "image": "/tesla.svg"
     },
@@ -14,7 +14,7 @@
       "company": "tesla",
       "team": "insurance",
       "duration": "May 24 - August 24",
-      "roledesc": "built key features for tesla insurance in react, react native and php. owned full development lifecycle of internal applications",
+      "roledesc": "built key features for tesla insurance in react, react native and php",
       "skills": ["React", "Javascript", "PHP", "Docker", "Typescript", "Redis"],
       "image": "/tesla.svg"
     },
@@ -22,7 +22,7 @@
       "title": "Software Designer",
       "company": "FSAE SJSU",
       "duration": "June 2023 - December 2023",
-      "roledesc": "Solved bugs and optimized the dashboard layout while working with multiple teams and the vehicle driver. Implemented additional functionalities on dashboard boot-up and streamlined communication between systems, ensuring efficient control during real-time operations.",
+      "roledesc": "designed and improved vehicle dashboard user interface to show critical car information using c++",
       "skills": ["C++", "C", "CAN BUS", "Git"],
       "image": "/fsae_icon.png"
     }

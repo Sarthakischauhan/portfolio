@@ -5,7 +5,7 @@ import React from "react";
 const SocialTiles = () => {
   return (
     <div className="w-full py-2 mt-2 select-none font-mono text-sm">
-      <div className="container mx-auto flex justify-start items-center space-x-4">
+      <div className="container mx-auto flex justify-start items-center space-x-2 md:space-x-4 sm:space-x-2 lg:space-x-5">
         <Link
           href="https://github.com/Sarthakischauhan"
           className="text-gray-400 hover:text-white transition-colors"
