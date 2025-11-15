@@ -27,6 +27,18 @@
       "image": "/fsae_icon.png"
     }
   ],
+  "projects":[
+    {
+      "name": "Spotify MCP",
+      "src": "https://github.com/Sarthakischauhan/cursor-spotify-mcp",
+      "desc": "mcp server to control spotify from your preferred mcp client"
+    },
+    {
+      "name": "Banking Web App",
+      "src":"https://github.com/Sarthakischauhan/cs160-banking",
+      "desc": "ledger based banking application, built using nextjs, typescript"
+    }
+  ],
   "blogData": [
     {
       "title": "My plans for future and ambitions with engineering",

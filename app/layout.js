@@ -2,6 +2,7 @@ import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Head from "next/head";
+import RouteBackButton from "./components/RouteBackButton";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
       </Head>
       <body className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}>
         {/* {<Navbar />}*/}
+        <RouteBackButton />
         {children}
       </body>
     </html>

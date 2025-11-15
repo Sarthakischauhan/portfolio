@@ -2,34 +2,14 @@ import SocialTiles from "./components/SocialTiles";
 import Link from "next/link";
 import data from "../public/data.json";
 import { SectionList } from "./components/SectionList";
-const PROJECTS = [
-  {
-    name: "LangCanvas",
-    summary:
-      "Realtime diagramming canvas that streams LangGraph workflows and supports multiplayer editing with CRDT sync.",
-    tech: ["Next.js", "Liveblocks", "LangChain", "Tailwind"],
-    href: "https://github.com/example/langcanvas",
-  },
-  {
-    name: "ChargeIQ",
-    summary:
-      "Energy usage co-pilot that forecasts EV charging demand, alerts on anomalies, and plugs into in-house telemetry APIs.",
-    tech: ["TypeScript", "tRPC", "PostgreSQL", "Temporal"],
-    href: "https://github.com/example/chargeiq",
-  },
-  {
-    name: "Sentinel HUD",
-    summary:
-      "Driver heads-up display with live CAN bus metrics, lap analytics, and OTA layout updates for Formula SAE.",
-    tech: ["React", "WebGL", "Rust", "Wasm"],
-    href: "https://github.com/example/sentinel-hud",
-  },
-];
+import PageContainer from "./components/PageContainer";
 
 const containerClass =
-  "mx-auto flex max-w-[40rem] flex-col gap-8 px-6 mt-10 mb-10 pt-8 md:px-0";
+  "flex max-w-[40rem] flex-col gap-8 mt-10 mb-10 pt-8";
 const paragraphClass =
-  "text-sm font-mono leading-relaxed text-white/70 sm:text-base";
+  "text-body font-mono leading-relaxed text-white/70";
+const headingLinkClass =
+  "text-section-heading transition-colors hover:text-hyperlink";
 
 const formatDate = (value) =>
   new Date(value).toLocaleDateString(undefined, {
@@ -39,6 +19,8 @@ const formatDate = (value) =>
   });
 
 export default function Home() {
+  const PROJECTS = [...data.projects]
+  .slice(0,4)
   const WORK_EXPERIENCE = data.workExperience;
   const RECENT_BLOGS = [...data.blogData]
     .sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted))
@@ -46,15 +28,14 @@ export default function Home() {
 
   return (
     <>
-      <div className={containerClass}>
+      <PageContainer className={containerClass}>
         <div
           className="intro animate-fade-in-up"
           style={{ animationDelay: "0.05s" }}
         >
-          <h1 className="mt-2 text-3xl font-mono font-medium leading-tight sm:text-[28px] md:text-4xl">
+          <h1 className="text-name-heading font-mono font-medium leading-tight">
             Sarthak Chauhan
           </h1>
-
           <SocialTiles />
           <div className="para-class mt-2 space-y-4">
             <p className={paragraphClass}>
@@ -74,13 +55,13 @@ export default function Home() {
           animationDelay={0.1}
           getKey={(exp) => `${exp.company}-${exp.team ?? exp.title}`}
           renderHeading={(exp) => (
-            <span className="flex flex-wrap gap-2 text-sm sm:text-base">
+            <span className="flex flex-wrap gap-2 text-section-heading">
               <span className="capitalize">{exp.title}</span>
-              <span className="text-white/60 text-xs sm:text-sm flex items-center">
+              <span className="flex items-center text-white/60">
                 @ {exp.company}
               </span>
               {exp.team && (
-                <span className="text-white/50 text-xs sm:text-sm">
+                <span className="text-white/50">
                   ({exp.team})
                 </span>
               )}
@@ -88,7 +69,7 @@ export default function Home() {
           )}
           renderBody={(exp) => (
             <>
-              <p>{exp.roledesc}</p>
+              <p className="text-body">{exp.roledesc}</p>
             </>
           )}
         />
@@ -99,17 +80,17 @@ export default function Home() {
           getKey={(project) => project.name}
           renderHeading={(project) => (
             <Link
-              href={project.href}
+              href={project.src}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-base transition-colors hover:text-hyperlink sm:text-lg"
+              className={headingLinkClass}
             >
               {project.name}
             </Link>
           )}
           renderBody={(project) => (
             <>
-              <p>{project.summary}</p>
+              <p className="text-body">{project.desc}</p>
             </>
           )}
         />
@@ -121,14 +102,14 @@ export default function Home() {
           renderHeading={(blog) => (
             <Link
               href={`/blog/${blog.slug}`}
-              className="text-base transition-colors hover:text-hyperlink sm:text-lg"
+              className={headingLinkClass}
             >
               {blog.title}
             </Link>
           )}
           renderBody={(blog) => (
             <>
-              <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-wide text-white/50 sm:text-xs">
+              <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-meta text-white/50 sm:text-xs">
                 <span>{formatDate(blog.date_posted)}</span>
                 <div className="flex flex-wrap gap-2">
                   {blog.tags.map((tag) => (
@@ -136,13 +117,13 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              <p className="mt-2 text-sm leading-relaxed sm:text-base">
+              <p className="mt-2 text-body">
                 {blog.desc}
               </p>
             </>
           )}
         />
-      </div>
+      </PageContainer>
     </>
   );
 }

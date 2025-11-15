@@ -6,12 +6,17 @@ import SocialTiles from "../components/SocialTiles";
 const Navbar = () => {
   const pathname = usePathname();
 
+  const baseLinkClass =
+    "text-nav tracking-nav transition-colors font-mono";
+
   const NavLink = ({ href, children }) => {
     const isActive = pathname === href;
     return (
       <Link
         href={href}
-        className={`${isActive ? "text-white" : "text-gray-400"} hover:text-white transition-colors tracking-wider`}
+        className={`${baseLinkClass} ${
+          isActive ? "text-white" : "text-white/60"
+        } hover:text-white`}
       >
         {children}
       </Link>
@@ -19,9 +24,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-6 md:p-4 font-inter select-none">
+    <nav className="p-6 md:p-4 font-mono select-none">
       <div className="max-w-[40rem] mx-auto flex justify-between items-center">
-        <div className="flex space-x-0.5 text-lg font-regular">
+        <div className="flex items-center gap-2 text-nav font-medium text-white/70">
           <span>/</span>
           <NavLink href="/">home</NavLink>
 

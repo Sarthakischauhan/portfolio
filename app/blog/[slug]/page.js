@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import ExternalCTA from "../../components/ExternalCTA";
 import { ArrowUpRight } from "lucide-react";
+import PageContainer from "../../components/PageContainer";
 import "../../styles/xcode.css";
 
 const NotFound = () => (
@@ -37,14 +38,14 @@ const BlogPost = ({ params }) => {
 
   return (
     <>
-      <div className="prose-invert prose-sm mx-auto mb-[30px] mt-[30px] flex max-w-[50rem] flex-col p-6 font-mono md:mb-[40px] md:mt-[50px] md:p-0">
+      <PageContainer className="prose-invert prose-sm flex max-w-[40rem] flex-col gap-8 mt-10 mb-10 pt-8 text-body font-mono">
         <div
           className="animate-fade-in-up"
           style={{ animationDelay: "0.08s" }}
         >
           {Blog ? <Blog /> : <NotFound />}
         </div>
-      </div>
+      </PageContainer>
     </>
   );
 };
