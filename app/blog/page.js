@@ -1,30 +1,39 @@
-"use client"
-import { useBlogData } from '../hooks/useBlogData';
-import BlogTile from '../components/BlogTile';
-import BlogFilter from '../components/BlogFilter';
+"use client";
+import { useBlogData } from "../hooks/useBlogData";
+import BlogTile from "../components/BlogTile";
+import BlogFilter from "../components/BlogFilter";
+import PageContainer from "../components/PageContainer";
 
 const BlogListing = () => {
   const { filteredBlogs, allTags, selectedTag, setSelectedTag } = useBlogData();
   return (
-    <div className="max-w-[50rem] mx-auto md:mt-[80px] mt-[30px] flex flex-col p-6 md:p-0 font-inter">
-        <div className="flex justify-between items-center">
-            <div className="text-3xl font-semibold">
-                Recent Writings
-            </div>
-            <BlogFilter 
-              selectedTag={selectedTag}
-              setSelectedTag={setSelectedTag}
-              allTags={allTags}
-            />
-        </div>
+    <PageContainer className="flex max-w-[40rem] flex-col gap-8 mt-10 mb-10 pt-8">
+      <div
+        className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between animate-fade-in-up"
+        style={{ animationDelay: "0.05s" }}
+      >
+        <h1 className="text-xl font-semibold leading-tight text-white sm:text-2xl md:text-3xl">
+          Recent Writings
+        </h1>
+        <BlogFilter
+          selectedTag={selectedTag}
+          setSelectedTag={setSelectedTag}
+          allTags={allTags}
+        />
+      </div>
 
-        <div className="space-y-10 mt-[16px]">
-            {filteredBlogs.map((blog, index) => ( 
-                <BlogTile key={index} blog={blog} /> 
-            ))}
-        </div>
-    </div>
-  )
-}
+      <div className="mt-6 space-y-10">
+        {filteredBlogs.map((blog, index) => (
+          <BlogTile
+            key={blog.slug ?? index}
+            blog={blog}
+            className="animate-fade-in-up"
+            style={{ animationDelay: `${0.1 + index * 0.04}s` }}
+          />
+        ))}
+      </div>
+    </PageContainer>
+  );
+};
 
 export default BlogListing;

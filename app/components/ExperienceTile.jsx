@@ -1,48 +1,60 @@
-import Image from 'next/image'
 import React from 'react'
-import { If } from 'react-if';
 
 const ExperienceTile = ({ work }) => {
   return (
-    <>
-        <div className="tile w-full flex md:flex-row xl:flex-row flex-col gap-x-2 ">
-          <div className="job-heading flex-1 flex flex-col gap-y-1">
-            <div className="job-duration">
-              <h6 className="text-[10px] timeline font-inter">{work.duration}</h6>
-            </div>
-            <div className="job-position font-inter font-medium cursor-pointer">
-              <h3>
-                {work.title}, <span>{work.company}</span>
-              </h3>
-            </div>
-            <div className="job-description">
-              <p className="font-inter text-[12px] opacity-90 tracking-widest font-regular leading-2">{work.roledesc}</p>
-            </div>
-            <div className="skills">
-              <ul className="mt-2 flex flex-wrap">
-                {work.skills.map((skill, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium leading-5 text-black mr-1.5 mt-2"
-                  >
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
+    <div className="tile w-full mb-6">
+      {/* Main experience header */}
+      <div className="flex items-stretch gap-4 mb-4">
+        {/* Company info and duration */}
+        <div className="flex-1 flex justify-between items-start">
+          <div className="flex flex-col">
+            <p className="text-white text-xs font-inter opacity-70">{work.duration}</p>
+            <h3 className="text-white text-md font-medium font-inter">
+              {work.company}
+            </h3>
+            <p className="text-white text-sm font-inter opacity-90">
+              {work.title}
+            </p>
           </div>
-          <div className="flex-1 relative ">
-              <Image
-                src={work.image}
-                alt="My internship experience image"
-                className="object-cover"
-                fill={true}
-                priority
-              />
-            </div>
-
         </div>
-    </>
+        {/* Right-side logo */}
+        <div className="flex-shrink-0 flex items-center">
+          <div className="w-10 h-10 md:w-10 md:h-10">
+            <img
+              src={work.image}
+              alt={`${work.company} logo`}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+      
+      {/* What you actually did */}
+      <div className="">
+        <div className="job-description mb-4">
+          <p className="font-inter text-sm opacity-80 leading-relaxed">
+            {/* {work.roledesc} */}
+            - Designed an internal chatbot to help developers working with design system library questions
+            <br/>
+            - Deployed fastapi based service on kubernetes cluster achieving 99.9% uptime
+          </p>
+        </div>
+        
+        {/* Skills */}
+        <div className="skills">
+          <ul className="flex flex-wrap gap-2">
+            {work.skills.map((skill, index) => (
+              <li
+                key={index}
+                className="flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium leading-5 text-black"
+              >
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 };
 

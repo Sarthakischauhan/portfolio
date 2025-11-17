@@ -1,76 +1,129 @@
-import ExperienceTile from "./components/ExperienceTile";
-import BlogTile from "./components/BlogTile";
-import Image from 'next/image';
 import SocialTiles from "./components/SocialTiles";
 import Link from "next/link";
-import ExternalCTA from "./components/ExternalCTA";
-import * as data from "../public/data.json";
-import { ArrowUpRight} from 'lucide-react'
-import { If,Else } from "react-if";
+import data from "../public/data.json";
+import { SectionList } from "./components/SectionList";
+import PageContainer from "./components/PageContainer";
+
+const containerClass =
+  "flex max-w-[40rem] flex-col gap-8 mt-10 mb-10 pt-8";
+const paragraphClass =
+  "text-body font-mono leading-relaxed text-white/70";
+const headingLinkClass =
+  "text-section-heading transition-colors hover:text-hyperlink";
+
+const formatDate = (value) =>
+  new Date(value).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
 export default function Home() {
+  const PROJECTS = [...data.projects]
+  .slice(0,4)
   const WORK_EXPERIENCE = data.workExperience;
-  const BLOG_DATA = data.blogData
+  const RECENT_BLOGS = [...data.blogData]
     .sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted))
     .slice(0, 2);
-  
-  return (  
+
+  return (
     <>
-      <div className="max-w-[50rem] mx-auto md:mt-[100px] mt-[30px] flex flex-col p-6 md:p-0 ">
-        <Image src='/D.png' height={150} width={150} alt="Sarthak Chauhan" 
-        className="rounded-full aspect-square object-cover border-white border-2 w-4/12 sm:w-[150px]"
-        placeholder="empty"
-        priority
-        />
-        <div className='intro'>
-            <h1 className='md:text-3xl text-2xl mt-[24px] font-inter font-semibold'>Hey, I&apos;m Sarthak 👋🏼</h1>
-            <SocialTiles />
-            <div className='para-class tracking-wide font-regular'>
-                <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='self-intro'>
-                    A third-year Computer Science student who thrives on crafting software from scratch and setting it free in the wild web. I&apos;ve been coding for some time now, and yes, I can center divs (a true test of developer prowess!).
-                </p>
-                <p className='text-[16px] w-70 font-inter mt-[16px] leading-2' id='work-intro'>
-                Currently diving deep into computer vision and machine learning, because why not solve the real world with cool tech? In my downtime, I love working on building products.
-                </p>
-            </div>
+      <PageContainer className={containerClass}>
+        <div
+          className="intro animate-fade-in-up"
+          style={{ animationDelay: "0.05s" }}
+        >
+          <h1 className="text-name-heading font-mono font-medium leading-tight">
+            Sarthak Chauhan
+          </h1>
+          <SocialTiles />
+          <div className="para-class mt-2 space-y-4">
+            <p className={paragraphClass}>
+              i love to craft user interfaces, write apis, multiply matrices and
+              some good ol&apos; brainstorming. actively looking for full time
+              roles for winter 2025
+            </p>
+            <p className={paragraphClass}>
+              currently i am finishing up school and working on some fullstack
+              and ai projects.
+            </p>
+          </div>
         </div>
-        <div className="work-exp mb-[10px] mt-8 md:mt-16">
-            <h1 className='md:text-3xl text-2xl sm:[24px] mt-[16px] font-inter font-semibold'>Work Experience</h1>
-            <div className="space-y-6 md:space-y-16 mt-[24px]">
-              {WORK_EXPERIENCE.map((work, i) => ( 
-                <ExperienceTile work={work} key={i} />
-              ))}
-            </div>
-        </div>
-        <If condition={BLOG_DATA.length != 0}>
-          <div className="work-exp mb-[10px] mt-16">
-              <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Recent Writings</h1>
-              <div className="space-y-10 mt-[24px]">
-                {BLOG_DATA.map((blog, i) => ( 
-                  <BlogTile blog={blog} key={i} tags={false}/>
-                ))}
-              </div>
-              <div className="mt-[16px]">
-                <ExternalCTA
-                    action="/blog"
-                    content="Checkout all blogs"
-                    icon={<ArrowUpRight className="w-3.5 h-3.5"/>}
-                /> 
-              </div>
-        </div>
-        </If>
-        <Else>
-          <></>
-        </Else>
-        <div className="mb-[20px] mt-8 md:mt-16">
-            <h1 className='font-inter font-semibold md:text-3xl text-2xl'>Get in touch</h1> 
-            <div className="block mt-[16px] md:mt-[24px]">
-              <span className="font-inter text-[16px] leading-widest">
-              I am actively seeking Summer 2025 internship opportunities to further expand my skills in software engineering. Feel free to reach out at <span className="font-inter hover:text-hyperlink cursor-pointer underline transition-color"><Link href="mailto:sarthak.chauhan@sjsu.edu">sarthak.chauhan@sjsu.edu</Link></span>—let&apos;s connect!
+        <SectionList
+          label="previously worked at"
+          items={WORK_EXPERIENCE}
+          animationDelay={0.1}
+          getKey={(exp) => `${exp.company}-${exp.team ?? exp.title}`}
+          renderHeading={(exp) => (
+            <span className="flex flex-wrap gap-2 text-section-heading">
+              <span className="capitalize">{exp.title}</span>
+              <span className="flex items-center text-white/60">
+                @ {exp.company}
               </span>
-            </div>
-        </div>
-      </div>
+              {exp.team && (
+                <span className="text-white/50">
+                  ({exp.team})
+                </span>
+              )}
+            </span>
+          )}
+          renderBody={(exp) => (
+            <>
+              <p className="text-body">{exp.roledesc}</p>
+            </>
+          )}
+        />
+        <SectionList
+          label="recent projects"
+          items={PROJECTS}
+          animationDelay={0.2}
+          getKey={(project) => project.name}
+          renderHeading={(project) => (
+            <Link
+              href={project.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={headingLinkClass}
+            >
+              {project.name}
+            </Link>
+          )}
+          renderBody={(project) => (
+            <>
+              <p className="text-body">{project.desc}</p>
+            </>
+          )}
+        />
+        <SectionList
+          label="latest writing"
+          items={RECENT_BLOGS}
+          animationDelay={0.3}
+          getKey={(blog) => blog.slug}
+          renderHeading={(blog) => (
+            <Link
+              href={`/blog/${blog.slug}`}
+              className={headingLinkClass}
+            >
+              {blog.title}
+            </Link>
+          )}
+          renderBody={(blog) => (
+            <>
+              <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-meta text-white/50 sm:text-xs">
+                <span>{formatDate(blog.date_posted)}</span>
+                <div className="flex flex-wrap gap-2">
+                  {blog.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <p className="mt-2 text-body">
+                {blog.desc}
+              </p>
+            </>
+          )}
+        />
+      </PageContainer>
     </>
   );
 }

@@ -1,57 +1,79 @@
 {
-    "workExperience": [
-        {
-            "title": "Software Engineering Intern", 
-            "company": "Tesla", 
-            "duration": "May 2024 - August 2024", 
-            "roledesc":"Built and maintained key features for Tesla's internal application for vehicle insurance. Worked closely with cross-functional teams including developers, designers, and product managers to ship end-to-end digital products.", 
-            "skills":["React","Javascript","PHP","Docker","Typescript","Redis"],
-            "image":"/tesla.png"
-        }, 
-        {
-            "title": "Software Designer", 
-            "company": "FSAE SJSU", 
-            "duration": "June 2023 - December 2023", 
-            "roledesc":"Solved bugs and optimized the dashboard layout while working with multiple teams and the vehicle driver. Implemented additional functionalities on dashboard boot-up and streamlined communication between systems, ensuring efficient control during real-time operations.",
-            "skills":["C++", "C","CAN BUS", "Git"],
-            "image":"/fsae.jpeg"
-        }
-    ],
-    "blogData":[
-        {
-            "title":"My plans for future and ambitions with engineering", 
-            "date_posted":"2024-12-10", 
-            "tags":["Thoughts","Future","Engineering"],
-            "desc": "Writing software is changing with cursor and LLMs, I need rapid reinventing of purpose",
-            "slug": "plans-for-future"
-        },
-        {
-            "title": "Why Indians Struggle to Hold Significant Soft Power",
-            "date_posted": "2024-12-03",
-            "tags": ["Thoughts", "Culture"],
-            "desc": "Exploring the cultural, societal, and systemic factors limiting India's global influence.",
-            "slug": "indian-softpower"
-        }, 
-        {
-            "title": "Can't beat OAuth2",
-            "date_posted": "2024-12-21",
-            "tags": ["Tech", "Teaching","2 min read"],
-            "desc": "Let's learn open authentication(OAuth) in 2 mins.",
-            "slug": "cant-beat-oauth2"
-        },
-        {
-            "title": "Automate the boring stuff",
-            "date_posted": "2025-02-25",
-            "tags": ["Tech", "Teaching","2 min read"],
-            "desc": "Oganize screenshots with python and a dash of AI",
-            "slug": "cleanSS-groq"
-        }, 
-        {
-            "title": "Slow and Steady",
-            "date_posted": "2025-07-13",
-            "tags": ["Thoughts","2 min read"],
-            "desc": "Taking a moment to step back and reflect on the way of doing things.",
-            "slug": "slow-and-steady"
-        }
-    ]
+  "workExperience": [
+    {
+      "title": "Software engineering intern",
+      "company": "tesla",
+      "team": "design system",
+      "duration": "May 25 - August 25",
+      "roledesc": "built design system coding agent using langgraph, adopted by 800+ frontend developers.",
+      "skills": ["Langgraph", "Python", "FastAPI", "Nx"],
+      "image": "/tesla.svg"
+    },
+    {
+      "title": "Software engineering intern",
+      "company": "tesla",
+      "team": "insurance",
+      "duration": "May 24 - August 24",
+      "roledesc": "built key features for tesla insurance in react, react native and php",
+      "skills": ["React", "Javascript", "PHP", "Docker", "Typescript", "Redis"],
+      "image": "/tesla.svg"
+    },
+    {
+      "title": "Software Designer",
+      "company": "FSAE SJSU",
+      "duration": "June 2023 - December 2023",
+      "roledesc": "designed and improved vehicle dashboard user interface to show critical car information using c++",
+      "skills": ["C++", "C", "CAN BUS", "Git"],
+      "image": "/fsae_icon.png"
+    }
+  ],
+  "projects":[
+    {
+      "name": "Spotify MCP",
+      "src": "https://github.com/Sarthakischauhan/cursor-spotify-mcp",
+      "desc": "mcp server to control spotify from your preferred mcp client"
+    },
+    {
+      "name": "Banking Web App",
+      "src":"https://github.com/Sarthakischauhan/cs160-banking",
+      "desc": "ledger based banking application, built using nextjs, typescript"
+    }
+  ],
+  "blogData": [
+    {
+      "title": "My plans for future and ambitions with engineering",
+      "date_posted": "2024-12-10",
+      "tags": ["Thoughts", "Future", "Engineering"],
+      "desc": "Writing software is changing with cursor and LLMs, I need rapid reinventing of purpose",
+      "slug": "plans-for-future"
+    },
+    {
+      "title": "Why Indians Struggle to Hold Significant Soft Power",
+      "date_posted": "2024-12-03",
+      "tags": ["Thoughts", "Culture"],
+      "desc": "Exploring the cultural, societal, and systemic factors limiting India's global influence.",
+      "slug": "indian-softpower"
+    },
+    {
+      "title": "Can't beat OAuth2",
+      "date_posted": "2024-12-21",
+      "tags": ["Tech", "Teaching", "2 min read"],
+      "desc": "Let's learn open authentication(OAuth) in 2 mins.",
+      "slug": "cant-beat-oauth2"
+    },
+    {
+      "title": "Automate the boring stuff",
+      "date_posted": "2025-02-25",
+      "tags": ["Tech", "Teaching", "2 min read"],
+      "desc": "Oganize screenshots with python and a dash of AI",
+      "slug": "cleanSS-groq"
+    },
+    {
+      "title": "Slow and Steady",
+      "date_posted": "2025-07-13",
+      "tags": ["Thoughts", "2 min read"],
+      "desc": "Taking a moment to step back and reflect on the way of doing things.",
+      "slug": "slow-and-steady"
+    }
+  ]
 }
