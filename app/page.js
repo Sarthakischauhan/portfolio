@@ -3,6 +3,7 @@ import Link from "next/link";
 import data from "../public/data.json";
 import { SectionList } from "./components/SectionList";
 import PageContainer from "./components/PageContainer";
+import { GithubCalendar }  from "./components/GithubCalendar";
 
 const containerClass =
   "flex max-w-[40rem] flex-col gap-8 mt-10 mb-10 pt-8";
@@ -49,6 +50,7 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <GithubCalendar />
         <SectionList
           label="previously worked at"
           items={WORK_EXPERIENCE}
