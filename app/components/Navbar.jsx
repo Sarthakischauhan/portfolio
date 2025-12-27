@@ -1,55 +1,235 @@
 "use client";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import SocialTiles from "../components/SocialTiles";
+import { usePathname, useRouter } from "next/navigation";
+import { useBlogData } from "../hooks/useBlogData";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const blogData = useBlogData();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const searchInputRef = useRef(null);
 
-  const baseLinkClass =
-    "text-nav tracking-nav transition-colors font-mono";
+  // Dynamic navigation functions
+  const getCurrentSection = () => {
+    if (pathname.startsWith("/blog")) return "writings";
+    if (pathname.startsWith("/projects")) return "projects";
+    return null;
+  };
 
-  const NavLink = ({ href, children }) => {
+  const getCurrentSectionHref = () => {
+    if (pathname.startsWith("/blog")) return "/blog";
+    if (pathname.startsWith("/projects")) return "/projects";
+    return "/";
+  };
+
+  // Handle scroll behavior
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Hide/show navbar based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      // Add background blur when scrolled
+      setIsScrolled(currentScrollY > 10);
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  // Focus search input when modal opens
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  // Close search modal on escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        setIsSearchOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
+
+  const baseLinkClass = "text-nav tracking-nav transition-all duration-200 font-mono relative group";
+
+  const NavLink = ({ href, children, onClick }) => {
     const isActive = pathname === href;
     return (
       <Link
         href={href}
+        onClick={onClick}
         className={`${baseLinkClass} ${
           isActive ? "text-white" : "text-white/60"
         } hover:text-white`}
       >
-        {children}
+        <span className="relative">
+          {children}
+          <span className={`absolute -bottom-1 left-0 h-px bg-nav transform transition-transform duration-200 ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+        </span>
       </Link>
     );
   };
 
-  return (
-    <nav className="p-6 md:p-4 font-mono select-none">
-      <div className="max-w-[40rem] mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-2 text-nav font-medium text-white/70">
-          <span>/</span>
-          <NavLink href="/">home</NavLink>
+  // Search functionality
+  const searchItems = [
+    ...blogData.filteredBlogs.map(post => ({
+      ...post,
+      type: "blog",
+      href: `/blog/${post.slug}`
+    })),
+    // Add projects when available
+  ];
 
-          {/* <NavLink href="/projects">projects</NavLink> */}
-          <span>/</span>
-          <NavLink href="/projects">projects</NavLink>
-          <span>/</span>
-          <NavLink href="/blog">writings</NavLink>
+  const filteredResults = searchItems.filter(item =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (item.description && item.description.toLowerCase().includes(searchQuery.toLowerCase()))
+  ).slice(0, 5);
+
+  const handleSearchSelect = (item) => {
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    router.push(item.href);
+  };
+
+  const currentSection = getCurrentSection();
+
+  return (
+    <>
+      {/* Progress indicator for blog posts */}
+      {pathname.startsWith("/blog/") && (
+        <div className="fixed top-0 left-0 right-0 h-px bg-white/10 z-50">
+          <div 
+            className="h-full bg-nav transition-transform duration-150"
+            style={{
+              transform: `translateX(${Math.max(0, (1 - window.scrollY / (document.documentElement.scrollHeight - window.innerHeight))) * 100 - 100}%)`
+            }}
+          />
         </div>
-        {/* <div className="flex space-x-4">
-          <a href="https://www.linkedin.com/in/sarthakchauhan01/" target="_blank" rel="noopener noreferrer">
-            <svg className="w-5 h-5 h" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
-          <a href="https://github.com/Sarthakischauhan" target="_blank" rel="noopener noreferrer">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-            </svg>
-          </a>
-        </div>*/}
-      </div>
-    </nav>
+      )}
+
+      {/* Main Navbar */}
+      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      } ${isScrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}`}>
+        <div className="max-w-[40rem] mx-auto px-6 md:px-4">
+          <div className="flex justify-between items-center h-16 md:h-14">
+            {/* Dynamic Navigation Links */}
+            <div className="flex items-center gap-2 text-nav font-medium text-white/70 select-none">
+              <span className="text-white/50">/</span>
+              <NavLink href="/">home</NavLink>
+              {currentSection && (
+                <>
+                  <span className="text-white/50">/</span>
+                  <NavLink href={getCurrentSectionHref()}>{currentSection}</NavLink>
+                </>
+              )}
+            </div>
+
+            {/* Search button */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2 text-white/60 hover:text-white transition-colors duration-200"
+              aria-label="Search"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Search Modal */}
+      {isSearchOpen && (
+        <div className="fixed inset-0 z-50">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setIsSearchOpen(false)}
+          />
+          
+          {/* Search panel */}
+          <div className="absolute left-0 right-0 top-20 max-w-[40rem] mx-auto px-6 md:px-4">
+            <div className="bg-black/90 backdrop-blur-md border border-white/10 rounded-lg">
+              <div className="p-4">
+                <div className="relative">
+                  <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search posts..."
+                    className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded text-white placeholder-white/40 focus:outline-none focus:border-nav/50 transition-colors duration-200 font-mono text-nav"
+                  />
+                </div>
+                
+                {/* Search results */}
+                {searchQuery && (
+                  <div className="mt-4 space-y-2 max-h-64 overflow-y-auto">
+                    {filteredResults.length > 0 ? (
+                      filteredResults.map((item, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleSearchSelect(item)}
+                          className="w-full text-left p-3 bg-white/5 hover:bg-white/10 rounded transition-colors duration-200 group"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-white font-mono text-sm truncate group-hover:text-nav transition-colors duration-200">
+                                {item.title}
+                              </h4>
+                              {item.description && (
+                                <p className="text-white/40 text-xs mt-1 line-clamp-2">
+                                  {item.description}
+                                </p>
+                              )}
+                            </div>
+                            <span className="text-xs text-white/30 font-mono uppercase">
+                              {item.type}
+                            </span>
+                          </div>
+                        </button>
+                      ))
+                    ) : (
+                      <p className="text-white/40 text-center py-4 text-sm">
+                        No results found for "{searchQuery}"
+                      </p>
+                    )}
+                  </div>
+                )}
+                
+                {/* Keyboard shortcut hint */}
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <p className="text-white/30 text-xs text-center">
+                    Press <kbd className="px-1 py-0.5 bg-white/10 rounded text-xs">ESC</kbd> to close
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

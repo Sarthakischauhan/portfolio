@@ -7,12 +7,16 @@ export async function GithubCalendar() {
     return <></>
   }
   const data = (await response.json()).contributions
-  return <ActivityCalendar 
-    data={data} 
+  return <ActivityCalendar
+    data={data}
+    fontSize={12}
+    blockSize={10}
+    className="max-w-[40rem]"
     theme={
         {
-            dark:["rgba(255, 255, 255, 0.1)","#79f046ff" ], 
+            dark:["rgba(255, 255, 255, 0.1)","#79f046ff" ],
             light:["rgba(255, 255, 255, 0.1)","#79f046ff" ]
         }
     }/>
+
 }

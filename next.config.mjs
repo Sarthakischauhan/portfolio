@@ -12,6 +12,9 @@ const withMDX = nextMDX({
 );
 const nextConfig = withMDX({
     pageExtensions: ["jsx","js","mdx"],
+    experimental: {
+        viewTransition: true,
+    },
 })
   
 export default nextConfig;
