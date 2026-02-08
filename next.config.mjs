@@ -11,7 +11,19 @@ const withMDX = nextMDX({
  }
 );
 const nextConfig = withMDX({
-    pageExtensions: ["jsx","js","mdx"],
+    pageExtensions: ["jsx", "js", "mdx"],
+    experimental: {
+      mdxRs: true,
+    },
+    turbopack: {
+      resolveExtensions: [
+        ".mdx",
+        ".jsx",
+        ".js",
+        ".mjs",
+        ".json",
+      ],
+    },
 })
   
 export default nextConfig;

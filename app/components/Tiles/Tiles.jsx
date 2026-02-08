@@ -28,7 +28,7 @@ export default function Tiles() {
             <div className="border-b border-gray-300 opacity-10 text-xs"></div>
             <div className="flex justify-between w-full text-xs">
               <h4 className="text-white/80">Intern</h4>
-              <h4 className="text-white/70">may 25</h4>
+              <h4 className="text-white/70">may 24</h4>
             </div>
           </div>
         </div>
