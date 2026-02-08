@@ -8,7 +8,7 @@ import PageContainer from "../../components/PageContainer";
 import "../../styles/xcode.css";
 
 const NotFound = () => (
-  <div className="space-y-3 text-center font-mono">
+  <div className="space-y-3 text-center font-geist">
     <h1 className="text-2xl font-semibold text-white">404 - Not Found</h1>
     <p className="text-sm text-white/70 sm:text-base">
       The requested blog post could not be found.
@@ -38,7 +38,7 @@ const BlogPost = ({ params }) => {
 
   return (
     <>
-      <PageContainer className="prose-invert prose-sm flex max-w-[40rem] flex-col gap-8 mt-10 mb-10 pt-8 text-body font-mono">
+      <PageContainer className="prose-invert prose-sm flex max-w-[30rem] flex-col gap-8 mt-10 mb-10 pt-8 text-body font-geist text-white/80">
         <div
           className="animate-fade-in-up"
           style={{ animationDelay: "0.08s" }}

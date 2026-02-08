@@ -1,8 +1,8 @@
 import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
-import Navbar from "./components/Navbar";
 import Head from "next/head";
-import RouteBackButton from "./components/RouteBackButton";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,9 +28,8 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="format-detection" content="date=no" />
       </Head>
-      <body className={`${inter.variable} ${ibmPlexMono.variable} antialiased`}>
-        {/* {<Navbar />}*/}
-        <RouteBackButton />
+      <body className={`${inter.variable} ${ibmPlexMono.variable} ${GeistSans.variable} antialiased`}>
+        <Navbar />
         {children}
       </body>
     </html>
