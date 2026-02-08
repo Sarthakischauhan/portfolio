@@ -23,8 +23,8 @@ const NotFound = () => (
   </div>
 );
 
-const BlogPost = ({ params }) => {
-  const { slug } = params;
+const BlogPost = async ({ params }) => {
+  const { slug } = await params;
 
   const filePath = slug
     ? path.join(process.cwd(), "content", `${slug}.mdx`)

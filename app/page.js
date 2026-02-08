@@ -8,7 +8,7 @@ import Image from "next/image";
 const containerClass =
   "flex max-w-[30rem] flex-col gap-8 mt-10 mb-10 pt-8";
 const paragraphClass =
-  "text-body font-geist leading-relaxed text-white";
+  "text-body font-geist leading-relaxed tracking-wider text-white";
 
 const formatDate = (value) =>
   new Date(value).toLocaleDateString(undefined, {
@@ -32,19 +32,18 @@ export default function Home() {
           className="intro animate-fade-in-up"
           style={{ animationDelay: "0.05s" }}
         >
-          <div className="ounded-full overflow-hidden w-24 h-24 relative">
-            <Image src="/D.png" fill alt="my face3" />
+          <div className="rounded-sm overflow-hidden w-24 h-24 relative">
+            <Image src="/D.png" fill alt="my face3" priority />
           </div>
           <SocialTiles />
           <div className="para-class mt-2 space-y-4">
             <p className={paragraphClass}>
-              i love to craft user interfaces, write apis, multiply matrices and
-              some good ol&apos; brainstorming. actively looking for full time
-              roles for winter 2025
+              I am a software engineer at Tesla working on web interfaces, agents and microservices.
+              Previously I have worked on full stack applications, studied computer science at SJSU and tried my hand at powerlifting.
             </p>
+            <div className=""></div>
             <p className={paragraphClass}>
-              currently i am finishing up school and working on some fullstack
-              and ai projects.
+              I&apos;m based in the Bay Area, always up for a good coffee, talk about building agents and ah! music!
             </p>
           </div>
         </div>

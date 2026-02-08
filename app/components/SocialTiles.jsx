@@ -32,10 +32,10 @@ const SocialTiles = () => {
         </Link>
 
         <Link
-          href="https://dribbble.com/Sarthakischauhan"
+          href="mailto:sarthakchauhann@gmail.com"
           className={baseLink}
         >
-          dribbble
+         mail 
           <span className="sr-only">Dribbble</span>
         </Link>
       </div>

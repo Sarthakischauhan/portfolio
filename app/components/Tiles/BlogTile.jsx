@@ -28,7 +28,7 @@ export default function BlogTile() {
                 href={blog.href}
                 className="group flex items-start justify-between gap-2 rounded-md px-1 py-1 -mx-1 transition-colors hover:bg-white/5 text-xs"
               >
-                <span className="text-white leading-snug transition-colors group-hover:text-white/90">
+                <span className="text-white leading-snug transition-colors group-hover:text-white/90 tracking-wide">
                   {blog.title}
                 </span>
                 <span className="shrink-0 text-white/50 pt-0.5 transition-colors group-hover:text-white/80">
