@@ -1,13 +1,31 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SocialTiles from "../components/SocialTiles";
+import { Mail } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
 
   const baseLinkClass =
-    "text-nav tracking-nav transition-colors font-mono";
+    "font-mediun tracking-nav transition-colors font-geist";
+
+  const iconLinkClass =
+    "text-white/60 transition-colors hover:text-white";
+
+  const XIcon = () => (
+    <svg data-testid="geist-icon" height="14" stroke-linejoin="round" viewBox="0 0 16 16" width="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 0.5H5.75L9.48421 5.71053L14 0.5H16L10.3895 6.97368L16.5 15.5H11.25L7.51579 10.2895L3 15.5H1L6.61053 9.02632L0.5 0.5ZM12.0204 14L3.42043 2H4.97957L13.5796 14H12.0204Z" fill="currentColor"></path></svg>
+  );
+
+  const Github = () => (
+    <svg data-testid="geist-icon" height="14" stroke-linejoin="round" viewBox="0 0 16 16" width="14"><g clip-path="url(#clip0_872_3147)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.57879 0 7.99729C0 11.5361 2.29 14.5251 5.47 15.5847C5.87 15.6547 6.02 15.4148 6.02 15.2049C6.02 15.0149 6.01 14.3851 6.01 13.7154C4 14.0852 3.48 13.2255 3.32 12.7757C3.23 12.5458 2.84 11.836 2.5 11.6461C2.22 11.4961 1.82 11.1262 2.49 11.1162C3.12 11.1062 3.57 11.696 3.72 11.936C4.44 13.1455 5.59 12.8057 6.05 12.5957C6.12 12.0759 6.33 11.726 6.56 11.5261C4.78 11.3262 2.92 10.6364 2.92 7.57743C2.92 6.70773 3.23 5.98797 3.74 5.42816C3.66 5.22823 3.38 4.40851 3.82 3.30888C3.82 3.30888 4.49 3.09895 6.02 4.1286C6.66 3.94866 7.34 3.85869 8.02 3.85869C8.7 3.85869 9.38 3.94866 10.02 4.1286C11.55 3.08895 12.22 3.30888 12.22 3.30888C12.66 4.40851 12.38 5.22823 12.3 5.42816C12.81 5.98797 13.12 6.69773 13.12 7.57743C13.12 10.6464 11.25 11.3262 9.47 11.5261C9.76 11.776 10.01 12.2558 10.01 13.0056C10.01 14.0752 10 14.9349 10 15.2049C10 15.4148 10.15 15.6647 10.55 15.5847C12.1381 15.0488 13.5182 14.0284 14.4958 12.6673C15.4735 11.3062 15.9996 9.67293 16 7.99729C16 3.57879 12.42 0 8 0Z" fill="currentColor"></path>
+    </g>
+    <defs>
+    <clipPath id="clip0_872_3147">
+    <rect width="16" height="16" fill="white"></rect>
+    </clipPath>
+    </defs></svg>
+  )
 
   const NavLink = ({ href, children }) => {
     const isActive = pathname === href;
@@ -15,7 +33,7 @@ const Navbar = () => {
       <Link
         href={href}
         className={`${baseLinkClass} ${
-          isActive ? "text-white" : "text-white/60"
+          isActive ? "text-white" : "text-white/90"
         } hover:text-white`}
       >
         {children}
@@ -24,30 +42,38 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="p-6 md:p-4 font-mono select-none">
-      <div className="max-w-[40rem] mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-2 text-nav font-medium text-white/70">
-          <span>/</span>
-          <NavLink href="/">home</NavLink>
-
-          {/* <NavLink href="/projects">projects</NavLink> */}
-          <span>/</span>
-          <NavLink href="/projects">projects</NavLink>
-          <span>/</span>
-          <NavLink href="/blog">writings</NavLink>
-        </div>
-        {/* <div className="flex space-x-4">
-          <a href="https://www.linkedin.com/in/sarthakchauhan01/" target="_blank" rel="noopener noreferrer">
-            <svg className="w-5 h-5 h" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
-          <a href="https://github.com/Sarthakischauhan" target="_blank" rel="noopener noreferrer">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-            </svg>
-          </a>
-        </div>*/}
+    <nav className="p-6 md:p-4 font-geist select-none">
+      <div className="max-w-[30rem] mx-auto flex items-center justify-between">
+        <NavLink href="/">Sarthak Chauhan</NavLink>
+        {pathname !== "/" ? (
+          <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/Sarthakischauhan"
+              target="_blank"
+              rel="noreferrer"
+              className={iconLinkClass}
+              aria-label="GitHub"
+            >
+              <Github />
+            </a>
+            <a
+              href="https://x.com/sarchauhann"
+              target="_blank"
+              rel="noreferrer"
+              className={iconLinkClass}
+              aria-label="X"
+            >
+              <XIcon />
+            </a>
+            <a
+              href="mailto:hello@sarthakchauhann@gmail.com"
+              className={iconLinkClass}
+              aria-label="Email"
+            >
+              <Mail className="h-4 w-4" />
+            </a>
+          </div>  
+        ) : null}
       </div>
     </nav>
   );

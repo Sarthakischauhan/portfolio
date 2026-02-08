@@ -1,24 +1,41 @@
-import { ChevronDown } from "lucide-react";
+import { Filter, ListFilter } from "lucide-react";
+import { useState } from "react";
 
 const BlogFilter = ({ selectedTag, setSelectedTag, allTags }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="relative font-mono">
-      <div className="relative">
-        <select
-          value={selectedTag}
-          onChange={(e) => setSelectedTag(e.target.value)}
-          className="cursor-pointer text-opacity-70 text-white appearance-none w-[120px] h-9 px-3 pr-8 text-sm rounded-full border border-white/50 bg-transparent focus:outline-none hover:border-white transition-colors duration-300 hover:text-opacity-100"
-        >
-          {allTags.map((tag) => (
-            <option key={tag} value={tag}>
-              {tag}
-            </option>
-          ))}
-        </select>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-          <ChevronDown className="h-4 w-4 opacity-50" />
+    <div className="relative z-50 inline-flex font-geist">
+      <button
+        type="button"
+        aria-label="Filter posts"
+        className="inline-flex h-9 w-9 items-center justify-center text-white/70 transition-colors hover:border-white hover:text-white"
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        <ListFilter className="h-4=5 w-5" />
+      </button>
+      {open ? (
+        <div className="absolute right-0 top-full mt-2 min-w-[10rem] rounded-lg border border-white/10 bg-black/80 p-2 backdrop-blur z-[999] shadow-lg">
+          <ul className="flex flex-col gap-1">
+            {allTags.map((tag) => (
+              <li key={tag}>
+                <button
+                  type="button"
+                  className={`w-full rounded-md px-2 py-1 text-left text-body transition-colors ${
+                    selectedTag === tag ? "text-white" : "text-white/70"
+                  } hover:text-white hover:bg-white/5`}
+                  onClick={() => {
+                    setSelectedTag(tag);
+                    setOpen(false);
+                  }}
+                >
+                  {tag}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };

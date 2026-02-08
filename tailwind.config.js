@@ -19,6 +19,7 @@ module.exports = {
       fontFamily: {
         inter: ["var(--font-inter)", "sans"],
         mono: ["var(--font-ibm-mono)", "monospace"],
+        geist: ["var(--font-geist-sans)", "sans"]
       },
       textColor: {
         danger: "#e3342f",
@@ -57,7 +58,7 @@ module.exports = {
           // 12px → fluid → 14.4px
         ],
         "section-heading": [
-          "clamp(0.75rem, 0.85rem + 0.6vw, 0.9rem)",
+          "10px"
           // 15.2px → fluid → 20px
         ],
         nav: [
@@ -68,6 +69,9 @@ module.exports = {
           "clamp(1.5625rem, 1.25rem + 1.5vw, 1.875rem)",
           // 25px → fluid → 30px
         ],
+        "blog-title": [
+          "16px"
+        ]
       },
       letterSpacing: {
         nav: "0.04em",            

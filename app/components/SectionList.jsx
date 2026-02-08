@@ -1,5 +1,5 @@
 const sectionLabelClass =
-  "text-xs font-mono uppercase tracking-section-label text-white/60";
+  "text-xs font-geist uppercase tracking-section-label text-white/60";
 
 export const SectionList = ({
   label,
@@ -10,7 +10,7 @@ export const SectionList = ({
   animationDelay = 0.1,
 }) => (
   <div
-    className="animate-fade-in-up font-mono"
+    className="animate-fade-in-up font-geist"
     style={{ animationDelay: `${animationDelay}s` }}
   >
     <p className={sectionLabelClass}>{label}</p>

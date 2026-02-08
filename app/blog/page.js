@@ -7,13 +7,13 @@ import PageContainer from "../components/PageContainer";
 const BlogListing = () => {
   const { filteredBlogs, allTags, selectedTag, setSelectedTag } = useBlogData();
   return (
-    <PageContainer className="flex max-w-[40rem] flex-col gap-8 mt-10 mb-10 pt-8">
+    <PageContainer className="flex max-w-[30rem] flex-col gap-8 mt-10 mb-10 pt-8">
       <div
-        className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between animate-fade-in-up"
+        className="relative z-50 flex gap-4 flex-row items-center justify-between animate-fade-in-up"
         style={{ animationDelay: "0.05s" }}
       >
-        <h1 className="text-xl font-semibold leading-tight text-white sm:text-2xl md:text-3xl">
-          Recent Writings
+        <h1 className="text-name-heading font-medium text-white">
+          Writings
         </h1>
         <BlogFilter
           selectedTag={selectedTag}
@@ -22,7 +22,7 @@ const BlogListing = () => {
         />
       </div>
 
-      <div className="mt-6 space-y-10">
+      <div className="mt-2 space-y-6">
         {filteredBlogs.map((blog, index) => (
           <BlogTile
             key={blog.slug ?? index}
