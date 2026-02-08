@@ -2,7 +2,7 @@ import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
 import Head from "next/head";
-import Navbar from "./components/Navbar";
+import { Navbar } from "./components";
 
 const inter = Inter({
   variable: "--font-inter",

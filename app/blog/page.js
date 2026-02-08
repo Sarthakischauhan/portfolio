@@ -1,8 +1,6 @@
 "use client";
 import { useBlogData } from "../hooks/useBlogData";
-import BlogTile from "../components/BlogTile";
-import BlogFilter from "../components/BlogFilter";
-import PageContainer from "../components/PageContainer";
+import { BlogFilter, BlogTile, PageContainer } from "../components";
 
 const BlogListing = () => {
   const { filteredBlogs, allTags, selectedTag, setSelectedTag } = useBlogData();

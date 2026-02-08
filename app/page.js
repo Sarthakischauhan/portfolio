@@ -1,9 +1,12 @@
-import SocialTiles from "./components/SocialTiles";
 import data from "../public/data.json";
-import PageContainer from "./components/PageContainer";
-import Tiles, { BlogTile } from "./components/Tiles";
-import CaptionImage from "./components/CaptionImage";
 import Image from "next/image";
+import {
+  CaptionImage,
+  HomeBlogTile,
+  PageContainer,
+  SocialTiles,
+  Tiles,
+} from "./components";
 
 const containerClass =
   "flex max-w-[30rem] flex-col gap-8 mt-10 mb-10 pt-8";
@@ -58,7 +61,7 @@ export default function Home() {
           />
         </div>
         <div className="animate-fade-in-up" style={{ animationDelay: "0.12s" }}>
-          <BlogTile />
+          <HomeBlogTile />
         </div>
       </PageContainer>
     </>

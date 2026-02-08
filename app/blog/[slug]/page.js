@@ -2,9 +2,8 @@
 import dynamic from "next/dynamic";
 import fs from "fs";
 import path from "path";
-import ExternalCTA from "../../components/ExternalCTA";
+import { ExternalCTA, PageContainer } from "../../components";
 import { ArrowUpRight } from "lucide-react";
-import PageContainer from "../../components/PageContainer";
 import "../../styles/xcode.css";
 
 const NotFound = () => (
