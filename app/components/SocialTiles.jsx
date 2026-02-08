@@ -2,11 +2,11 @@ import Link from "next/link";
 import React from "react";
 
 const baseLink =
-  "relative text-gray-400 hover:text-white transition-colors before:absolute before:left-0 before:-bottom-0.5 before:h-[1px] before:w-full before:scale-x-0 before:bg-gray-500 hover:before:animate-underline-lr";
+  "relative text-white/60 hover:text-white transition-colors before:absolute before:left-0 before:-bottom-0.5 before:h-[1px] before:w-full before:scale-x-0 before:bg-gray-500 hover:before:animate-underline-lr";
 
 const SocialTiles = () => {
   return (
-    <div className="w-full py-2 mt-2 select-none font-mono text-nav">
+    <div className="w-full py-2 mt-2 select-none font-geist text-nav">
       <div className="container mx-auto flex justify-start items-center space-x-3">
         <Link href="https://github.com/Sarthakischauhan" className={baseLink}>
           github
