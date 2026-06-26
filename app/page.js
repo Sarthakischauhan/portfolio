@@ -51,7 +51,7 @@ export default function Home() {
           </div>
         </div>
         <div className="animate-fade-in-up" style={{ animationDelay: "0.08s" }}>
-          <Tiles />
+          <Tiles workExperience={WORK_EXPERIENCE} />
         </div>
         <div className="animate-fade-in-up" style={{animationDelay: "0.08s"}}>
           <CaptionImage
