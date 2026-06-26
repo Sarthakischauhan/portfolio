@@ -1,29 +1,22 @@
+import nextMDX from "@next/mdx";
+
 /** @type {import('next').NextConfig} */
-import rehypeHighlight from 'rehype-highlight';
-import nextMDX from '@next/mdx';
-import remarkGfm from 'remark-gfm';
+const nextConfig = {
+  pageExtensions: ["jsx", "js", "mdx"],
+  experimental: {
+    mdxRs: true,
+  },
+  turbopack: {
+    resolveExtensions: [".mdx", ".tsx", ".ts", ".jsx", ".js", ".mjs", ".json"],
+  },
+};
+
 const withMDX = nextMDX({
-    extension: /\.mdx?$/,
-    options:{
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeHighlight]
-    }
- }
-);
-const nextConfig = withMDX({
-    pageExtensions: ["jsx", "js", "mdx"],
-    experimental: {
-      mdxRs: true,
-    },
-    turbopack: {
-      resolveExtensions: [
-        ".mdx",
-        ".jsx",
-        ".js",
-        ".mjs",
-        ".json",
-      ],
-    },
-})
-  
-export default nextConfig;
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: ["remark-gfm"],
+    rehypePlugins: ["rehype-highlight"],
+  },
+});
+
+export default withMDX(nextConfig);
