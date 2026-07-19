@@ -1,0 +1,23 @@
+export const portfolioTheme = {
+  name: "portfolio-dark",
+  colors: {
+    background: "#0A0A0A",
+    foreground: "#EDEDED",
+    comment: "#737373",
+    keyword: "#db6767",
+    typeKeywords: "#db6767",
+    string: "#799e7c",
+    function: "#6374d0",
+    variable: "#EDEDED",
+    number: "#d08a61",
+    operator: "#6b6b6b",
+    punctuation: "#525252",
+    type: "#cda059",
+    tag: "#5a9a95",
+    attribute: "#8ca0cc",
+    constant: "#d08a61",
+    surface: "#171717",
+    overlay: "#262626",
+    subtext: "#A3A3A3",
+  },
+};

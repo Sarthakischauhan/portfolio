@@ -13,6 +13,7 @@
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^16.1.6",
     "@radix-ui/react-slot": "^1.1.0",
+    "@sarchauhan/code-markdown": "^0.0.2",
     "@types/mdx": "^2.0.13",
     "framer-motion": "^11.9.0",
     "geist": "^1.7.0",
