@@ -1,6 +1,7 @@
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
+import "@sarchauhan/code-markdown/styles.css";
 import Head from "next/head";
 import { Navbar } from "./components";
 

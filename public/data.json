@@ -27,16 +27,13 @@
       "image": "/fsae_icon.png"
     }
   ],
-  "projects":[
+  "projects": [
     {
-      "name": "Spotify MCP",
-      "src": "https://github.com/Sarthakischauhan/cursor-spotify-mcp",
-      "desc": "mcp server to control spotify from your preferred mcp client"
-    },
-    {
-      "name": "Banking Web App",
-      "src":"https://github.com/Sarthakischauhan/cs160-banking",
-      "desc": "ledger based banking application, built using nextjs, typescript"
+      "name": "code-markdown",
+      "href": "/projects/code-markdown",
+      "npm": "https://www.npmjs.com/package/code-markdown",
+      "github": "https://github.com/Sarthakischauhan/code-markdown",
+      "desc": "npm package for themeable code renderer with a custom tokenizer, multi-language highlighting, line numbers, and highlighted lines"
     }
   ],
   "blogData": [
