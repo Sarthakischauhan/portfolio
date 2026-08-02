@@ -43,3 +43,23 @@ body {
 .timeline{
   opacity: 0.7;
 }
+
+.github-calendar-scroll {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.github-calendar-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.github-activity-calendar {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.github-activity-calendar svg {
+  width: 100%;
+  height: auto;
+}
