@@ -72,6 +72,9 @@ export default async function Home() {
         <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
           <div className="flex flex-col">
             <h4 className="opacity-60 font-medium text-section-heading">PROJECTS</h4>
+            <div className="mt-3">
+              <GithubCalendar activity={GITHUB_ACTIVITY} />
+            </div>
             <div className="mt-3 flex flex-col gap-4">
               <ul className="flex flex-col">
                 {PROJECTS.map((project) => (
@@ -95,9 +98,6 @@ export default async function Home() {
               </ul>
             </div>
           </div>
-        </div>
-        <div className="animate-fade-in-up" style={{ animationDelay: "0.11s" }}>
-          <GithubCalendar activity={GITHUB_ACTIVITY} />
         </div>
         <div className="animate-fade-in-up" style={{ animationDelay: "0.08s" }}>
           <CaptionImage
