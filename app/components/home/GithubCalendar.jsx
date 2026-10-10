@@ -10,7 +10,7 @@ export default function GithubCalendar({ activity = [] }) {
   return (
     <div className="flex flex-col gap-2">
       <h4 className="opacity-60 font-medium text-section-heading">
-        LAST 6 MONTHS
+        LAST YEAR
       </h4>
       <div className="github-calendar-scroll w-full overflow-x-auto text-white/60">
         {activity.length > 0 ? (
@@ -19,10 +19,10 @@ export default function GithubCalendar({ activity = [] }) {
             className="github-activity-calendar"
             colorScheme="dark"
             theme={theme}
-            blockSize={12}
-            blockMargin={3}
-            blockRadius={2}
-            fontSize={10}
+            blockSize={7}
+            blockMargin={2}
+            blockRadius={1}
+            fontSize={9}
             showColorLegend={false}
             showTotalCount={false}
             showWeekdayLabels={false}
