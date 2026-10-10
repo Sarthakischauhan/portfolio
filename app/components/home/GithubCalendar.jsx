@@ -10,7 +10,7 @@ export default function GithubCalendar({ activity = [] }) {
   return (
     <div className="flex flex-col gap-2">
       <h4 className="opacity-60 font-medium text-section-heading">
-        LAST YEAR
+        CONTRIBUTIONS IN THE LAST YEAR
       </h4>
       <div className="github-calendar-scroll w-full overflow-x-auto text-white/60">
         {activity.length > 0 ? (
