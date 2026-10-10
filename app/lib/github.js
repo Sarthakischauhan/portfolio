@@ -17,7 +17,7 @@ const getCachedContributions = unstable_cache(
   { revalidate: 3600 }
 );
 
-function recentWindow(contributions, months = 3) {
+function recentWindow(contributions, months = 6) {
   const cutoff = new Date();
   cutoff.setMonth(cutoff.getMonth() - months);
   const cutoffKey = cutoff.toISOString().slice(0, 10);
@@ -25,7 +25,7 @@ function recentWindow(contributions, months = 3) {
   return contributions.filter((day) => day.date >= cutoffKey);
 }
 
-export async function getGithubContributions(username, year, months = 3) {
+export async function getGithubContributions(username, year, months = 6) {
   try {
     const contributions = await getCachedContributions(username, year);
     return recentWindow(contributions, months);
