@@ -57,3 +57,22 @@ body {
 .github-activity-calendar {
   max-width: 100%;
 }
+
+.github-activity-calendar .react-activity-calendar__calendar rect {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 120ms ease, stroke 120ms ease;
+}
+
+.github-activity-calendar .react-activity-calendar__calendar rect:hover {
+  stroke: rgba(255, 255, 255, 0.7);
+  transform: scale(1.28);
+}
+
+.react-activity-calendar__tooltip {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  z-index: 20;
+}
