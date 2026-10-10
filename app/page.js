@@ -66,9 +66,6 @@ export default async function Home() {
             </p>
           </div>
         </div>
-        <div className="animate-fade-in-up" style={{ animationDelay: "0.07s" }}>
-          <GithubCalendar activity={GITHUB_ACTIVITY} />
-        </div>
         <div className="animate-fade-in-up" style={{ animationDelay: "0.08s" }}>
           <Tiles workExperience={WORK_EXPERIENCE} />
         </div>
@@ -98,6 +95,9 @@ export default async function Home() {
               </ul>
             </div>
           </div>
+        </div>
+        <div className="animate-fade-in-up" style={{ animationDelay: "0.11s" }}>
+          <GithubCalendar activity={GITHUB_ACTIVITY} />
         </div>
         <div className="animate-fade-in-up" style={{ animationDelay: "0.08s" }}>
           <CaptionImage

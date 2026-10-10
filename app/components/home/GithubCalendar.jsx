@@ -19,11 +19,12 @@ function contributionLabel(activity) {
 }
 
 export default function GithubCalendar({ activity = [] }) {
+  const total = activity.reduce((sum, day) => sum + (day.count ?? 0), 0);
+  const contributions =
+    total === 1 ? "1 contribution" : `${total} contributions`;
+
   return (
     <div className="flex flex-col gap-2">
-      <h4 className="opacity-60 font-medium text-section-heading">
-        CONTRIBUTIONS IN THE LAST YEAR
-      </h4>
       <div className="github-calendar-scroll w-full overflow-x-auto text-white/60">
         {activity.length > 0 ? (
           <ActivityCalendar
@@ -48,6 +49,9 @@ export default function GithubCalendar({ activity = [] }) {
           />
         ) : null}
       </div>
+      <p className="text-right font-geist text-[11px] tracking-wide text-white/40">
+        {contributions} in the last year
+      </p>
     </div>
   );
 }
