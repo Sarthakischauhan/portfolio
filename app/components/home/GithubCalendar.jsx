@@ -19,14 +19,13 @@ export default function GithubCalendar({ activity = [] }) {
             className="github-activity-calendar"
             colorScheme="dark"
             theme={theme}
-            blockSize={8}
-            blockMargin={2}
-            blockRadius={1}
-            fontSize={9}
+            blockSize={11}
+            blockMargin={3}
+            blockRadius={2}
+            fontSize={10}
             showColorLegend={false}
             showTotalCount={false}
             showWeekdayLabels={false}
-            style={{ width: "100%" }}
           />
         ) : null}
       </div>

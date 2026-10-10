@@ -55,11 +55,5 @@ body {
 }
 
 .github-activity-calendar {
-  width: 100% !important;
   max-width: 100%;
-}
-
-.github-activity-calendar svg {
-  width: 100%;
-  height: auto;
 }
