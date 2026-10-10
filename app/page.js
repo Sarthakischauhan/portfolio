@@ -1,8 +1,10 @@
 import data from "../public/data.json";
 import Image from "next/image";
 import Link from "next/link";
+import { getGithubContributions } from "./lib/github";
 import {
   CaptionImage,
+  GithubCalendar,
   HomeBlogTile,
   PageContainer,
   SocialTiles,
@@ -20,12 +22,16 @@ const formatDate = (value) =>
     day: "numeric",
   });
 
-export default function Home() {
+export default async function Home() {
   const PROJECTS = [...data.projects].slice(0, 4);
   const WORK_EXPERIENCE = data.workExperience;
   const RECENT_BLOGS = [...data.blogData]
     .sort((a, b) => new Date(b.date_posted) - new Date(a.date_posted))
     .slice(0, 2);
+  const GITHUB_ACTIVITY = await getGithubContributions(
+    "sarthakischauhan",
+    "last"
+  );
 
   return (
     <>
@@ -36,7 +42,13 @@ export default function Home() {
         >
           <div className="flex justify-start gap-3 items-end cursor-pointer">
             <div className="rounded-sm overflow-hidden w-24 h-24 relative">
-              <Image src="/D.png" fill alt="my face3" priority />
+              <Image
+                src="/D.png"
+                fill
+                alt="my face3"
+                priority
+                sizes="6rem"
+              />
             </div>
           </div>
           <SocialTiles />
@@ -60,6 +72,9 @@ export default function Home() {
         <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
           <div className="flex flex-col">
             <h4 className="opacity-60 font-medium text-section-heading">PROJECTS</h4>
+            <div className="mt-3">
+              <GithubCalendar activity={GITHUB_ACTIVITY} />
+            </div>
             <div className="mt-3 flex flex-col gap-4">
               <ul className="flex flex-col">
                 {PROJECTS.map((project) => (
@@ -87,6 +102,7 @@ export default function Home() {
         <div className="animate-fade-in-up" style={{ animationDelay: "0.08s" }}>
           <CaptionImage
             src="/sf.jpeg"
+            priority={true}
             alt="San Francisco"
             caption="Little Italy, SF"
           />

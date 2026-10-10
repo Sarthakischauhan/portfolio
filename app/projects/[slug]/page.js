@@ -3,6 +3,37 @@ import fs from "fs";
 import path from "path";
 import { ExternalCTA, PageContainer } from "../../components";
 import { ArrowUpRight } from "lucide-react";
+import data from "../../../public/data.json";
+
+export function generateStaticParams() {
+  return data.projects.map((project) => ({
+    slug: project.href.split("/").pop(),
+  }));
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const project = data.projects.find(
+    (entry) => entry.href.split("/").pop() === slug
+  );
+
+  if (!project) {
+    return { title: "Not found" };
+  }
+
+  return {
+    title: project.name,
+    description: project.desc,
+    alternates: {
+      canonical: `/projects/${slug}`,
+    },
+    openGraph: {
+      title: `${project.name} — Sarthak Chauhan`,
+      description: project.desc,
+      url: `/projects/${slug}`,
+    },
+  };
+}
 
 const NotFound = () => (
   <div className="space-y-3 text-center font-geist">

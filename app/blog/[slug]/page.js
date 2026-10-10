@@ -4,7 +4,37 @@ import fs from "fs";
 import path from "path";
 import { ExternalCTA, PageContainer } from "../../components";
 import { ArrowUpRight } from "lucide-react";
+import data from "../../../public/data.json";
 import "../../styles/xcode.css";
+
+export function generateStaticParams() {
+  return data.blogData.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const post = data.blogData.find((entry) => entry.slug === slug);
+
+  if (!post) {
+    return { title: "Not found" };
+  }
+
+  return {
+    title: post.title,
+    description: post.desc,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.desc,
+      url: `/blog/${slug}`,
+      publishedTime: post.date_posted,
+      tags: post.tags,
+    },
+  };
+}
 
 const NotFound = () => (
   <div className="space-y-3 text-center font-geist">
