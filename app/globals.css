@@ -70,9 +70,21 @@ body {
   transform: scale(1.28);
 }
 
-.react-activity-calendar__tooltip {
+.react-activity-calendar__tooltip,
+.react-activity-calendar__tooltip[data-color-scheme="dark"] {
+  background-color: #171717;
+  color: #ededed;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 4px 8px;
   font-family: var(--font-geist-sans), sans-serif;
   font-size: 11px;
   letter-spacing: 0.02em;
   z-index: 20;
+}
+
+.react-activity-calendar__tooltip .react-activity-calendar__tooltip-arrow,
+.react-activity-calendar__tooltip[data-color-scheme="dark"]
+  .react-activity-calendar__tooltip-arrow {
+  fill: #171717;
 }
