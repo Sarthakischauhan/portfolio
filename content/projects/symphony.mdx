@@ -1,0 +1,59 @@
+import Link from "next/link";
+import SymphonyDemo from "@/app/components/projects/SymphonyDemo";
+import CodeMarkdownBlock from "@/app/components/layout/CodeMarkdownBlock";
+import { portfolioTheme } from "@/app/styles/portfolioTheme";
+
+<div className="space-y-10">
+  <header className="space-y-4">
+    <Link href="/" className="text-[11px] tracking-wide text-white/50 transition-colors hover:text-white">← All projects</Link>
+    <h1 className="sr-only">Symphony</h1>
+    <img src="/projects/symphony/logo.svg" alt="Symphony" width="1686" height="268" className="h-auto w-full max-w-[22rem] py-3" />
+    <div className="flex gap-4 font-geist text-nav font-medium">
+      <Link href="https://github.com/Sarthakischauhan/symphony" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">github ↗</Link>
+      <Link href="https://github.com/Sarthakischauhan/symphony/tree/main/docs" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">docs ↗</Link>
+    </div>
+    <p className="leading-relaxed tracking-wider text-white/80">My personal coding agent. I give it a task, follow the work in my terminal, and review the changes. It connects to editors through ACP, too.</p>
+    <p className="text-xs leading-relaxed tracking-wide text-white/55">Built in Python, with a composable agent harness underneath. The terminal is one way into the same loop: models, tools, events, and a conversation that carries on.</p>
+  </header>
+
+  <section aria-labelledby="symphony-terminal" className="space-y-4">
+    <h2 id="symphony-terminal" className="text-section-heading font-medium tracking-section-label text-white/60">A TASK, IN THE TERMINAL</h2>
+    <SymphonyDemo />
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">The conversation stays at the center. Tool calls sit alongside the response, so I can see what was read, what changed, and what ran without leaving the task.</p>
+  </section>
+
+  <section aria-labelledby="symphony-features" className="space-y-4">
+    <h2 id="symphony-features" className="text-section-heading font-medium tracking-section-label text-white/60">WHAT I USE IT FOR</h2>
+    <dl className="divide-y divide-white/10">
+      <div className="space-y-1.5 py-4 pt-0"><dt className="text-xs text-white/90">Read, edit, run</dt><dd className="text-[11px] leading-relaxed tracking-wide text-white/60">Search a workspace, patch files, run shell commands, and inspect the diff. Approval prompts keep me involved when an action needs a decision.</dd></div>
+      <div className="space-y-1.5 py-4"><dt className="text-xs text-white/90">Plan before building</dt><dd className="text-[11px] leading-relaxed tracking-wide text-white/60">Switch between plan and build modes. Use slash commands and file mentions to give the agent direction, or cancel a run when I need to change course.</dd></div>
+      <div className="space-y-1.5 py-4"><dt className="text-xs text-white/90">Split the work</dt><dd className="text-[11px] leading-relaxed tracking-wide text-white/60">Delegate focused work to subagents and follow their sessions from the agent dashboard.</dd></div>
+      <div className="space-y-1.5 py-4"><dt className="text-xs text-white/90">Pick up where I left off</dt><dd className="text-[11px] leading-relaxed tracking-wide text-white/60">Saved sessions let me return to a conversation. Provider integrations share one model interface, so the harness can work across providers.</dd></div>
+      <div className="space-y-1.5 py-4 pb-0"><dt className="text-xs text-white/90">The same agent, in an editor</dt><dd className="text-[11px] leading-relaxed tracking-wide text-white/60">ACP carries streamed responses, tool updates, and permission requests over stdio. The editor connection uses the same harness as the TUI.</dd></div>
+    </dl>
+    <figure className="space-y-2">
+      <a href="/projects/symphony/commands.png" target="_blank" rel="noreferrer" aria-label="View Symphony slash commands at full size"><img src="/projects/symphony/commands.png" alt="The real Symphony slash-command menu opened in the terminal composer." width="1300" height="908" loading="lazy" className="h-auto w-full rounded-lg border border-white/10" /></a>
+      <figcaption className="text-[10px] leading-relaxed tracking-wide text-white/50">Type / to find a command. Open the capture to take a closer look.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="symphony-workflow" className="space-y-4">
+    <h2 id="symphony-workflow" className="text-section-heading font-medium tracking-section-label text-white/60">HOW IT WORKS</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Symphony Code supplies the workspace tools and session behavior. The harness runs the turn loop; the provider layer handles the model. Typed events bring the work back to whichever interface I am using.</p>
+    <figure className="space-y-3">
+      <div className="rounded-lg border border-white/10 bg-[#0a0a0a] p-4"><img src="/projects/symphony/workflow.svg" alt="Terminal UI and an ACP editor connect to Symphony Code. Its harness calls model providers, runs workspace tools through approval hooks, feeds tool results into the next turn, and sends typed events back to the interface. Symphony Code saves sessions." loading="lazy" className="h-auto w-full" /></div>
+      <figcaption className="text-[10px] leading-relaxed tracking-wide text-white/50">One loop, two interfaces. <a href="/projects/symphony/workflow.mmd" className="underline underline-offset-4 hover:text-white">Mermaid source ↗</a></figcaption>
+    </figure>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">I kept the harness independent of files and terminals. It can power other agents, a browser workflow, or an HTTP interface without carrying the coding UI along.</p>
+  </section>
+
+  <section aria-labelledby="symphony-start" className="space-y-4">
+    <h2 id="symphony-start" className="text-section-heading font-medium tracking-section-label text-white/60">TRY IT</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Open source, MIT licensed. Run it from source with Python 3.11+, uv, and a supported model provider. The first launch guides provider setup.</p>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`git clone https://github.com/Sarthakischauhan/symphony.git
+cd symphony
+uv sync
+uv run --package symphony-code symphony --workspace /path/to/project`}</CodeMarkdownBlock></div>
+    <p className="text-[11px] leading-relaxed tracking-wide text-white/50">For an ACP client, launch <code className="text-white/75">symphony acp</code> from the installed workspace. <Link href="https://github.com/Sarthakischauhan/symphony/blob/main/coding_agent/src/coding_agent/protocols/acp/README.md" className="underline underline-offset-4 hover:text-white">Connection details ↗</Link></p>
+  </section>
+</div>
