@@ -12,13 +12,29 @@ dependencies in a separate source checkout, then run:
 ```sh
 /path/to/symphony/.venv/bin/python scripts/capture-symphony.py
 npm install --prefix /tmp/symphony-showcase-tools playwright@1.63.0 mermaid@11
-SHOWCASE_TOOLS=/tmp/symphony-showcase-tools node scripts/render-symphony-assets.cjs
+SYMPHONY_SOURCE=/path/to/symphony SHOWCASE_TOOLS=/tmp/symphony-showcase-tools node scripts/render-symphony-assets.cjs
 /path/to/symphony/.venv/bin/python scripts/symphony-gif.py
 ```
 
 The renderer uses `/usr/bin/chromium`; override `CHROMIUM_PATH` if needed.
 Textual exports intermediate SVGs to `/tmp/symphony-captures`. The renderer
-produces PNGs and renders `public/projects/symphony/workflow.mmd` to SVG.
-Pillow joins the first three terminal captures into the GIF. The site serves
-these static assets without shipping Mermaid or capture dependencies to users.
-The GIF plays only when requested; pausing replaces it with the still capture.
+produces intermediate PNGs and renders `public/projects/symphony/workflow.mmd`
+to SVG. Pillow creates lossless WebP stills, an animated WebP, and a GIF export.
+Only the current carousel slide and its neighbors are mounted. The animation
+loads on play; pausing replaces it with a still. Mermaid and capture tools are
+never shipped to the browser, and pre-encoded images avoid runtime image
+transformation requests.
+
+The encoder publishes content-hashed assets and writes
+`content/projects/symphony-assets.json`. Their dedicated URL directory has a
+one-year immutable cache header. Never overwrite a hashed filename with new
+bytes: regenerate the manifest instead. The encoder removes obsolete files
+only when they are listed in the prior manifest. Editable editor-icon sources
+live in `scripts/assets`: Zed is from Simple Icons (CC0); VS Code is from
+Devicon (MIT). Their logos identify the respective editors.
+
+ACP configuration references: [Zed custom agents](https://zed.dev/docs/ai/external-agents#custom-agents)
+and [VS Code ACP Client](https://github.com/formulahendry/vscode-acp), whose
+`acp.agents` settings schema is defined in its package.json. VS Code requires
+this extension. The examples use an absolute source-workspace executable path
+and intentionally contain no credentials.
