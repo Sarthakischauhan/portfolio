@@ -32,6 +32,12 @@ bytes: regenerate the manifest instead. The encoder removes obsolete files
 only when they are listed in the prior manifest. Editable editor-icon sources
 live in `scripts/assets`: Zed is from Simple Icons (CC0); VS Code is from
 Devicon (MIT). Their logos identify the respective editors.
+Cursor and Windsurf icons come from Lobe Icons (MIT). Their tabs configure the
+VS Code-compatible ACP Client extension installed as a VSIX; they do not use
+the editors' native assistant configuration. The client requires a VS Code
+1.85-compatible extension API. The carousel's model command is `/model` (not
+`/models`) in the captured Symphony revision. The add-on view uses Symphony's
+actual report renderer with sample add-on registrations.
 
 ACP configuration references: [Zed custom agents](https://zed.dev/docs/ai/external-agents#custom-agents)
 and [VS Code ACP Client](https://github.com/formulahendry/vscode-acp), whose

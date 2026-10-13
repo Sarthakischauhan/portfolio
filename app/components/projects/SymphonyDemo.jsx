@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Play, Pause, ArrowUpRight } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import assets from "../../../content/projects/symphony-assets.json";
 
 export default function SymphonyDemo() {
@@ -22,7 +22,6 @@ export default function SymphonyDemo() {
             {playing ? "Pause demo" : "Play demo"}
           </button>
         </div>
-        <a href={assets.tui} target="_blank" rel="noreferrer" aria-label="View the Symphony terminal capture at full size">
           {/* Pre-encoded WebP avoids runtime image transforms; animation loads on play. */}
           <img
             src={playing ? assets.demo : assets.tui}
@@ -31,13 +30,9 @@ export default function SymphonyDemo() {
             height="908"
             className="h-auto w-full"
           />
-        </a>
       </div>
       <figcaption className="flex flex-wrap items-center justify-between gap-2 text-[10px] leading-relaxed tracking-wide text-white/50">
         <span>From a request to changes ready for review</span>
-        <a href={assets.tui} target="_blank" rel="noreferrer" className="flex items-center gap-1 transition-colors hover:text-white">
-          Full size <ArrowUpRight size={11} aria-hidden="true" />
-        </a>
       </figcaption>
     </figure>
   );

@@ -27,6 +27,12 @@ from coding_agent.tui.screens.learning import LearningModal
 from coding_agent.addons.learning.store import LearningStore
 from coding_agent.tui.runtime.subagent import SubagentRecord
 from tempfile import TemporaryDirectory
+from coding_agent.tui.composer import SlashMenu
+from coding_agent.tui.commands import model_options
+from coding_agent.addons.manager import addons_report
+from coding_agent.addons.manager.bridge import build_surface
+from core_harness import Tool
+from core_harness.extensions import CommandSpec, ExtensionSnapshot, LoadedAddon
 
 DIFF = """diff --git a/src/client.py b/src/client.py
 index 7af2330..9ee1630 100644
@@ -124,6 +130,33 @@ async def main():
             app.action_subagents()
             await pilot.pause()
             app.save_screenshot("command-subagents.svg", path=str(OUTPUT))
+            await pilot.press("escape")
+            await pilot.pause()
+
+            # Mix provider catalogs so the capture demonstrates the shared picker.
+            choices = model_options(["openai", "anthropic", "gemini"])
+            showcase_ids = ("openai:gpt-5.6", "anthropic:claude-sonnet-4-6", "gemini:gemini-3.1-pro-preview")
+            selected = tuple(next(option for option in choices if option.id == model_id) for model_id in showcase_ids)
+            app.query_one(PromptInput).text = "/model "
+            await pilot.pause()
+            app.query_one("#slash-menu", SlashMenu).set_models(selected, selected[0].id)
+            await pilot.pause()
+            app.save_screenshot("command-models.svg", path=str(OUTPUT))
+            app.query_one(PromptInput).text = ""
+            await pilot.pause()
+
+            sample = ExtensionSnapshot(loaded=(
+                LoadedAddon("project-checks", "0.1.0", Path("/tmp/symphony-capture/project-checks"),
+                    tools=(Tool(lambda: "ok", name="run_checks", description="Run project checks"),),
+                    commands=(CommandSpec("checks", "Run project checks", lambda argument: "Checks complete"),)),
+                LoadedAddon("review-notes", "0.1.0", Path("/tmp/symphony-capture/review-notes"),
+                    tools=(Tool(lambda: "saved", name="save_review", description="Save review notes"),),
+                    commands=(CommandSpec("notes", "Read review notes", lambda argument: "Review notes"),)),
+            ))
+            app.mount_transcript(UserMessage("/addons"))
+            app.add_notice(addons_report(build_surface(sample, builtin_tool_names=())))
+            await pilot.pause()
+            app.save_screenshot("command-addons.svg", path=str(OUTPUT))
 
 
 asyncio.run(main())
