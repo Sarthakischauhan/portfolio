@@ -1,0 +1,68 @@
+import Link from "next/link";
+import SymphonyDemo from "@/app/components/projects/SymphonyDemo";
+import SymphonyCommands from "@/app/components/projects/SymphonyCommands";
+import SymphonyEditors from "@/app/components/projects/SymphonyEditors";
+import { harnessSnippet } from "./symphony-content";
+import assets from "./symphony-assets.json";
+import CodeMarkdownBlock from "@/app/components/layout/CodeMarkdownBlock";
+import { portfolioTheme } from "@/app/styles/portfolioTheme";
+
+<div className="space-y-10">
+  <header className="space-y-4">
+    <Link href="/" className="text-[11px] tracking-wide text-white/50 transition-colors hover:text-white">← All projects</Link>
+    <h1 className="sr-only">Symphony</h1>
+    <img src={assets.logo} alt="Symphony" width="1686" height="268" className="h-auto w-full max-w-[30rem] py-3" />
+    <div className="flex gap-4 font-geist text-nav font-medium">
+      <Link href="https://github.com/Sarthakischauhan/symphony" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">github ↗</Link>
+      <Link href="https://github.com/Sarthakischauhan/symphony/tree/main/docs" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">docs ↗</Link>
+    </div>
+    <p className="leading-relaxed tracking-wider text-white/80">My personal coding agent. I give it a task, follow the work in my terminal, and review the changes. It connects to editors through ACP, too.</p>
+    <p className="text-xs leading-relaxed tracking-wide text-white/55">Built in Python, with a composable agent harness underneath. The terminal is one way into the same loop: models, tools, events, and a conversation that carries on.</p>
+  </header>
+
+  <section aria-labelledby="symphony-terminal" className="space-y-4">
+    <h2 id="symphony-terminal" className="text-section-heading font-medium tracking-section-label text-white/60">A TASK, IN THE TERMINAL</h2>
+    <SymphonyDemo />
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">The conversation stays at the center. Tool calls sit alongside the response, so I can see what was read, what changed, and what ran without leaving the task.</p>
+  </section>
+
+  <section aria-labelledby="symphony-features" className="space-y-4">
+    <h2 id="symphony-features" className="text-section-heading font-medium tracking-section-label text-white/60">A CLOSER LOOK</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Review a diff, inspect what the agent remembers, or follow a delegated task. A few of the views I keep within reach.</p>
+    <SymphonyCommands />
+  </section>
+
+  <section aria-labelledby="symphony-workflow" className="space-y-4">
+    <h2 id="symphony-workflow" className="text-section-heading font-medium tracking-section-label text-white/60">HOW IT WORKS</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Symphony Code supplies the workspace tools and session behavior. The harness runs the turn loop; the provider layer handles the model. Typed events bring the work back to whichever interface I am using.</p>
+    <figure className="space-y-3">
+      <div className="rounded-lg border border-white/10 bg-[#0a0a0a] p-4"><img src={assets.workflow} alt="Terminal UI and an ACP editor connect to Symphony Code. Its harness calls model providers, runs workspace tools through approval hooks, feeds tool results into the next turn, and sends typed events back to the interface. Symphony Code saves sessions." loading="lazy" className="h-auto w-full" /></div>
+      <figcaption className="text-[10px] leading-relaxed tracking-wide text-white/50">One loop, two interfaces. <a href="/projects/symphony/workflow.mmd" className="underline underline-offset-4 hover:text-white">Mermaid source ↗</a></figcaption>
+    </figure>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">I kept the harness independent of files and terminals. It can power other agents, a browser workflow, or an HTTP interface without carrying the coding UI along.</p>
+  </section>
+
+  <section aria-labelledby="symphony-harness" className="space-y-4">
+    <h2 id="symphony-harness" className="text-section-heading font-medium tracking-section-label text-white/60">BUILD YOUR OWN AGENT</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">The base harness is useful on its own. Give it a model, a prompt, and a set of Python tools. It handles the turn loop, tool dispatch, streaming events, cancellation, and run limits.</p>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="python" theme={portfolioTheme} className="border-0">{harnessSnippet}</CodeMarkdownBlock></div>
+    <p className="text-[11px] leading-relaxed tracking-wide text-white/50">This agent can read a file and summarize it. Run it in the installed Symphony workspace with a configured provider; register only the tools your agent needs. <Link href="https://github.com/Sarthakischauhan/symphony/blob/main/docs/packages/symphony-harness.md" className="underline underline-offset-4 hover:text-white">Harness guide ↗</Link></p>
+  </section>
+
+  <section aria-labelledby="symphony-acp" className="space-y-4">
+    <h2 id="symphony-acp" className="text-section-heading font-medium tracking-section-label text-white/60">IN YOUR EDITOR, THROUGH ACP</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">The same coding agent, next to your code. ACP streams replies, tool activity, and permission requests between Symphony and your editor.</p>
+    <SymphonyEditors />
+    <p className="text-[11px] leading-relaxed tracking-wide text-white/50">Install Symphony and configure its provider first. Replace the absolute executable path with your checkout's path and merge the JSON with your existing settings. The editor supplies the project directory when it starts a session.</p>
+  </section>
+
+  <section aria-labelledby="symphony-start" className="space-y-4">
+    <h2 id="symphony-start" className="text-section-heading font-medium tracking-section-label text-white/60">TRY IT</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Open source, MIT licensed. Run it from source with Python 3.11+, uv, and a supported model provider. The first launch guides provider setup.</p>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`git clone https://github.com/Sarthakischauhan/symphony.git
+cd symphony
+uv sync
+uv run --package symphony-code symphony --workspace /path/to/project`}</CodeMarkdownBlock></div>
+
+  </section>
+</div>

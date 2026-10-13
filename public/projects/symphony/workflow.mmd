@@ -1,0 +1,18 @@
+%% Rendered with Mermaid 11. Keep this source beside workflow.svg.
+%% Monochrome surfaces and muted accents follow DESIGN.md.
+%%{init: {"theme":"base","themeVariables":{"background":"#0A0A0A","primaryColor":"#171717","primaryTextColor":"#EDEDED","primaryBorderColor":"#525252","lineColor":"#737373","secondaryColor":"#171717","tertiaryColor":"#171717","fontFamily":"monospace","fontSize":"14px"},"flowchart":{"htmlLabels":false,"curve":"linear","nodeSpacing":20,"rankSpacing":28}}}%%
+flowchart TD
+    T[Terminal UI] --> C[Symphony Code]
+    A[Editor · ACP] --> C
+    C --> H[Agent harness]
+    H --> P[Model providers]
+    P -->|tool request| H
+    H --> G[Approval hooks]
+    G --> W[Workspace tools]
+    W -->|result · next turn| H
+    H -. typed events .-> C
+    C -.-> S[Saved sessions]
+    classDef product fill:#171717,stroke:#5a9a95,color:#EDEDED
+    classDef core fill:#171717,stroke:#6374d0,color:#EDEDED
+    class C product
+    class H core

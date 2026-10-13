@@ -29,6 +29,12 @@
   ],
   "projects": [
     {
+      "name": "symphony",
+      "href": "/projects/symphony",
+      "github": "https://github.com/Sarthakischauhan/symphony",
+      "desc": "My personal coding agent that handles my tasks in a TUI, with ACP connections to editors, workspace tools, and subagents."
+    },
+    {
       "name": "code-markdown",
       "href": "/projects/code-markdown",
       "npm": "https://www.npmjs.com/package/code-markdown",
