@@ -8,7 +8,7 @@ import { editors } from "../../../content/projects/symphony-content";
 export default function SymphonyEditors() {
   return (
     <Tabs defaultValue="zed">
-      <TabsList aria-label="Editor setup">
+      <TabsList aria-label="Editor setup" className="flex w-fit max-w-full flex-wrap justify-start">
         {editors.map((editor) => (
           <TabsTrigger key={editor.id} value={editor.id}>
             <img src={editor.icon} alt="" width="16" height="16" className="h-4 w-4 opacity-80" />

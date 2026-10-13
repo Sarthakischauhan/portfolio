@@ -3,10 +3,14 @@
   "command-diff": "/projects/symphony/assets/command-diff.e1c79850e0c2.webp",
   "command-learning": "/projects/symphony/assets/command-learning.5f88416af31f.webp",
   "command-subagents": "/projects/symphony/assets/command-subagents.81269cc999a4.webp",
+  "command-models": "/projects/symphony/assets/command-models.bbd12153f123.webp",
+  "command-addons": "/projects/symphony/assets/command-addons.bb62302ae53b.webp",
   "logo": "/projects/symphony/assets/logo.ae40a3e9b644.webp",
   "demo": "/projects/symphony/assets/demo.9de5a69a4501.webp",
   "gif": "/projects/symphony/assets/gif.106c9fc6e913.gif",
   "workflow": "/projects/symphony/assets/workflow.9df94db16cf7.svg",
   "zed": "/projects/symphony/assets/zed.b9b0914ba4a8.svg",
-  "vscode": "/projects/symphony/assets/vscode.503d580c442a.svg"
+  "vscode": "/projects/symphony/assets/vscode.503d580c442a.svg",
+  "cursor": "/projects/symphony/assets/cursor.7538b82a8273.svg",
+  "windsurf": "/projects/symphony/assets/windsurf.7aee3de273a2.svg"
 }

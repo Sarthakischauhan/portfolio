@@ -48,4 +48,15 @@ export const editors = [
     docs: "https://marketplace.visualstudio.com/items?itemName=formulahendry.acp-client",
     linkLabel: "ACP Client extension",
   },
+  ...[
+    { id: "cursor", name: "Cursor" },
+    { id: "windsurf", name: "Windsurf" },
+  ].map((editor) => ({
+    ...editor,
+    icon: assets[editor.id],
+    instruction: `Install the ACP Client extension by formulahendry in ${editor.name} using Extensions: Install from VSIX. Merge this entry into user settings.json, then use ACP: Connect to Agent and select Symphony.`,
+    code: JSON.stringify({ "acp.agents": { Symphony: { ...launch, env: {} } } }, null, 2),
+    docs: "https://github.com/formulahendry/vscode-acp#packaging",
+    linkLabel: "Get or build the ACP Client VSIX",
+  })),
 ];

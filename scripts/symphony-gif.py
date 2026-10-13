@@ -18,7 +18,7 @@ def publish(name, data, extension):
     (assets / filename).write_bytes(data)
     manifest[name] = f"/projects/symphony/assets/{filename}"
 
-for name in ("tui", "command-diff", "command-learning", "command-subagents", "logo"):
+for name in ("tui", "command-diff", "command-learning", "command-subagents", "command-models", "command-addons", "logo"):
     destination = captures / f"{name}.webp"
     Image.open(captures / f"{name}.png").save(destination, lossless=True, method=6)
     publish(name, destination.read_bytes(), "webp")
@@ -28,7 +28,7 @@ frames[0].save(captures / "demo.webp", save_all=True, append_images=frames[1:], 
 publish("demo", (captures / "demo.webp").read_bytes(), "webp")
 publish("gif", (captures / "demo.gif").read_bytes(), "gif")
 publish("workflow", (captures / "workflow.svg").read_bytes(), "svg")
-for name in ("zed", "vscode"):
+for name in ("zed", "vscode", "cursor", "windsurf"):
     publish(name, Path(f"scripts/assets/{name}.svg").read_bytes(), "svg")
 manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
 # Only remove artifacts listed by the previous generated manifest.

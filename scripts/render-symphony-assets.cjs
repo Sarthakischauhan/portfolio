@@ -13,7 +13,7 @@ const { chromium } = load("playwright");
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium", args: ["--no-sandbox"] });
   try {
     const page = await browser.newPage({ viewport: { width: 1300, height: 1000 } });
-    const captures = [["01-request", "frame-1"], ["02-explore", "frame-2"], ["03-result", "tui"], ["command-diff", "command-diff"], ["command-learning", "command-learning"], ["command-subagents", "command-subagents"]];
+    const captures = [["01-request", "frame-1"], ["02-explore", "frame-2"], ["03-result", "tui"], ["command-diff", "command-diff"], ["command-learning", "command-learning"], ["command-subagents", "command-subagents"], ["command-models", "command-models"], ["command-addons", "command-addons"]];
     for (const [source, target] of captures) {
       const svg = await fs.readFile(`/tmp/symphony-captures/${source}.svg`, "utf8");
       await page.setContent(`<style>body{margin:0;background:#0a0a0a}svg{display:block}</style>${svg}`);
