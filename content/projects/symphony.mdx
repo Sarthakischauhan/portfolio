@@ -13,6 +13,7 @@ import { portfolioTheme } from "@/app/styles/portfolioTheme";
     <h1 className="sr-only">Symphony</h1>
     <img src={assets.logo} alt="Symphony" width="1686" height="268" className="h-auto w-full max-w-[30rem] py-3" />
     <div className="flex gap-4 font-geist text-nav font-medium">
+      <Link href="https://pypi.org/project/symphony-code/" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">pypi ↗</Link>
       <Link href="https://github.com/Sarthakischauhan/symphony" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">github ↗</Link>
       <Link href="https://github.com/Sarthakischauhan/symphony/tree/main/docs" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">docs ↗</Link>
     </div>
@@ -58,11 +59,9 @@ import { portfolioTheme } from "@/app/styles/portfolioTheme";
 
   <section aria-labelledby="symphony-start" className="space-y-4">
     <h2 id="symphony-start" className="text-section-heading font-medium tracking-section-label text-white/60">TRY IT</h2>
-    <p className="text-xs leading-relaxed tracking-wide text-white/60">Open source, MIT licensed. Run it from source with Python 3.11+, uv, and a supported model provider. The first launch guides provider setup.</p>
-    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`git clone https://github.com/Sarthakischauhan/symphony.git
-cd symphony
-uv sync
-uv run --package symphony-code symphony --workspace /path/to/project`}</CodeMarkdownBlock></div>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Open source, MIT licensed. <Link href="https://pypi.org/project/symphony-code/" className="underline underline-offset-4 hover:text-white">symphony-code 0.0.1</Link> is on PyPI. Python 3.11+ and a supported model provider. The one-liner installs uv if needed, then installs the package as a uv tool. macOS and Linux only. The first launch guides provider setup.</p>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`curl -fsSL https://raw.githubusercontent.com/Sarthakischauhan/symphony/main/install.sh | sh
+symphony --workspace /path/to/your/project`}</CodeMarkdownBlock></div>
 
   </section>
 </div>
