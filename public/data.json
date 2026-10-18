@@ -31,7 +31,8 @@
     {
       "name": "symphony",
       "href": "/projects/symphony",
-      "github": "https://github.com/Sarthakischauhan/symphony",
+      "pypi": "https://pypi.org/project/symphony-code/",
+    "github": "https://github.com/Sarthakischauhan/symphony",
       "desc": "My personal coding agent that handles my tasks in a TUI, with ACP connections to editors, workspace tools, and subagents."
     },
     {
