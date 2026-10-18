@@ -1,0 +1,38 @@
+# Sarthak Chauhan
+
+> Personal site of Sarthak Chauhan, a software engineer in the Bay Area. The site covers work on web interfaces, agents, and microservices, plus writing on engineering and culture. Previously a software engineering intern at Tesla (design systems and insurance). Computer science at SJSU.
+
+This file is the short map for agents. Pages are written for people, not as a docs corpus. Prefer the links below over guessing routes.
+
+## Site
+
+- [Home](https://www.sarchauhan.dev/): Bio, work timeline, and current projects
+- [Writing](https://www.sarchauhan.dev/blog): Index of posts
+- [Sitemap](https://www.sarchauhan.dev/sitemap.xml): Canonical URLs
+
+## Projects
+
+- [Symphony](https://www.sarchauhan.dev/projects/symphony): Personal coding agent. Python TUI, ACP connections to editors, workspace tools, subagents, and a reusable harness. PyPI package `symphony-code`. MIT licensed
+- [Symphony source](https://github.com/Sarthakischauhan/symphony): Repository and docs
+- [code-markdown](https://www.sarchauhan.dev/projects/code-markdown): Themeable code renderer with a custom tokenizer, multi-language highlighting, line numbers, and highlighted lines
+- [code-markdown source](https://github.com/Sarthakischauhan/code-markdown): Repository
+
+## Writing
+
+- [Slow and Steady](https://www.sarchauhan.dev/blog/slow-and-steady): On consistency versus intensity (July 13, 2025)
+- [Automate the boring stuff](https://www.sarchauhan.dev/blog/cleanSS-groq): Organizing screenshots with Python, PIL, and a Groq vision model (February 25, 2025)
+- [Can't beat OAuth2](https://www.sarchauhan.dev/blog/cant-beat-oauth2): High-level introduction to OAuth as authorization, not authentication (December 21, 2024)
+- [Plans for the future](https://www.sarchauhan.dev/blog/plans-for-future): On shifting from web work toward harder CS, algorithms, and LLMs (December 10, 2024)
+- [Why Indians Struggle to Hold Significant Soft Power](https://www.sarchauhan.dev/blog/indian-softpower): Cultural and systemic limits on India's global influence (December 3, 2024)
+
+## Elsewhere
+
+- [GitHub](https://github.com/Sarthakischauhan): sarthakischauhan
+- [Resume](https://www.sarchauhan.dev/Resume.pdf): PDF
+- [LinkedIn](https://www.linkedin.com/in/sarthakchauhan01/)
+- [X](https://x.com/sarchauhann)
+- [Email](mailto:sarthakchauhann@gmail.com)
+
+## Optional
+
+- [llms.txt spec](https://llmstxt.org/): Format used by this file
