@@ -5,9 +5,9 @@ import { portfolioTheme } from "@/app/styles/portfolioTheme";
 import { quickStart, aiSdk } from "./chat-sdk-content";
 
 <div className="space-y-10">
-  <header className="space-y-4">
+  <header className="sdk-page-header space-y-4">
     <Link href="/" className="text-[11px] tracking-wide text-white/50 hover:text-white">← All projects</Link>
-    <h1 className="text-name-heading font-medium text-white">Chat SDK</h1>
+    <h1 className="text-4xl sm:text-5xl font-medium tracking-tight text-white">Chat SDK<span className="text-white/30">.</span></h1>
     <nav aria-label="Chat SDK links" className="flex gap-4 text-nav font-medium text-white/60">
       <a href="https://www.npmjs.com/package/@sarchauhan/chat" className="hover:text-white hover:underline underline-offset-4">npm ↗</a>
       <a href="https://github.com/Sarthakischauhan/chat-sdk" className="hover:text-white hover:underline underline-offset-4">github ↗</a>
@@ -17,12 +17,9 @@ import { quickStart, aiSdk } from "./chat-sdk-content";
     <p className="text-xs leading-relaxed tracking-wide text-white/55">The UI behind <Link href="/projects/symphony" className="underline underline-offset-4 hover:text-white">Symphony Web</Link>, packaged for other apps. Bring an adapter, import the stylesheet, and mount Chat. No Next.js dependency.</p>
   </header>
 
-  <section aria-labelledby="chat-widgets" className="space-y-4">
-    <h2 id="chat-widgets" className="text-section-heading font-medium tracking-section-label text-white/60">TOOLS YOU CAN INSPECT</h2>
-    <p className="text-xs leading-relaxed tracking-wide text-white/60">Read files, review a patch, inspect search results, or ask a question. These are the actual package widgets. Known tool payloads turn into these views automatically; custom registries can override them.</p>
-    <ChatSdkDemo />
-  </section>
+  <ChatSdkDemo />
 
+  <div className="sdk-docs space-y-10">
   <section aria-labelledby="chat-start" className="space-y-4">
     <h2 id="chat-start" className="text-section-heading font-medium tracking-section-label text-white/60">A COMPONENT AND AN ADAPTER</h2>
     <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`npm install @sarchauhan/chat`}</CodeMarkdownBlock></div>
@@ -46,4 +43,5 @@ import { quickStart, aiSdk } from "./chat-sdk-content";
     <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="tsx" theme={portfolioTheme} className="border-0">{aiSdk}</CodeMarkdownBlock></div>
     <a href="https://github.com/Sarthakischauhan/chat-sdk/tree/main/examples/next-ai-sdk" className="inline-block text-[11px] text-white/55 underline underline-offset-4 hover:text-white">Explore the AI SDK example ↗</a>
   </section>
+  </div>
 </div>
