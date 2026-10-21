@@ -1,0 +1,49 @@
+import Link from "next/link";
+import ChatSdkDemo from "@/app/components/projects/ChatSdkDemo";
+import CodeMarkdownBlock from "@/app/components/layout/CodeMarkdownBlock";
+import { portfolioTheme } from "@/app/styles/portfolioTheme";
+import { quickStart, aiSdk } from "./chat-sdk-content";
+
+<div className="space-y-10">
+  <header className="space-y-4">
+    <Link href="/" className="text-[11px] tracking-wide text-white/50 hover:text-white">← All projects</Link>
+    <h1 className="text-name-heading font-medium text-white">Chat SDK</h1>
+    <nav aria-label="Chat SDK links" className="flex gap-4 text-nav font-medium text-white/60">
+      <a href="https://www.npmjs.com/package/@sarchauhan/chat" className="hover:text-white hover:underline underline-offset-4">npm ↗</a>
+      <a href="https://github.com/Sarthakischauhan/chat-sdk" className="hover:text-white hover:underline underline-offset-4">github ↗</a>
+      <a href="https://github.com/Sarthakischauhan/chat-sdk/tree/main/packages/chat" className="hover:text-white hover:underline underline-offset-4">docs ↗</a>
+    </nav>
+    <p className="leading-relaxed tracking-wider text-white/80">A React interface for agents. Streaming replies, tool calls, and interactive questions, with your backend behind it.</p>
+    <p className="text-xs leading-relaxed tracking-wide text-white/55">The UI behind <Link href="/projects/symphony" className="underline underline-offset-4 hover:text-white">Symphony Web</Link>, packaged for other apps. Bring an adapter, import the stylesheet, and mount Chat. No Next.js dependency.</p>
+  </header>
+
+  <section aria-labelledby="chat-widgets" className="space-y-4">
+    <h2 id="chat-widgets" className="text-section-heading font-medium tracking-section-label text-white/60">TOOLS YOU CAN INSPECT</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Read files, review a patch, inspect search results, or ask a question. These are the actual package widgets. Known tool payloads turn into these views automatically; custom registries can override them.</p>
+    <ChatSdkDemo />
+  </section>
+
+  <section aria-labelledby="chat-start" className="space-y-4">
+    <h2 id="chat-start" className="text-section-heading font-medium tracking-section-label text-white/60">A COMPONENT AND AN ADAPTER</h2>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`npm install @sarchauhan/chat`}</CodeMarkdownBlock></div>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">React 18 or later. The adapter yields normalized message snapshots from your backend; Chat renders them. This small example returns one local reply.</p>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="tsx" theme={portfolioTheme} className="border-0">{quickStart}</CodeMarkdownBlock></div>
+  </section>
+
+  <section aria-labelledby="chat-protocol" className="space-y-4">
+    <h2 id="chat-protocol" className="text-section-heading font-medium tracking-section-label text-white/60">ONE RENDER MODEL, YOUR TRANSPORT</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">The protocol represents text, reasoning, tool states, sources, files, data, and widgets. Event reducers normalize streams into message parts. Your adapter handles the backend connection; the UI consumes the same shapes.</p>
+    <div className="divide-y divide-white/10 rounded-lg border border-white/10 px-4 text-xs">
+      <a href="https://www.npmjs.com/package/@sarchauhan/chat" className="block py-3 hover:text-white"><span className="font-mono">@sarchauhan/chat ↗</span><span className="mt-1 block text-white/50">React components, themes, and tool widgets.</span></a>
+      <a href="https://www.npmjs.com/package/@sarchauhan/protocol" className="block py-3 hover:text-white"><span className="font-mono">@sarchauhan/protocol ↗</span><span className="mt-1 block text-white/50">Typed events, normalized parts, and reducers.</span></a>
+      <a href="https://www.npmjs.com/package/@sarchauhan/adapter" className="block py-3 hover:text-white"><span className="font-mono">@sarchauhan/adapter ↗</span><span className="mt-1 block text-white/50">Backend contract with an optional AI SDK adapter.</span></a>
+    </div>
+  </section>
+
+  <section aria-labelledby="chat-ai-sdk" className="space-y-4">
+    <h2 id="chat-ai-sdk" className="text-section-heading font-medium tracking-section-label text-white/60">ALREADY USING AI SDK?</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Use the optional AI SDK adapter with an endpoint that speaks the AI SDK UI message stream protocol. Install <code>ai</code> (version 5 or later) alongside the chat package. The endpoints below are supplied by your application.</p>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="tsx" theme={portfolioTheme} className="border-0">{aiSdk}</CodeMarkdownBlock></div>
+    <a href="https://github.com/Sarthakischauhan/chat-sdk/tree/main/examples/next-ai-sdk" className="inline-block text-[11px] text-white/55 underline underline-offset-4 hover:text-white">Explore the AI SDK example ↗</a>
+  </section>
+</div>
