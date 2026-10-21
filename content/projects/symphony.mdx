@@ -17,9 +17,19 @@ import { portfolioTheme } from "@/app/styles/portfolioTheme";
       <Link href="https://github.com/Sarthakischauhan/symphony" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">github ↗</Link>
       <Link href="https://github.com/Sarthakischauhan/symphony/tree/main/docs" className="text-white/60 transition-colors hover:text-white hover:underline underline-offset-4">docs ↗</Link>
     </div>
-    <p className="leading-relaxed tracking-wider text-white/80">My personal coding agent. I give it a task, follow the work in my terminal, and review the changes. It connects to editors through ACP, too.</p>
+    <p className="leading-relaxed tracking-wider text-white/80">My personal coding agent. I give it a task, follow the work in my terminal or browser, and review the changes. It connects to editors through ACP, too.</p>
     <p className="text-xs leading-relaxed tracking-wide text-white/55">Built in Python, with a composable agent harness underneath. The terminal is one way into the same loop: models, tools, events, and a conversation that carries on.</p>
   </header>
+
+  <section aria-labelledby="symphony-web" className="space-y-4">
+    <h2 id="symphony-web" className="text-section-heading font-medium tracking-section-label text-white/60">NEW IN 0.0.3 · SYMPHONY WEB</h2>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">The same coding agent, in your browser. Browse and resume terminal sessions, follow streaming tool calls, review changes, and answer approval requests. Run it locally with your existing provider setup.</p>
+    <figure className="space-y-3">
+      <a href="/projects/symphony/assets/web-view.webp" aria-label="Open full-size Symphony Web screenshot"><img src="/projects/symphony/assets/web-view.webp" alt="Symphony Web demo with a session sidebar, an agent conversation, and tool activity." width="1363" height="936" className="h-auto w-full rounded-lg border border-white/10" /></a>
+      <figcaption className="text-[10px] leading-relaxed tracking-wide text-white/50">Symphony Web demo, in color. Click to view full size. Built with my <Link href="/projects/chat-sdk" className="underline underline-offset-4 hover:text-white">Chat SDK ↗</Link></figcaption>
+    </figure>
+    <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`symphony web --workspace /path/to/your/project`}</CodeMarkdownBlock></div>
+  </section>
 
   <section aria-labelledby="symphony-terminal" className="space-y-4">
     <h2 id="symphony-terminal" className="text-section-heading font-medium tracking-section-label text-white/60">A TASK, IN THE TERMINAL</h2>
@@ -38,7 +48,7 @@ import { portfolioTheme } from "@/app/styles/portfolioTheme";
     <p className="text-xs leading-relaxed tracking-wide text-white/60">Symphony Code supplies the workspace tools and session behavior. The harness runs the turn loop; the provider layer handles the model. Typed events bring the work back to whichever interface I am using.</p>
     <figure className="space-y-3">
       <div className="rounded-lg border border-white/10 bg-[#0a0a0a] p-4"><img src={assets.workflow} alt="Terminal UI and an ACP editor connect to Symphony Code. Its harness calls model providers, runs workspace tools through approval hooks, feeds tool results into the next turn, and sends typed events back to the interface. Symphony Code saves sessions." loading="lazy" className="h-auto w-full" /></div>
-      <figcaption className="text-[10px] leading-relaxed tracking-wide text-white/50">One loop, two interfaces. <a href="/projects/symphony/workflow.mmd" className="underline underline-offset-4 hover:text-white">Mermaid source ↗</a></figcaption>
+      <figcaption className="text-[10px] leading-relaxed tracking-wide text-white/50">One agent loop, with terminal, web, and editor interfaces. <a href="/projects/symphony/workflow.mmd" className="underline underline-offset-4 hover:text-white">Mermaid source ↗</a></figcaption>
     </figure>
     <p className="text-xs leading-relaxed tracking-wide text-white/60">I kept the harness independent of files and terminals. It can power other agents, a browser workflow, or an HTTP interface without carrying the coding UI along.</p>
   </section>
@@ -59,7 +69,7 @@ import { portfolioTheme } from "@/app/styles/portfolioTheme";
 
   <section aria-labelledby="symphony-start" className="space-y-4">
     <h2 id="symphony-start" className="text-section-heading font-medium tracking-section-label text-white/60">TRY IT</h2>
-    <p className="text-xs leading-relaxed tracking-wide text-white/60">Open source, MIT licensed. <Link href="https://pypi.org/project/symphony-code/" className="underline underline-offset-4 hover:text-white">symphony-code 0.0.1</Link> is on PyPI. Python 3.11+ and a supported model provider. The one-liner installs uv if needed, then installs the package as a uv tool. macOS and Linux only. The first launch guides provider setup.</p>
+    <p className="text-xs leading-relaxed tracking-wide text-white/60">Open source, MIT licensed. <Link href="https://pypi.org/project/symphony-code/" className="underline underline-offset-4 hover:text-white">symphony-code 0.0.3</Link> is on PyPI. Python 3.11+ and a supported model provider. The one-liner installs uv if needed, then installs the package as a uv tool. macOS and Linux only. The first launch guides provider setup.</p>
     <div className="overflow-hidden rounded-lg border border-white/10"><CodeMarkdownBlock language="bash" theme={portfolioTheme} className="border-0">{`curl -fsSL https://raw.githubusercontent.com/Sarthakischauhan/symphony/main/install.sh | sh
 symphony --workspace /path/to/your/project`}</CodeMarkdownBlock></div>
 

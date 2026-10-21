@@ -32,8 +32,15 @@
       "name": "symphony",
       "href": "/projects/symphony",
       "pypi": "https://pypi.org/project/symphony-code/",
-    "github": "https://github.com/Sarthakischauhan/symphony",
-      "desc": "My personal coding agent that handles my tasks in a TUI, with ACP connections to editors, workspace tools, and subagents."
+      "github": "https://github.com/Sarthakischauhan/symphony",
+      "desc": "My personal coding agent, in the terminal, on the web, and in editors through ACP. v0.0.3 adds Symphony Web."
+    },
+    {
+      "name": "chat-sdk",
+      "href": "/projects/chat-sdk",
+      "npm": "https://www.npmjs.com/package/@sarchauhan/chat",
+      "github": "https://github.com/Sarthakischauhan/chat-sdk",
+      "desc": "Embeddable React chat with streaming, interactive tool widgets, a typed protocol, and AI SDK support."
     },
     {
       "name": "code-markdown",
