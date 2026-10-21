@@ -125,3 +125,32 @@
   .sdk-gallery input,
   .sdk-gallery textarea { font-size: 16px; }
 }
+
+/* Portaled previews need a bounded flex body when the viewport is short. */
+.chat-root.chat-detail-panel { display: flex; flex-direction: column; overflow: hidden; }
+.chat-detail-body { flex: 1 1 auto; min-width: 0; }
+.sdk-code .code-markdown__body,
+.sdk-docs .code-markdown__body { overscroll-behavior-x: contain; }
+@media (max-width: 899px) {
+  .sdk-sidebar nav.sdk-nav-open { max-height: min(50dvh, 20rem); overflow-y: auto; overscroll-behavior: contain; }
+  .sdk-preview .chat-tool-widget > summary { min-height: 44px; }
+  .sdk-preview .chat-tool-widget > summary > svg.chat-tool-widget-chevron { opacity: 1; }
+  .sdk-preview .chat-question > footer { flex-wrap: wrap; gap: 12px; }
+  .sdk-preview .chat-question > footer button { min-height: 44px; }
+  .sdk-preview .chat-terminal-footer button { min-height: 44px; min-width: 44px; }
+  .sdk-code .code-markdown__copy,
+  .sdk-docs .code-markdown__copy,
+  .chat-detail-close { width: 44px; height: 44px; }
+}
+@media (pointer: coarse) {
+  .sdk-toolbar-actions button,
+  .sdk-theme button { min-width: 44px; min-height: 44px; }
+  .sdk-variants button,
+  .sdk-preview .chat-tool-widget > summary { min-height: 44px; }
+  .chat-detail-close { width: 44px; height: 44px; }
+}
+@media (max-height: 480px) {
+  .chat-root.chat-detail-panel { max-height: calc(100dvh - 12px); }
+  .chat-detail-header { padding: 10px 16px; }
+  .chat-detail-body { padding: 12px 16px; }
+}
