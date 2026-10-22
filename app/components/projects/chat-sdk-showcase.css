@@ -75,3 +75,9 @@
   .sdk-desktop-label { display: block; flex: 1; color: #a3a3a3; font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .sdk-rail-bar, .sdk-rail-label { transition: none; } }
+
+/* The SDK portals the picker into its preview root. Keep that open preview above later widgets. */
+#model-picker .sdk-stage { overflow: visible; }
+#model-picker .sdk-preview.chat-root { overflow: visible; border-radius: 0 0 8px 8px; }
+#model-picker:has(.chat-model-trigger[data-state="open"]) { position: relative; z-index: 40; }
+#model-picker .chat-model-content { max-height: min(24rem, var(--radix-popover-content-available-height, 24rem)); }
