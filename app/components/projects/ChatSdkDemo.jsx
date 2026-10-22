@@ -81,7 +81,17 @@ export default function ChatSdkDemo() {
     return ()=>observer.disconnect();
   }, []);
   return <div className="sdk-gallery">
-    <aside className="sdk-sidebar"><div className="sdk-sidebar-inner"><div className="sdk-sidebar-heading"><button type="button" className="sdk-mobile-menu" aria-expanded={menuOpen} aria-controls="sdk-component-nav" onClick={() => setMenuOpen(open => !open)}><span>Components</span><span>{menuOpen ? "Close −" : "Browse +"}</span></button><div className="sdk-theme" role="group" aria-label="Preview theme"><button type="button" aria-label="Light previews" aria-pressed={theme === "light"} onClick={()=>setTheme("light")}><Sun size={13}/></button><button type="button" aria-label="Dark previews" aria-pressed={theme === "dark"} onClick={()=>setTheme("dark")}><Moon size={13}/></button></div></div><nav id="sdk-component-nav" className={menuOpen ? "sdk-nav-open" : ""} aria-label="Widget showcase">{examples.map((e)=><a key={e.id} href={`#${e.id}`} aria-current={active === e.id ? "location" : undefined} onClick={()=>{setActive(e.id);setMenuOpen(false);}}>{e.title}</a>)}</nav></div></aside>
+    <nav className="sdk-heading-rail" aria-label="On this page">
+      {examples.map(example => (
+        <a key={example.id} href={`#${example.id}`} aria-label={example.title}
+          aria-current={active === example.id ? "location" : undefined}
+          onClick={() => setActive(example.id)}>
+          <span className="sdk-rail-bar" aria-hidden="true" />
+          <span className="sdk-rail-label" aria-hidden="true">{example.title}</span>
+        </a>
+      ))}
+    </nav>
+    <aside className="sdk-sidebar"><div className="sdk-sidebar-inner"><div className="sdk-sidebar-heading"><span className="sdk-desktop-label">Components</span><button type="button" className="sdk-mobile-menu" aria-expanded={menuOpen} aria-controls="sdk-component-nav" onClick={() => setMenuOpen(open => !open)}><span>Components</span><span>{menuOpen ? "Close −" : "Browse +"}</span></button><div className="sdk-theme" role="group" aria-label="Preview theme"><button type="button" aria-label="Light previews" aria-pressed={theme === "light"} onClick={()=>setTheme("light")}><Sun size={13}/></button><button type="button" aria-label="Dark previews" aria-pressed={theme === "dark"} onClick={()=>setTheme("dark")}><Moon size={13}/></button></div></div><nav id="sdk-component-nav" className={menuOpen ? "sdk-nav-open" : ""} aria-label="Widget showcase">{examples.map((e)=><a key={e.id} href={`#${e.id}`} aria-current={active === e.id ? "location" : undefined} onClick={()=>{setActive(e.id);setMenuOpen(false);}}>{e.title}</a>)}</nav></div></aside>
     <div className="sdk-examples">{examples.map((e)=><Example key={e.id} example={e} theme={theme}/>)}</div>
   </div>;
 }

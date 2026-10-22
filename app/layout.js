@@ -1,4 +1,4 @@
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
 import "@sarchauhan/code-markdown/styles.css";
@@ -6,15 +6,23 @@ import Head from "next/head";
 import { Navbar } from "./components";
 import { siteDescription, siteName, siteTitle, siteUrl } from "./lib/site";
 
-const inter = Inter({
+const inter = localFont({
   variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "200", "500"],
+  display: "swap",
+  src: [
+    { path: "../node_modules/@fontsource/inter/files/inter-latin-200-normal.woff2", weight: "200", style: "normal" },
+    { path: "../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2", weight: "500", style: "normal" },
+  ],
 });
-const ibmPlexMono = IBM_Plex_Mono({
+const ibmPlexMono = localFont({
   variable: "--font-ibm-mono",
-  subsets: ["latin"],
-  weight: ["300", "100", "400"],
+  display: "swap",
+  src: [
+    { path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-100-normal.woff2", weight: "100", style: "normal" },
+    { path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-300-normal.woff2", weight: "300", style: "normal" },
+    { path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
+  ],
 });
 
 export const metadata = {
