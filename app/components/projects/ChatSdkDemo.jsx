@@ -27,7 +27,7 @@ const after = 'const adapter = createAdapter({\n  endpoint: "/api/chat",\n  stre
 const results = [{ path: "src/adapter.ts", line: 8, text: "export const adapter: ChatAdapter = {" }, { path: "src/chat.tsx", line: 12, text: "return <Chat adapter={adapter} />;" }, { path: "src/stream.ts", line: 24, text: "yield { id, role: 'assistant', parts };" }];
 const artifact = { id: "release-notes", filename: "release-notes.md", mediaType: "text/markdown", status: "ready", content: "# Symphony 0.0.3\n\nThe coding agent now has a web interface.\n\n- Resume terminal sessions in your browser\n- Inspect tool calls and review diffs\n- Built with @sarchauhan/chat\n" };
 const agent = { id: "review-1", title: "Code reviewer", task: "Review the streaming adapter and reconnect behavior.", state: "completed", summary: "Reviewed 3 files. The stream preserves message order after reconnect.", messages: [{ id: "review-msg", role: "assistant", parts: [{ type: "text", text: "Checked the adapter contract, event reducer, and reconnect handling. Message IDs remain stable across retries." }] }] };
-const pickerRegistryUrl = "/projects/chat-sdk/model-registry.json";
+const pickerRegistryUrl = "/projects/chat-sdk/model-registry.json?v=20261022";
 const pickerAdapter = { async *sendMessage() {} };
 
 function ModelPickerDemo() {
