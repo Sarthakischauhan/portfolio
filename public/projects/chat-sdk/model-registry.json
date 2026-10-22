@@ -1,0 +1,124 @@
+{
+  "defaultProviderId": "openai",
+  "providers": [
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "label": "OpenAI",
+      "defaultModel": "gpt-6-astra",
+      "models": [
+        {
+          "id": "gpt-6-astra",
+          "label": "GPT-6 Astra",
+          "description": "Complex reasoning and coding",
+          "thinkingLevels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        },
+        {
+          "id": "gpt-6.1-sol",
+          "label": "GPT-6.1 Sol",
+          "description": "Balanced intelligence and cost",
+          "thinkingLevels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        },
+        {
+          "id": "gpt-6-luna",
+          "label": "GPT-6 Luna",
+          "description": "Efficient, high-volume tasks",
+          "thinkingLevels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "label": "Anthropic",
+      "defaultModel": "claude-opus-5-5",
+      "models": [
+        {
+          "id": "claude-opus-5-5",
+          "label": "Claude Opus 5.5",
+          "description": "Long-running coding and knowledge work"
+        },
+        {
+          "id": "claude-sonnet-5-5",
+          "label": "Claude Sonnet 5.5",
+          "description": "Speed and intelligence"
+        },
+        {
+          "id": "claude-haiku-5-5",
+          "label": "Claude Haiku 5.5",
+          "description": "Fast classification and routing"
+        },
+        {
+          "id": "claude-fable-5-1",
+          "label": "Claude Fable 5.1",
+          "description": "Demanding reasoning and agentic work"
+        }
+      ]
+    },
+    {
+      "id": "gemini",
+      "name": "Google",
+      "label": "Google",
+      "defaultModel": "gemini-4-argon",
+      "models": [
+        {
+          "id": "gemini-4-argon",
+          "label": "Gemini 4 Argon",
+          "description": "Flagship reasoning"
+        },
+        {
+          "id": "gemini-3.8-flash",
+          "label": "Gemini 3.8 Flash",
+          "description": "Software engineering and agents"
+        },
+        {
+          "id": "gemini-3.5-flash-lite",
+          "label": "Gemini 3.5 Flash-Lite",
+          "description": "High-throughput tasks"
+        }
+      ]
+    },
+    {
+      "id": "grok",
+      "name": "xAI",
+      "label": "xAI",
+      "defaultModel": "grok-4.7",
+      "models": [
+        {
+          "id": "grok-4.7",
+          "label": "Grok 4.7",
+          "description": "Coding, agents, and knowledge work"
+        },
+        {
+          "id": "grok-4.6",
+          "label": "Grok 4.6",
+          "description": "Text, reasoning, and coding"
+        },
+        {
+          "id": "grok-4.5",
+          "label": "Grok 4.5",
+          "description": "Text, reasoning, and coding"
+        }
+      ]
+    }
+  ]
+}

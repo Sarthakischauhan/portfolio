@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, Code2, Copy, RotateCcw, Sun, Moon } from "lucide-react";
 import { ReadFileWidget, PatchWidget, SearchWidget, QuestionWidget, TerminalWidget, ApprovalWidget, ArtifactWidget, SubagentWidget } from "@sarchauhan/chat/widgets";
+import { ChatContextProvider, ChatSelect } from "@sarchauhan/chat";
 import CodeMarkdownBlock from "@/app/components/layout/CodeMarkdownBlock";
 import { portfolioTheme } from "@/app/styles/portfolioTheme";
 import "./chat-sdk-demo.css";
@@ -26,7 +27,18 @@ const after = 'const adapter = createAdapter({\n  endpoint: "/api/chat",\n  stre
 const results = [{ path: "src/adapter.ts", line: 8, text: "export const adapter: ChatAdapter = {" }, { path: "src/chat.tsx", line: 12, text: "return <Chat adapter={adapter} />;" }, { path: "src/stream.ts", line: 24, text: "yield { id, role: 'assistant', parts };" }];
 const artifact = { id: "release-notes", filename: "release-notes.md", mediaType: "text/markdown", status: "ready", content: "# Symphony 0.0.3\n\nThe coding agent now has a web interface.\n\n- Resume terminal sessions in your browser\n- Inspect tool calls and review diffs\n- Built with @sarchauhan/chat\n" };
 const agent = { id: "review-1", title: "Code reviewer", task: "Review the streaming adapter and reconnect behavior.", state: "completed", summary: "Reviewed 3 files. The stream preserves message order after reconnect.", messages: [{ id: "review-msg", role: "assistant", parts: [{ type: "text", text: "Checked the adapter contract, event reducer, and reconnect handling. Message IDs remain stable across retries." }] }] };
+const pickerRegistryUrl = "/projects/chat-sdk/model-registry.json?v=20261022";
+const pickerAdapter = { async *sendMessage() {} };
+
+function ModelPickerDemo() {
+  return <ChatContextProvider adapter={pickerAdapter} registryUrl={pickerRegistryUrl} defaultProvider="openai">
+    <ChatSelect />
+    <p className="sdk-picker-note">Sample registry. Try search, provider filters, and model selection. No model requests are sent.</p>
+  </ChatContextProvider>;
+}
+
 const examples = [
+  { id: "model-picker", title: "Model picker", desc: "Search models, filter by provider, and choose a model with its thinking level.", variants: ["Models"], name: "ChatSelect", props: {} },
   { id: "read-file", title: "Read file", desc: "A quiet tool row. Open it to see exactly what the agent read.", variants: ["Complete", "Running", "Error"], name: "ReadFileWidget", props: { path: "src/agent.ts", content: source, state: "complete" } },
   { id: "patch", title: "Patch & diff", desc: "Changes with context, line numbers, and clear additions and removals.", variants: ["Adapter", "Prompt"], name: "PatchWidget", props: { path: "src/adapter.ts", before, after, state: "complete" } },
   { id: "search", title: "Search results", desc: "File matches and snippets, with enough context to follow the result.", variants: ["Results", "Empty"], name: "SearchWidget", props: { query: "adapter", results, state: "complete" } },
@@ -54,12 +66,42 @@ function Example({ example, theme }) {
   const [variant, setVariant] = useState(example.variants[0]);
   const [view, setView] = useState("preview");
   const [copyState, setCopyState] = useState("");
+  const copyTimer = useRef(null);
+  useEffect(() => () => clearTimeout(copyTimer.current), []);
+  const clearCopy = () => { clearTimeout(copyTimer.current); setCopyState(""); };
+  const copyCode = async () => {
+    clearCopy();
+    try {
+      if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(code);
+      else {
+        const field = document.createElement("textarea");
+        const focused = document.activeElement;
+        field.value = code;
+        field.setAttribute("readonly", "");
+        field.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+        document.body.append(field);
+        field.select();
+        try { if (!document.execCommand("copy")) throw new Error("Copy unavailable"); }
+        finally { field.remove(); focused?.focus(); }
+      }
+      setCopyState("Copied");
+    }
+    catch { setCopyState("Copy unavailable"); }
+    copyTimer.current = setTimeout(() => setCopyState(""), 1800);
+  };
   const [reset, setReset] = useState(0);
   const [answer, setAnswer] = useState("");
   const [filter, setFilter] = useState("");
   const props = snippet(example, variant);
-  const code = `import { ${example.name} } from "@sarchauhan/chat/widgets";\nimport "@sarchauhan/chat/styles.css";\n\n<${example.name}\n${Object.entries(props).filter(([,v]) => v !== undefined).map(([k,v]) => `  ${k}={${JSON.stringify(v, null, 2)}}`).join("\n")}\n${example.id === "question" ? '  onSubmit={(answer) => console.log(answer)}\n' : example.id === "approval" ? '  onAnswer={(choice) => console.log(choice)}\n' : ""}/>`;
-  const components = { "read-file": ReadFileWidget, patch: PatchWidget, search: SearchWidget, terminal: TerminalWidget, question: QuestionWidget, approval: ApprovalWidget, artifacts: ArtifactWidget, subagents: SubagentWidget };
+  const code = example.id === "model-picker" ? `import { ChatContextProvider, ChatSelect } from "@sarchauhan/chat";
+import "@sarchauhan/chat/styles.css";
+
+// registryUrl returns { defaultProviderId, providers: [...] }.
+// adapter is your application's ChatAdapter.
+<ChatContextProvider adapter={adapter} registryUrl="${pickerRegistryUrl}">
+  <ChatSelect />
+</ChatContextProvider>` : `import { ${example.name} } from "@sarchauhan/chat/widgets";\nimport "@sarchauhan/chat/styles.css";\n\n<${example.name}\n${Object.entries(props).filter(([,v]) => v !== undefined).map(([k,v]) => `  ${k}={${JSON.stringify(v, null, 2)}}`).join("\n")}\n${example.id === "question" ? '  onSubmit={(answer) => console.log(answer)}\n' : example.id === "approval" ? '  onAnswer={(choice) => console.log(choice)}\n' : ""}/>`;
+  const components = { "model-picker": ModelPickerDemo, "read-file": ReadFileWidget, patch: PatchWidget, search: SearchWidget, terminal: TerminalWidget, question: QuestionWidget, approval: ApprovalWidget, artifacts: ArtifactWidget, subagents: SubagentWidget };
   const Component = components[example.id];
   const liveProps = { ...props };
   if (example.id === "question") Object.assign(liveProps, { disabled: !!answer, onSubmit: (value) => setAnswer([...value.values, value.text].filter(Boolean).join(", ")) });
@@ -69,8 +111,8 @@ function Example({ example, theme }) {
   return <section id={example.id} className="sdk-example" aria-labelledby={`${example.id}-title`}>
     <div className="sdk-example-heading"><div><h3 id={`${example.id}-title`}>{example.title}</h3><p>{example.desc}</p></div></div>
     <div className="sdk-stage" data-preview-theme={theme}>
-      <div className="sdk-stage-toolbar"><span className="sdk-stage-label"><span />{view === "preview" ? "Live preview" : "React / TSX"}</span><div className="sdk-toolbar-actions"><button type="button" aria-label={`Reset ${example.title}`} title="Reset demo" onClick={() => { setReset(r => r+1); setAnswer(""); setFilter(""); }}><RotateCcw size={13} /></button><button type="button" aria-label={`Copy ${example.title} code`} onClick={async () => { try { await navigator.clipboard.writeText(code); setCopyState("Copied"); } catch { setCopyState("Copy unavailable"); } }}>{copyState === "Copied" ? <Check size={13}/> : <Copy size={13}/>}</button><button type="button" aria-label={`${view === "preview" ? "View" : "Hide"} ${example.title} code`} aria-pressed={view === "code"} onClick={() => setView(v=>v === "preview" ? "code" : "preview")}><Code2 size={14}/></button></div></div>
-      <span className="sdk-copy-status" role="status">{copyState}</span>
+      <div className="sdk-stage-toolbar"><span className="sdk-stage-label"><span />{view === "preview" ? "Live preview" : "React / TSX"}</span><div className="sdk-toolbar-actions"><button type="button" aria-label={`Reset ${example.title}`} title="Reset demo" onClick={() => { setReset(r => r+1); setAnswer(""); setFilter(""); clearCopy(); }}><RotateCcw size={13} /></button><button type="button" aria-label={`Copy ${example.title} code`} onClick={copyCode}>{copyState === "Copied" ? <Check size={13}/> : <Copy size={13}/>}</button><button type="button" aria-label={`${view === "preview" ? "View" : "Hide"} ${example.title} code`} aria-pressed={view === "code"} onClick={() => setView(v=>v === "preview" ? "code" : "preview")}><Code2 size={14}/></button></div></div>
+      <span className={copyState === "Copy unavailable" ? "sdk-copy-status" : "sr-only"} role="status">{copyState}</span>
       {view === "code" ? <div className="sdk-code"><CodeMarkdownBlock language="tsx" theme={theme === "light" ? lightPreviewTheme : portfolioTheme}>{code}</CodeMarkdownBlock></div> : <div className="sdk-preview chat-root chat-sdk-demo" data-theme={theme}>
         <div className="sdk-widget" key={`${variant}-${reset}`}>
           {example.id === "search" && <input className="sdk-filter" aria-label="Filter search results" placeholder="Filter files or matches…" value={filter} onChange={e=>setFilter(e.target.value)}/>}
@@ -78,7 +120,7 @@ function Example({ example, theme }) {
           {answer && <p className="sdk-answer" role="status">{example.id === "approval" ? "Decision" : "Your answer"}: {answer} <span>· demo only</span></p>}
         </div>
       </div>}
-      <div className="sdk-variants" role="group" aria-label={`${example.title} variants`}>{example.variants.map(v=><button key={v} type="button" aria-pressed={v === variant} onClick={()=>{setVariant(v);setAnswer("");setFilter("");setCopyState("");}}>{v}</button>)}</div>
+      {example.variants.length > 1 && <div className="sdk-variants" role="group" aria-label={`${example.title} variants`}>{example.variants.map(v=><button key={v} type="button" aria-pressed={v === variant} onClick={()=>{setVariant(v);setAnswer("");setFilter("");clearCopy();}}>{v}</button>)}</div>}
     </div>
   </section>;
 }
