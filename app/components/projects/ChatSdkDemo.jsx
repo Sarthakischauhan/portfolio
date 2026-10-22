@@ -8,6 +8,18 @@ import { portfolioTheme } from "@/app/styles/portfolioTheme";
 import "./chat-sdk-demo.css";
 import "./chat-sdk-showcase.css";
 
+const lightPreviewTheme = {
+  name: "portfolio-preview-light",
+  colors: {
+    background: "#f7f7f8", foreground: "#171717", comment: "#64646e",
+    keyword: "#a63242", typeKeywords: "#a63242", string: "#32633c",
+    function: "#4d51a3", variable: "#171717", number: "#95562c",
+    operator: "#64646e", punctuation: "#64646e", type: "#805d21",
+    tag: "#326b66", attribute: "#365a90", constant: "#95562c",
+    surface: "#ededf0", overlay: "#e8e8ec", subtext: "#64646e",
+  },
+};
+
 const source = 'export async function runAgent(task: string) {\n  const session = await createSession();\n  return session.run(task, { stream: true });\n}\n';
 const before = 'const adapter = createAdapter({\n  endpoint: "/api/chat",\n  stream: false,\n});\n';
 const after = 'const adapter = createAdapter({\n  endpoint: "/api/chat",\n  stream: true,\n  reconnect: true,\n});\n';
@@ -59,7 +71,7 @@ function Example({ example, theme }) {
     <div className="sdk-stage" data-preview-theme={theme}>
       <div className="sdk-stage-toolbar"><span className="sdk-stage-label"><span />{view === "preview" ? "Live preview" : "React / TSX"}</span><div className="sdk-toolbar-actions"><button type="button" aria-label={`Reset ${example.title}`} title="Reset demo" onClick={() => { setReset(r => r+1); setAnswer(""); setFilter(""); }}><RotateCcw size={13} /></button><button type="button" aria-label={`Copy ${example.title} code`} onClick={async () => { try { await navigator.clipboard.writeText(code); setCopyState("Copied"); } catch { setCopyState("Copy unavailable"); } }}>{copyState === "Copied" ? <Check size={13}/> : <Copy size={13}/>}</button><button type="button" aria-label={`${view === "preview" ? "View" : "Hide"} ${example.title} code`} aria-pressed={view === "code"} onClick={() => setView(v=>v === "preview" ? "code" : "preview")}><Code2 size={14}/></button></div></div>
       <span className="sdk-copy-status" role="status">{copyState}</span>
-      {view === "code" ? <div className="sdk-code"><CodeMarkdownBlock language="tsx" theme={portfolioTheme}>{code}</CodeMarkdownBlock></div> : <div className="sdk-preview chat-root chat-sdk-demo" data-theme={theme}>
+      {view === "code" ? <div className="sdk-code"><CodeMarkdownBlock language="tsx" theme={theme === "light" ? lightPreviewTheme : portfolioTheme}>{code}</CodeMarkdownBlock></div> : <div className="sdk-preview chat-root chat-sdk-demo" data-theme={theme}>
         <div className="sdk-widget" key={`${variant}-${reset}`}>
           {example.id === "search" && <input className="sdk-filter" aria-label="Filter search results" placeholder="Filter files or matches…" value={filter} onChange={e=>setFilter(e.target.value)}/>}
           <Component {...liveProps}/>

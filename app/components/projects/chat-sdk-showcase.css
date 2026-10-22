@@ -16,14 +16,24 @@
 .sdk-example-heading > div { min-width: 0; }
 .sdk-example-heading h3 { color: #ededed; font-size: 13px; font-weight: 500; }
 .sdk-example-heading p { margin-top: 8px; font-size: 11px; line-height: 1.65; letter-spacing: .025em; color: #a3a3a3; }
-.sdk-stage { min-width: 0; border: 1px solid #ffffff1a; border-radius: 8px; background: #0a0a0a; overflow: hidden; }
-.sdk-stage-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 4px 8px 4px 16px; border-bottom: 1px solid #ffffff0d; }
-.sdk-stage-label { min-width: 0; color: #737373; font-size: 10px; }
+.sdk-stage {
+  --sdk-stage-bg: #0a0a0a; --sdk-stage-fg: #ededed; --sdk-stage-muted: #a3a3a3;
+  --sdk-stage-border: #ffffff1a; --sdk-stage-control: #171717;
+  min-width: 0; border: 1px solid var(--sdk-stage-border); border-radius: 8px;
+  background: var(--sdk-stage-bg); color: var(--sdk-stage-fg); color-scheme: dark; overflow: hidden;
+}
+.sdk-stage[data-preview-theme="light"] {
+  --sdk-stage-bg: #f7f7f8; --sdk-stage-fg: #171717; --sdk-stage-muted: #64646e;
+  --sdk-stage-border: #0000001a; --sdk-stage-control: #e8e8ec;
+  color-scheme: light;
+}
+.sdk-stage-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 4px 8px 4px 16px; border-bottom: 1px solid var(--sdk-stage-border); }
+.sdk-stage-label { min-width: 0; color: var(--sdk-stage-muted); font-size: 10px; }
 .sdk-stage-label > span { display: none; }
 .sdk-toolbar-actions { display: flex; flex-shrink: 0; }
-.sdk-toolbar-actions button { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; color: #a3a3a3; }
-.sdk-toolbar-actions button:hover, .sdk-toolbar-actions button[aria-pressed="true"] { color: #ededed; background: #171717; }
-.sdk-copy-status { display: block; text-align: right; font-size: 11px; color: #a3a3a3; }
+.sdk-toolbar-actions button { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; color: var(--sdk-stage-muted); }
+.sdk-toolbar-actions button:hover, .sdk-toolbar-actions button[aria-pressed="true"] { color: var(--sdk-stage-fg); background: var(--sdk-stage-control); }
+.sdk-copy-status { display: block; text-align: right; font-size: 11px; color: var(--sdk-stage-muted); }
 .sdk-copy-status:not(:empty) { padding: 8px 16px; }
 /* Override theme tokens, never individual widget layouts or typography selectors. */
 .sdk-preview.chat-root {
@@ -37,9 +47,9 @@
 .sdk-preview.chat-root[data-theme="dark"] { --chat-bg: #0a0a0a; --chat-bg-elevated: #171717; --chat-fg: #ededed; --chat-fg-muted: #a3a3a3; --chat-fg-subtle: #737373; --chat-control-bg: #262626; --chat-border: #ffffff1a; }
 .sdk-preview.chat-root[data-theme="light"] { --chat-primary: #171717; --chat-primary-fg: #ffffff; }
 .sdk-widget { min-width: 0; width: 100%; }
-.sdk-variants { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; border-top: 1px solid #ffffff0d; }
-.sdk-variants button { min-height: 40px; padding: 8px 12px; border-radius: 8px; color: #737373; font-size: 11px; }
-.sdk-variants button[aria-pressed="true"] { background: #171717; color: #ededed; }
+.sdk-variants { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; border-top: 1px solid var(--sdk-stage-border); }
+.sdk-variants button { min-height: 40px; padding: 8px 12px; border-radius: 8px; color: var(--sdk-stage-muted); font-size: 11px; }
+.sdk-variants button:hover, .sdk-variants button[aria-pressed="true"] { background: var(--sdk-stage-control); color: var(--sdk-stage-fg); }
 .sdk-code { min-width: 0; max-height: 360px; overflow: auto; }
 .sdk-answer { margin-top: 16px; font-size: 12px; overflow-wrap: anywhere; }
 .sdk-answer span { color: var(--chat-fg-muted); }
