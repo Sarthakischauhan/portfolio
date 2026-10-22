@@ -51,6 +51,7 @@
 .sdk-variants button { min-height: 40px; padding: 8px 12px; border-radius: 8px; color: var(--sdk-stage-muted); font-size: 11px; }
 .sdk-variants button:hover, .sdk-variants button[aria-pressed="true"] { background: var(--sdk-stage-control); color: var(--sdk-stage-fg); }
 .sdk-code { min-width: 0; max-height: 360px; overflow: auto; }
+.sdk-picker-note { margin-top: 16px; font-size: 11px; line-height: 1.65; color: var(--chat-fg-muted); }
 .sdk-answer { margin-top: 16px; font-size: 12px; overflow-wrap: anywhere; }
 .sdk-answer span { color: var(--chat-fg-muted); }
 .sdk-filter { width: 100%; min-height: 40px; padding: 8px 12px; margin-bottom: 16px; border: 1px solid var(--chat-border); border-radius: 8px; background: var(--chat-bg-elevated); color: var(--chat-fg); font: inherit; }
