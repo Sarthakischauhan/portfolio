@@ -1,0 +1,54 @@
+{
+  "defaultProviderId": "openai",
+  "providers": [
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "defaultModel": "gpt-4.1",
+      "models": [
+        {
+          "id": "gpt-4.1",
+          "label": "GPT-4.1",
+          "description": "General purpose \u00b7 sample model"
+        },
+        {
+          "id": "o3",
+          "label": "o3",
+          "description": "Reasoning \u00b7 sample model",
+          "thinkingLevels": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "name": "OpenAI"
+    },
+    {
+      "id": "anthropic",
+      "label": "Anthropic",
+      "defaultModel": "claude-3-7-sonnet-20250219",
+      "models": [
+        {
+          "id": "claude-3-7-sonnet-20250219",
+          "label": "Claude 3.7 Sonnet",
+          "description": "Coding and reasoning \u00b7 sample model"
+        }
+      ],
+      "name": "Anthropic"
+    },
+    {
+      "id": "gemini",
+      "label": "Google",
+      "defaultModel": "gemini-2.5-flash",
+      "models": [
+        {
+          "id": "gemini-2.5-flash",
+          "label": "Gemini 2.5 Flash",
+          "description": "Fast responses \u00b7 sample model"
+        }
+      ],
+      "name": "Google"
+    }
+  ]
+}
