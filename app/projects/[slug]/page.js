@@ -64,7 +64,7 @@ const ProjectPage = async ({ params }) => {
     : null;
 
   return (
-    <PageContainer className={`flex ${slug === "chat-sdk" ? "sdk-project-page max-w-[64rem] md:px-8" : "max-w-[30rem]"} flex-col gap-8 mt-10 mb-10 pt-8 text-body font-geist text-white/80`}>
+    <PageContainer className="flex max-w-[30rem] flex-col gap-8 mt-10 mb-10 pt-8 text-body font-geist text-white/80">
       {Project ? <Project /> : <NotFound />}
     </PageContainer>
   );

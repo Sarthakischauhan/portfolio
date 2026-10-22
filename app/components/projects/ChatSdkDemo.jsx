@@ -1,12 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Check, Code2, Copy, RotateCcw, Sun, Moon, ArrowUpRight } from "lucide-react";
+import { Check, Code2, Copy, RotateCcw, Sun, Moon } from "lucide-react";
 import { ReadFileWidget, PatchWidget, SearchWidget, QuestionWidget, TerminalWidget, ApprovalWidget, ArtifactWidget, SubagentWidget } from "@sarchauhan/chat/widgets";
 import CodeMarkdownBlock from "@/app/components/layout/CodeMarkdownBlock";
 import { portfolioTheme } from "@/app/styles/portfolioTheme";
 import "./chat-sdk-demo.css";
 import "./chat-sdk-showcase.css";
+
+const lightPreviewTheme = {
+  name: "portfolio-preview-light",
+  colors: {
+    background: "#f7f7f8", foreground: "#171717", comment: "#64646e",
+    keyword: "#a63242", typeKeywords: "#a63242", string: "#32633c",
+    function: "#4d51a3", variable: "#171717", number: "#95562c",
+    operator: "#64646e", punctuation: "#64646e", type: "#805d21",
+    tag: "#326b66", attribute: "#365a90", constant: "#95562c",
+    surface: "#ededf0", overlay: "#e8e8ec", subtext: "#64646e",
+  },
+};
 
 const source = 'export async function runAgent(task: string) {\n  const session = await createSession();\n  return session.run(task, { stream: true });\n}\n';
 const before = 'const adapter = createAdapter({\n  endpoint: "/api/chat",\n  stream: false,\n});\n';
@@ -38,7 +50,7 @@ function snippet(example, variant) {
   return props;
 }
 
-function Example({ example, index, theme }) {
+function Example({ example, theme }) {
   const [variant, setVariant] = useState(example.variants[0]);
   const [view, setView] = useState("preview");
   const [copyState, setCopyState] = useState("");
@@ -55,11 +67,11 @@ function Example({ example, index, theme }) {
   if (example.id === "read-file" && variant === "Error") liveProps.error = "File not found. Check the workspace path and try again.";
   if (example.id === "search") liveProps.results = props.results.filter(r => (r.path + r.text).toLowerCase().includes(filter.toLowerCase()));
   return <section id={example.id} className="sdk-example" aria-labelledby={`${example.id}-title`}>
-    <div className="sdk-example-heading"><span className="sdk-number">{String(index + 1).padStart(2, "0")}</span><div><h3 id={`${example.id}-title`}>{example.title}</h3><p>{example.desc}</p></div></div>
+    <div className="sdk-example-heading"><div><h3 id={`${example.id}-title`}>{example.title}</h3><p>{example.desc}</p></div></div>
     <div className="sdk-stage" data-preview-theme={theme}>
       <div className="sdk-stage-toolbar"><span className="sdk-stage-label"><span />{view === "preview" ? "Live preview" : "React / TSX"}</span><div className="sdk-toolbar-actions"><button type="button" aria-label={`Reset ${example.title}`} title="Reset demo" onClick={() => { setReset(r => r+1); setAnswer(""); setFilter(""); }}><RotateCcw size={13} /></button><button type="button" aria-label={`Copy ${example.title} code`} onClick={async () => { try { await navigator.clipboard.writeText(code); setCopyState("Copied"); } catch { setCopyState("Copy unavailable"); } }}>{copyState === "Copied" ? <Check size={13}/> : <Copy size={13}/>}</button><button type="button" aria-label={`${view === "preview" ? "View" : "Hide"} ${example.title} code`} aria-pressed={view === "code"} onClick={() => setView(v=>v === "preview" ? "code" : "preview")}><Code2 size={14}/></button></div></div>
       <span className="sdk-copy-status" role="status">{copyState}</span>
-      {view === "code" ? <div className="sdk-code"><CodeMarkdownBlock language="tsx" theme={portfolioTheme}>{code}</CodeMarkdownBlock></div> : <div className="sdk-preview chat-root chat-sdk-demo" data-theme={theme}>
+      {view === "code" ? <div className="sdk-code"><CodeMarkdownBlock language="tsx" theme={theme === "light" ? lightPreviewTheme : portfolioTheme}>{code}</CodeMarkdownBlock></div> : <div className="sdk-preview chat-root chat-sdk-demo" data-theme={theme}>
         <div className="sdk-widget" key={`${variant}-${reset}`}>
           {example.id === "search" && <input className="sdk-filter" aria-label="Filter search results" placeholder="Filter files or matches…" value={filter} onChange={e=>setFilter(e.target.value)}/>}
           <Component {...liveProps}/>
@@ -81,7 +93,17 @@ export default function ChatSdkDemo() {
     return ()=>observer.disconnect();
   }, []);
   return <div className="sdk-gallery">
-    <aside className="sdk-sidebar"><div className="sdk-sidebar-inner"><div className="sdk-sidebar-heading"><span className="sdk-desktop-label">COMPONENTS <small>08</small></span><button type="button" className="sdk-mobile-menu" aria-expanded={menuOpen} aria-controls="sdk-component-nav" onClick={() => setMenuOpen(open => !open)}><span>Components</span><span>{menuOpen ? "Close −" : "Browse +"}</span></button><div className="sdk-theme" role="group" aria-label="Preview theme"><button type="button" aria-label="Light previews" aria-pressed={theme === "light"} onClick={()=>setTheme("light")}><Sun size={13}/></button><button type="button" aria-label="Dark previews" aria-pressed={theme === "dark"} onClick={()=>setTheme("dark")}><Moon size={13}/></button></div></div><nav id="sdk-component-nav" className={menuOpen ? "sdk-nav-open" : ""} aria-label="Widget showcase">{examples.map((e,i)=><a key={e.id} href={`#${e.id}`} aria-current={active === e.id ? "location" : undefined} onClick={()=>{setActive(e.id);setMenuOpen(false);}}><span>{String(i+1).padStart(2,"0")}</span>{e.title}</a>)}</nav><div className="sdk-sidebar-note"><span className="sdk-live-dot"/> Real components. Local demos.<p>Try a variant, inspect the output, or copy the code into your app.</p><a href="#chat-start">Start building <ArrowUpRight size={12}/></a></div></div></aside>
-    <div className="sdk-examples">{examples.map((e,i)=><Example key={e.id} example={e} index={i} theme={theme}/>)}</div>
+    <nav className="sdk-heading-rail" aria-label="On this page">
+      {examples.map(example => (
+        <a key={example.id} href={`#${example.id}`} aria-label={example.title}
+          aria-current={active === example.id ? "location" : undefined}
+          onClick={() => setActive(example.id)}>
+          <span className="sdk-rail-bar" aria-hidden="true" />
+          <span className="sdk-rail-label" aria-hidden="true">{example.title}</span>
+        </a>
+      ))}
+    </nav>
+    <aside className="sdk-sidebar"><div className="sdk-sidebar-inner"><div className="sdk-sidebar-heading"><span className="sdk-desktop-label">Components</span><button type="button" className="sdk-mobile-menu" aria-expanded={menuOpen} aria-controls="sdk-component-nav" onClick={() => setMenuOpen(open => !open)}><span>Components</span><span>{menuOpen ? "Close −" : "Browse +"}</span></button><div className="sdk-theme" role="group" aria-label="Preview theme"><button type="button" aria-label="Light previews" aria-pressed={theme === "light"} onClick={()=>setTheme("light")}><Sun size={13}/></button><button type="button" aria-label="Dark previews" aria-pressed={theme === "dark"} onClick={()=>setTheme("dark")}><Moon size={13}/></button></div></div><nav id="sdk-component-nav" className={menuOpen ? "sdk-nav-open" : ""} aria-label="Widget showcase">{examples.map((e)=><a key={e.id} href={`#${e.id}`} aria-current={active === e.id ? "location" : undefined} onClick={()=>{setActive(e.id);setMenuOpen(false);}}>{e.title}</a>)}</nav></div></aside>
+    <div className="sdk-examples">{examples.map((e)=><Example key={e.id} example={e} theme={theme}/>)}</div>
   </div>;
 }
