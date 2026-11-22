@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Markdown, { defaultUrlTransform } from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { getChangelogReleases } from "../../../lib/changelog-releases";
 import PageContainer from "../../../components/layout/PageContainer";
 import { changelogs } from "../../../../content/projects/changelogs";
 
 export const dynamicParams = false;
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return Object.keys(changelogs).map((slug) => ({ slug }));
@@ -24,7 +28,7 @@ export async function generateMetadata({ params }) {
 
 const dateFormat = new Intl.DateTimeFormat("en-US", {
   dateStyle: "medium",
-  timeZone: "UTC",
+  timeZone: "America/Los_Angeles",
 });
 
 const linkStyle = "rounded-sm hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
@@ -35,7 +39,8 @@ export default async function ChangelogPage({ params }) {
 
   if (!project) notFound();
 
-  const [latest] = project.releases;
+  const releases = await getChangelogReleases(slug, project);
+  const [latest] = releases;
 
   return (
     <PageContainer as="main" className="relative mb-10 mt-10 max-w-[30rem] pt-8 font-geist text-body text-white/80">
@@ -51,12 +56,12 @@ export default async function ChangelogPage({ params }) {
           aria-labelledby="release-index"
           className="mb-6 min-[800px]:absolute min-[800px]:inset-y-0 min-[800px]:right-full min-[800px]:mb-0 min-[800px]:mr-10 min-[800px]:w-24"
         >
-          <div className="min-[800px]:sticky min-[800px]:top-8">
+          <div className="min-[800px]:sticky min-[800px]:top-8 min-[800px]:max-h-[calc(100dvh-4rem)] min-[800px]:overflow-y-auto">
             <h2 id="release-index" className="mb-2 text-xs font-medium tracking-wide text-white/55">
               Releases
             </h2>
             <ul className="flex flex-wrap gap-x-4 min-[800px]:flex-col">
-              {project.releases.map(({ tag }) => (
+              {releases.map(({ tag }) => (
                 <li key={tag}>
                   <a
                     href={`#${tag}`}
@@ -72,7 +77,7 @@ export default async function ChangelogPage({ params }) {
         </nav>
 
         <div className="border-t border-white/10">
-          {project.releases.map(({ tag, date, title, summary, changes }) => (
+          {releases.map(({ tag, date, title, summary, changes, body }) => (
             <article
               key={tag}
               id={tag}
@@ -85,10 +90,30 @@ export default async function ChangelogPage({ params }) {
                   <span className="sr-only"> on GitHub</span>
                 </a>
                 <time dateTime={date} className="text-[11px] tracking-wide text-white/55">
-                  {dateFormat.format(new Date(date))}
+                  {dateFormat.format(new Date(date.length === 10 ? `${date}T12:00:00Z` : date))}
                 </time>
               </div>
               <h2 id={`${tag}-title`} className="mt-4 font-medium text-white">{title}</h2>
+              {body && (
+                <div className="prose prose-invert prose-sm mt-2 max-w-none break-words text-xs leading-relaxed tracking-wide prose-headings:font-medium prose-a:underline-offset-4 prose-pre:overflow-x-auto">
+                  <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    skipHtml
+                    disallowedElements={["img"]}
+                    urlTransform={(url) => {
+                      const safeUrl = defaultUrlTransform(url);
+                      if (!safeUrl || safeUrl.startsWith("#")) return safeUrl;
+                      try {
+                        return new URL(safeUrl, `${project.source}/blob/${tag}/`).href;
+                      } catch {
+                        return "";
+                      }
+                    }}
+                  >
+                    {body}
+                  </Markdown>
+                </div>
+              )}
               {summary && <p className="mt-2 leading-relaxed tracking-wide">{summary}</p>}
               {changes && (
                 <ul className="mt-3 list-disc space-y-2 pl-4 text-xs leading-relaxed tracking-wide text-white/60">

@@ -47,9 +47,8 @@ export default function sitemap() {
     },
     ...posts,
     ...projects,
-    ...Object.entries(changelogs).map(([slug, project]) => ({
+    ...Object.keys(changelogs).map((slug) => ({
       url: `${siteUrl}/projects/${slug}/changelog`,
-      lastModified: new Date(project.releases[0].date),
     })),
   ];
 }
