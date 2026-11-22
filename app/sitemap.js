@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import data from "../public/data.json";
 import { siteUrl } from "./lib/site";
+import { changelogs } from "../content/projects/changelogs";
 
 export default function sitemap() {
   const now = new Date();
@@ -46,5 +47,9 @@ export default function sitemap() {
     },
     ...posts,
     ...projects,
+    ...Object.entries(changelogs).map(([slug, project]) => ({
+      url: `${siteUrl}/projects/${slug}/changelog`,
+      lastModified: new Date(project.releases[0].date),
+    })),
   ];
 }
