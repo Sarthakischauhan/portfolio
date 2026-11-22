@@ -95,7 +95,7 @@ export default async function ChangelogPage({ params }) {
               </div>
               <h2 id={`${tag}-title`} className="mt-4 font-medium text-white">{title}</h2>
               {body && (
-                <div className="prose prose-invert prose-sm mt-2 max-w-none break-words text-xs leading-relaxed tracking-wide prose-headings:font-medium prose-a:underline-offset-4 prose-pre:overflow-x-auto">
+                <div className="prose prose-invert prose-sm mt-2 max-w-none break-words text-xs leading-relaxed tracking-wide prose-headings:font-medium prose-a:underline-offset-4 prose-pre:overflow-x-auto prose-li:my-0 prose-li:pl-1 [&_li+li]:mt-2 [&_li>p:first-child]:mt-0 [&_li>p:last-child]:mb-0">
                   <Markdown
                     remarkPlugins={[remarkGfm]}
                     skipHtml
@@ -116,7 +116,7 @@ export default async function ChangelogPage({ params }) {
               )}
               {summary && <p className="mt-2 leading-relaxed tracking-wide">{summary}</p>}
               {changes && (
-                <ul className="mt-3 list-disc space-y-2 pl-4 text-xs leading-relaxed tracking-wide text-white/60">
+                <ul className="mt-3 list-disc space-y-2 pl-4 text-xs [&>li]:pl-1 leading-relaxed tracking-wide text-white/60">
                   {changes.map((change) => <li key={change}>{change}</li>)}
                 </ul>
               )}
