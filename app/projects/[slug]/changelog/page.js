@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PageContainer from "../../../components/layout/PageContainer";
 import { changelogs } from "../../../../content/projects/changelogs";
 
 export const dynamicParams = false;
@@ -37,48 +38,60 @@ export default async function ChangelogPage({ params }) {
   const [latest] = project.releases;
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-6 pb-20 pt-10 font-geist text-[#ededed] md:px-10 md:pt-16">
-      <header className="border-b border-white/15 pb-8">
-        <Link href={`/projects/${slug}`} className={`font-mono text-sm text-[#a3a3a3] ${linkStyle}`}>
+    <PageContainer as="main" className="relative mb-10 mt-10 max-w-[30rem] pt-8 font-geist text-body text-white/80">
+      <header className="space-y-4">
+        <Link href={`/projects/${slug}`} className={`text-[11px] tracking-wide text-white/55 ${linkStyle}`}>
           {project.name}
         </Link>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">Changelog</h1>
-        <p className="mt-3 text-base leading-relaxed text-[#a3a3a3]">{project.description}</p>
+        <h1 className="text-name-heading font-medium text-white">Changelog</h1>
       </header>
 
-      <div className="grid gap-9 pt-8 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-12 md:pt-10">
-        <nav aria-label="Release versions" className="self-start rounded-lg border border-white/15 p-4 md:sticky md:top-6">
-          <h2 className="mb-2 text-sm font-medium text-[#a3a3a3]">Versions</h2>
-          <ul className="flex flex-wrap gap-x-4 md:flex-col md:gap-x-0">
-            {project.releases.map(({ tag }) => (
-              <li key={tag}>
-                <a href={`#${tag}`} className={`inline-flex min-h-9 items-center gap-2 font-mono text-sm ${linkStyle}`}>
-                  {tag.replace(/^chat-/, "v")}
-                  {tag === latest.tag && <span className="font-geist text-xs text-[#a3a3a3]">Latest</span>}
-                </a>
-              </li>
-            ))}
-          </ul>
+      <div className="relative mt-8 min-[800px]:mt-10">
+        <nav
+          aria-labelledby="release-index"
+          className="mb-6 min-[800px]:absolute min-[800px]:inset-y-0 min-[800px]:right-full min-[800px]:mb-0 min-[800px]:mr-10 min-[800px]:w-24"
+        >
+          <div className="min-[800px]:sticky min-[800px]:top-8">
+            <h2 id="release-index" className="mb-2 text-xs font-medium tracking-wide text-white/55">
+              Releases
+            </h2>
+            <ul className="flex flex-wrap gap-x-4 min-[800px]:flex-col">
+              {project.releases.map(({ tag }) => (
+                <li key={tag}>
+                  <a
+                    href={`#${tag}`}
+                    className={`inline-flex min-h-8 items-center gap-2 whitespace-nowrap font-mono text-xs ${tag === latest.tag ? "text-white" : "text-white/60"} ${linkStyle}`}
+                  >
+                    {tag.replace(/^chat-/, "v")}
+                    {tag === latest.tag && <span className="font-geist text-[11px] text-white/55">latest</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </nav>
 
-        <div>
+        <div className="border-t border-white/10">
           {project.releases.map(({ tag, date, title, summary, changes }) => (
             <article
               key={tag}
               id={tag}
               aria-labelledby={`${tag}-title`}
-              className="mb-8 scroll-mt-6 border-b border-white/15 pb-8 last:mb-0 last:border-b-0 last:pb-0"
+              className="scroll-mt-8 border-b border-white/10 py-6 last:border-b-0"
             >
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 font-mono text-sm">
-                <a href={`${project.source}/releases/tag/${tag}`} className={`underline decoration-white/35 underline-offset-4 ${linkStyle}`}>
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs">
+                <a href={`${project.source}/releases/tag/${tag}`} className={`font-mono font-medium text-white ${linkStyle}`}>
                   {tag.replace(/^chat-/, "v")}
+                  <span className="sr-only"> on GitHub</span>
                 </a>
-                <time dateTime={date} className="text-[#a3a3a3]">{dateFormat.format(new Date(date))}</time>
+                <time dateTime={date} className="text-[11px] tracking-wide text-white/55">
+                  {dateFormat.format(new Date(date))}
+                </time>
               </div>
-              <h2 id={`${tag}-title`} className="mt-3 text-xl font-semibold tracking-tight">{title}</h2>
-              {summary && <p className="mt-3 leading-relaxed text-white/80">{summary}</p>}
+              <h2 id={`${tag}-title`} className="mt-4 font-medium text-white">{title}</h2>
+              {summary && <p className="mt-2 leading-relaxed tracking-wide">{summary}</p>}
               {changes && (
-                <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-white/80 marker:text-[#a3a3a3]">
+                <ul className="mt-3 list-disc space-y-2 pl-4 text-xs leading-relaxed tracking-wide text-white/60">
                   {changes.map((change) => <li key={change}>{change}</li>)}
                 </ul>
               )}
@@ -86,6 +99,6 @@ export default async function ChangelogPage({ params }) {
           ))}
         </div>
       </div>
-    </main>
+    </PageContainer>
   );
 }
