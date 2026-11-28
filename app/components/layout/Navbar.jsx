@@ -6,6 +6,8 @@ import { Mail } from "lucide-react";
 const Navbar = () => {
   const pathname = usePathname();
 
+  if (pathname === "/projects/symphony") return null;
+
   const baseLinkClass =
     "font-mediun tracking-nav transition-colors font-geist";
 

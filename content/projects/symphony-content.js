@@ -25,7 +25,7 @@ asyncio.run(main())`;
 
 // Paths are intentionally local placeholders, not shell-expanded ~ paths.
 const launch = {
-  command: "/absolute/path/to/symphony/.venv/bin/symphony",
+  command: "/absolute/path/to/symphony",
   args: ["acp"],
 };
 

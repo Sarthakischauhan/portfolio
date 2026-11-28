@@ -12,7 +12,7 @@ This file is the short map for agents. Pages are written for people, not as a do
 
 ## Projects
 
-- [Symphony](https://www.sarchauhan.dev/projects/symphony): Personal coding agent. Python TUI, ACP connections to editors, workspace tools, subagents, and a reusable harness. PyPI package `symphony-code`. MIT licensed
+- [Symphony](https://www.sarchauhan.dev/projects/symphony): Open-source coding agent for the terminal, local browser UI, and ACP editors. The reusable Python harness ships as `symphony-harness`. MIT licensed
 - [Symphony source](https://github.com/Sarthakischauhan/symphony): Repository and docs
 - [code-markdown](https://www.sarchauhan.dev/projects/code-markdown): Themeable code renderer with a custom tokenizer, multi-language highlighting, line numbers, and highlighted lines
 - [code-markdown source](https://github.com/Sarthakischauhan/code-markdown): Repository

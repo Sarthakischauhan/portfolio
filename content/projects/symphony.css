@@ -1,0 +1,114 @@
+.symphony {
+  --canvas: #111410;
+  --panel: #171b16;
+  --ink: #f4f6ef;
+  --muted: #b6beb0;
+  --accent: #dcf994;
+  --line: #30392c;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 16px;
+}
+
+.symphony-shell {
+  width: min(1160px, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.symphony-header, .symphony-footer,
+.symphony-header nav, .symphony-footer nav,
+.symphony-brand, .symphony-actions, .symphony-link,
+.symphony-button, .symphony-inline-command {
+  display: flex;
+  align-items: center;
+}
+
+.symphony-header, .symphony-footer {
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 22px;
+}
+
+.symphony-header { border-bottom: 1px solid var(--line); }
+.symphony-footer { border-top: 1px solid var(--line); }
+.symphony-header nav, .symphony-footer nav { gap: clamp(12px, 3vw, 30px); }
+.symphony nav a { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 14px; }
+.symphony nav a:hover, .symphony-link:hover { color: var(--accent); }
+.symphony-brand { gap: 10px; font-weight: 650; font-size: 20px; letter-spacing: -.04em; }
+.symphony :is(a, button):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.symphony-hero {
+  display: grid;
+  grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 76px);
+  padding-block: clamp(58px, 8vw, 115px);
+  background: radial-gradient(ellipse at 72% 45%, #a9d76714, transparent 67%);
+}
+
+.symphony-hero figure > div { border-color: #3d4837; border-radius: 14px; box-shadow: 0 18px 60px #0006; }
+.symphony-hero figcaption { color: var(--muted); font-size: 12px; }
+.symphony-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font: 400 12px/1.5 var(--font-ibm-mono), monospace;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+}
+
+.symphony-label span { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.symphony h1, .symphony h2, .symphony h3 { font-weight: 600; line-height: 1.05; }
+.symphony h1 { margin-top: 20px; font-size: clamp(43px, 5.15vw, 76px); letter-spacing: -.075em; }
+.symphony h1 em { display: block; color: var(--accent); font-style: normal; }
+.symphony h2 { font-size: clamp(30px, 4vw, 53px); letter-spacing: -.06em; text-wrap: balance; }
+.symphony h3 { font-size: 19px; letter-spacing: -.035em; }
+.symphony p:not(.symphony-label) { color: var(--muted); line-height: 1.65; }
+.symphony .symphony-intro { margin-top: 24px; max-width: 43ch; font-size: clamp(16px, 1.5vw, 19px); }
+.symphony-actions { flex-wrap: wrap; gap: 14px 22px; margin-top: 30px; }
+.symphony-link, .symphony-button { gap: 8px; width: fit-content; font-size: 14px; font-weight: 550; }
+.symphony-button { background: var(--accent); color: var(--canvas); padding: 12px 16px; min-height: 46px; border-radius: 8px; }
+.symphony-button:hover { background: #ecffbd; }
+
+.symphony-install, .symphony-split {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  align-items: start;
+  gap: clamp(20px, 5vw, 62px);
+}
+
+.symphony-install { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: clamp(18px, 3vw, 36px); align-items: center; }
+.symphony-install h2 { font-size: clamp(24px, 3vw, 35px); }
+.symphony-install p { margin-block: 10px 14px; font-size: 14px; }
+.symphony-code, .symphony-screenshot { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; }
+.symphony-code pre { overflow-x: auto; }
+.symphony-section { padding-block: clamp(44px, 7vw, 94px); }
+.symphony-section + .symphony-section { border-top: 1px solid var(--line); }
+.symphony-section h2 { margin-block: 9px 18px; }
+.symphony-section .symphony-link { margin-top: 16px; }
+.symphony-features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-block: 28px; }
+.symphony-features article { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+.symphony-features svg { width: 22px; height: 22px; color: var(--accent); margin-bottom: 24px; }
+.symphony-features p { font-size: 14px; margin-top: 10px; }
+.symphony-features code { color: var(--ink); }
+.symphony-inline-command { width: fit-content; gap: 8px; margin-top: 18px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--accent); font-size: 13px; }
+.symphony-screenshot { display: block; }
+.symphony-screenshot img { width: 100%; height: auto; }
+.symphony-editors > p:not(.symphony-label) { max-width: 68ch; margin-bottom: 22px; }
+
+@media (max-width: 800px) {
+  .symphony-shell { width: calc(100% - 40px); }
+  .symphony h1 { font-size: clamp(51px, 8vw, 70px); }
+  .symphony-hero, .symphony-split, .symphony-install { grid-template-columns: minmax(0, 1fr); }
+  .symphony-features { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 420px) {
+  .symphony-shell { width: calc(100% - 32px); }
+  .symphony-header, .symphony-footer { flex-wrap: wrap; }
+  .symphony h1 { font-size: clamp(41px, 13vw, 51px); }
+}
+
+.symphony [aria-roledescription="carousel"] { max-width: 850px; margin-inline: auto; }

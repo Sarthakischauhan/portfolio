@@ -33,7 +33,7 @@
       "href": "/projects/symphony",
       "pypi": "https://pypi.org/project/symphony-code/",
       "github": "https://github.com/Sarthakischauhan/symphony",
-      "desc": "My personal coding agent, in the terminal, on the web, and in editors through ACP. v0.0.3 adds Symphony Web."
+      "desc": "An open-source coding agent for your terminal, browser, and ACP editor, built on a reusable Python harness."
     },
     {
       "name": "chat-sdk",
